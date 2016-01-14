@@ -328,13 +328,13 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
                     oDataConnectionSource = getSourceConnection();
                     oConnection = oDataConnectionSource.newConnection();
                     UsuarioBean oUsuario = new UsuarioBean();
-                    oUsuario.setLogin(login);
+                    oUsuario.setNombre(login);
                     oUsuario.setPassword(pass);
                     UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
                     oUsuario = oUsuarioDao.getFromLogin(oUsuario);
                     if (oUsuario.getId() != 0) {
                         oRequest.getSession().setAttribute("userBean", oUsuario);
-                        strAnswer = oUsuario.getLogin();
+                        strAnswer = oUsuario.getNombre();
                     } else {
                         strCode = "403";
                         strAnswer = "User or password incorrect";
@@ -367,7 +367,7 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
         if (oUserBean == null) {
             return JsonMessage.getJsonMsg("403", "ERROR: You don't have permission to perform this operation");
         } else {
-            return JsonMessage.getJsonMsg("200", oUserBean.getLogin());
+            return JsonMessage.getJsonMsg("200", oUserBean.getNombre());
         }
     }
 
@@ -377,7 +377,7 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
         if (oUserBean == null) {
             return 0;
         } else {
-            return oUserBean.getId_estado();
+            return oUserBean.getId_perfil();
         }
     }
 

@@ -32,6 +32,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import net.daw.bean.publicinterface.GenericBean;
 import net.daw.dao.implementation.EstadoDao;
+import net.daw.dao.implementation.PerfilDao;
 import net.daw.dao.implementation.TipousuarioDao;
 
 public class UsuarioBean implements GenericBean{
@@ -39,23 +40,19 @@ public class UsuarioBean implements GenericBean{
     @Expose
     private Integer id;
     @Expose
-    private String login = "";
+    private String nombre = "";
+    @Expose
+    private String apellido1 = "";
+    @Expose
+    private String apellido2 = "";
+    @Expose
+    private String email = "";    
     @Expose
     private String password = "";
     @Expose(serialize = false)
-    private Integer id_tipousuario = 0;
+    private Integer id_perfil = 0;
     @Expose(deserialize = false)
-    private TipousuarioBean obj_tipousuario = null;
-    @Expose(serialize = false)
-    private Integer id_estado = 0;
-    @Expose(deserialize = false)
-    private EstadoBean obj_estado = null;
-    @Expose
-    private String ciudad = "";
-    @Expose
-    private String firma = "";
-    @Expose
-    private String skin = "";
+    private PerfilBean obj_perfil = null;
 
     public UsuarioBean() {
         this.id = 0;
@@ -64,117 +61,147 @@ public class UsuarioBean implements GenericBean{
     public UsuarioBean(Integer id) {
         this.id = id;
     }
-
+    
+      /**
+     * @return the id
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * @param id the id to set
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
+    /**
+     * @return the apellido1
+     */
+    public String getApellido1() {
+        return apellido1;
+    }
+
+    /**
+     * @param apellido1 the apellido1 to set
+     */
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    /**
+     * @return the apellido2
+     */
+    public String getApellido2() {
+        return apellido2;
+    }
+
+    /**
+     * @param apellido2 the apellido2 to set
+     */
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * @param password the password to set
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public Integer getId_tipousuario() {
-        return id_tipousuario;
+    /**
+     * @return the id_perfil
+     */
+    public Integer getId_perfil() {
+        return id_perfil;
     }
 
-    public void setId_tipousuario(Integer id_tipousuario) {
-        this.id_tipousuario = id_tipousuario;
+    /**
+     * @param id_perfil the id_perfil to set
+     */
+    public void setId_perfil(Integer id_perfil) {
+        this.id_perfil = id_perfil;
     }
 
-    public TipousuarioBean getObj_tipousuario() {
-        return obj_tipousuario;
+    /**
+     * @return the obj_perfil
+     */
+    public PerfilBean getObj_perfil() {
+        return obj_perfil;
     }
 
-    public void setObj_tipousuario(TipousuarioBean obj_tipousuario) {
-        this.obj_tipousuario = obj_tipousuario;
-    }
-
-    public Integer getId_estado() {
-        return id_estado;
-    }
-
-    public void setId_estado(Integer id_estado) {
-        this.id_estado = id_estado;
-    }
-
-    public EstadoBean getObj_estado() {
-        return obj_estado;
-    }
-
-    public void setObj_estado(EstadoBean obj_estado) {
-        this.obj_estado = obj_estado;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public String getFirma() {
-        return firma;
-    }
-
-    public void setFirma(String firma) {
-        this.firma = firma;
-    }
-
-    public String getSkin() {
-        return skin;
-    }
-
-    public void setSkin(String skin) {
-        this.skin = skin;
+    /**
+     * @param obj_perfil the obj_perfil to set
+     */
+    public void setObj_perfil(PerfilBean obj_perfil) {
+        this.obj_perfil = obj_perfil;
     }
 
     public String toJson(Boolean expand) {
         String strJson = "{";
-        strJson += "id:" + id + ",";
-        strJson += "login:" + login + ",";
-        strJson += "password:" + password + ",";
-        strJson += "ciudad:" + ciudad + ",";
-        strJson += "firma:" + firma + ",";
-        strJson += "skin:" + skin + ",";
+        strJson += "id:" + getId() + ",";
+        strJson += "nombre:" + nombre + ",";
+        strJson += "apellido1:" + apellido1 + ",";
+        strJson += "apellido2:" + apellido2 + ",";
+        strJson += "email:" + email + ",";
+        strJson += "password:" + getPassword() + ",";
         if (expand) {
-            strJson += "obj_estado:" + obj_estado.toJson(false) + ",";
-            strJson += "obj_tipousuario:" + obj_tipousuario.toJson(false) + ",";
+            strJson += "obj_perfil:" + obj_perfil.toJson(false) + ",";
         } else {
-            strJson += "id_estado:" + id_estado + ",";
-            strJson += "id_tipousuario:" + id_tipousuario + ",";
+            strJson += "id_perfil:" + id_perfil + ",";
         }
         strJson += "}";
         return strJson;
     }
 
+    
     @Override
     public String getColumns() {
         String strColumns = "";
         strColumns += "id,";
-        strColumns += "login,";
+        strColumns += "nombre,";
+        strColumns += "apellido1,";
+        strColumns += "apellido2,";
+        strColumns += "email,";
         strColumns += "password,";
-        strColumns += "ciudad,";
-        strColumns += "firma,";
-        strColumns += "skin,";
-        strColumns += "id_estado,";
-        strColumns += "id_tipousuario";
+        strColumns += "id_perfil";
 
         return strColumns;
     }
@@ -182,14 +209,13 @@ public class UsuarioBean implements GenericBean{
     @Override
     public String getValues() {
         String strColumns = "";
-        strColumns += id + ",";
-        strColumns += login + ",";
+        strColumns += getId() + ",";
+        strColumns += nombre + ",";
+        strColumns += apellido1 + ",";
+        strColumns += apellido2 + ",";
+        strColumns += email + ",";
         strColumns += password + ",";
-        strColumns += ciudad + ",";
-        strColumns += firma + ",";
-        strColumns += skin + ",";
-        strColumns += id_estado + ",";
-        strColumns += id_tipousuario;
+        strColumns += id_perfil;
 
         return strColumns;
     }
@@ -197,46 +223,38 @@ public class UsuarioBean implements GenericBean{
     @Override
     public String toPairs() {
         String strPairs = "";
-        strPairs += "id=" + id + ",";
-        strPairs += "login=" + login + ",";
-        strPairs += "password=" + password + ",";
-        strPairs += "ciudad=" + ciudad + ",";
-        strPairs += "firma=" + firma + ",";
-        strPairs += "skin=" + skin + ",";
-        strPairs += "id_estado=" + id_estado + ",";
-        strPairs += "id_tipousuario=" + id_tipousuario;
+        strPairs += "id=" + getId() + ",";
+        strPairs += "nombre=" + nombre + ",";
+        strPairs += "password=" + getPassword() + ",";
+        strPairs += "apellido1=" + apellido1 + ",";
+        strPairs += "apellido2=" + apellido2 + ",";
+        strPairs += "email=" + email + ",";
+        strPairs += "id_perfil=" + id_perfil;
 
         return strPairs;
     }
-
+    
+    
     @Override
     public UsuarioBean fill(ResultSet oResultSet, Connection pooledConnection, Integer expand) throws SQLException, Exception {
         this.setId(oResultSet.getInt("id"));
-        this.setLogin(oResultSet.getString("login"));
+        this.setNombre(oResultSet.getString("nombre"));
         this.setPassword(oResultSet.getString("password"));
-        this.setCiudad(oResultSet.getString("ciudad"));
-        this.setFirma(oResultSet.getString("firma"));
-        this.setSkin(oResultSet.getString("skin"));
+        this.setApellido1(oResultSet.getString("apellido1"));
+        this.setApellido2(oResultSet.getString("apellido2"));
+        this.setEmail(oResultSet.getString("email"));
         if (expand > 0) {
-            EstadoBean oEstadoBean = new EstadoBean();
-            EstadoDao oEstadoDao = new EstadoDao(pooledConnection);
-            oEstadoBean.setId(oResultSet.getInt("id_estado"));
-            oEstadoBean = oEstadoDao.get(oEstadoBean, expand - 1);
-            this.setObj_estado(oEstadoBean);
+            PerfilBean oPerfilBean = new PerfilBean();
+            PerfilDao oPerfilDao = new PerfilDao(pooledConnection);
+            oPerfilBean.setId(oResultSet.getInt("id_perfil"));
+            oPerfilBean = oPerfilDao.get(oPerfilBean, expand - 1);
+            this.setObj_perfil(oPerfilBean);
         } else {
-            this.setId_estado(oResultSet.getInt("id_estado"));
-        }
-        if (expand > 0) {
-            TipousuarioBean oTipousuarioBean = new TipousuarioBean();
-            TipousuarioDao oTipousuarioDao = new TipousuarioDao(pooledConnection);
-            oTipousuarioBean.setId(oResultSet.getInt("id_tipousuario"));
-            oTipousuarioBean = oTipousuarioDao.get(oTipousuarioBean, expand - 1);
-            this.setObj_tipousuario(oTipousuarioBean);
-        } else {
-            this.setId_tipousuario(oResultSet.getInt("id_tipousuario"));
+            this.setId_perfil(oResultSet.getInt("id_perfil"));
         }
         return this;
 
     }
 
+  
 }

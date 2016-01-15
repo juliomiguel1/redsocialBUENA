@@ -88,37 +88,37 @@ private String strTable = "perfil";
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
         strSQL += SqlBuilder.buildSqlLimit(oMysql.getCount(strSQL), intRegsPerPag, intPage);
-        ArrayList<PerfilBean> arrEstado = new ArrayList<>();
+        ArrayList<PerfilBean> arrPerfil = new ArrayList<>();
         try {
             ResultSet oResultSet = oMysql.getAllSql(strSQL);
             if (oResultSet != null) {
                 while (oResultSet.next()) {
                     PerfilBean oPerfilBean = new PerfilBean();
-                    arrEstado.add(oPerfilBean.fill(oResultSet, oConnection, expand));
+                    arrPerfil.add(oPerfilBean.fill(oResultSet, oConnection, expand));
                 }
             }
         } catch (Exception ex) {
             ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
         }
-        return arrEstado;
+        return arrPerfil;
     }
 
     @Override
     public ArrayList<PerfilBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
-        ArrayList<PerfilBean> arrEstado = new ArrayList<>();
+        ArrayList<PerfilBean> arrPerfil = new ArrayList<>();
         try {
             ResultSet oResultSet = oMysql.getAllSql(strSQL);
             if (oResultSet != null) {
                 while (oResultSet.next()) {
                     PerfilBean oPerfilBean = new PerfilBean();
-                    arrEstado.add(oPerfilBean.fill(oResultSet, oConnection,expand));
+                    arrPerfil.add(oPerfilBean.fill(oResultSet, oConnection,expand));
                 }
             }
         } catch (Exception ex) {
             ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
         }
-        return arrEstado;
+        return arrPerfil;
     }
 
     @Override

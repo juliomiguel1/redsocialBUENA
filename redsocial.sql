@@ -2,9 +2,9 @@
 -- version 4.4.13.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 14-01-2016 a las 03:42:33
--- Versión del servidor: 5.6.27
+-- Servidor: localhost:3307
+-- Tiempo de generación: 17-01-2016 a las 12:17:22
+-- Versión del servidor: 5.6.26
 -- Versión de PHP: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -31,7 +31,14 @@ CREATE TABLE IF NOT EXISTS `amistad` (
   `id_usuario1` int(11) DEFAULT NULL,
   `id_usuario2` int(11) DEFAULT NULL,
   `id_grupo` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `amistad`
+--
+
+INSERT INTO `amistad` (`id`, `id_usuario1`, `id_usuario2`, `id_grupo`) VALUES
+(1, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -55,7 +62,15 @@ CREATE TABLE IF NOT EXISTS `comentario` (
 CREATE TABLE IF NOT EXISTS `grupo` (
   `id` int(11) NOT NULL,
   `descripcion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `grupo`
+--
+
+INSERT INTO `grupo` (`id`, `descripcion`) VALUES
+(1, 'amigos'),
+(2, 'no amigos');
 
 -- --------------------------------------------------------
 
@@ -71,7 +86,15 @@ CREATE TABLE IF NOT EXISTS `perfil` (
   `ocupacion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `estudio` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sexo` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `perfil`
+--
+
+INSERT INTO `perfil` (`id`, `id_usuario`, `direccion`, `estado_civil`, `ocupacion`, `estudio`, `sexo`) VALUES
+(1, 1, 'Av. Antonio Puchades', 'soltero??', 'estudiante', 'FP. Informatica', NULL),
+(2, 2, 'C/ Joanot Martorell', '...', 'estudiante ', 'ingles', NULL);
 
 -- --------------------------------------------------------
 
@@ -82,12 +105,19 @@ CREATE TABLE IF NOT EXISTS `perfil` (
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `apellido1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `apellido2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `apellido` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_perfil` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `email`, `password`, `id_perfil`) VALUES
+(1, 'julio', 'gutierrez', 'julio6164@gmail.com', 'gutierrez9', 1),
+(2, 'Luis Gustavo', 'Gutierrez Maza', 'luis@gmail.com', 'hola', 2);
 
 --
 -- Índices para tablas volcadas
@@ -131,7 +161,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `amistad`
 --
 ALTER TABLE `amistad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `comentario`
 --
@@ -141,17 +171,17 @@ ALTER TABLE `comentario`
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

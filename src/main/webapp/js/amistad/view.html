@@ -39,15 +39,25 @@ THE SOFTWARE.
                 </thead>
                 <tbody>
                     <tr><td>id</td><td>{{bean.id}}</td></tr> 
-                    <tr><td>Nombres</td><td>{{bean.nombre}}</td></tr>
-                    <tr><td>Apellidos</td><td>{{bean.apellido}}</td></tr>
-                    <tr><td>email</td><td>{{bean.email}}</td></tr> 
-                    <tr><td>password</td><td>{{bean.password}}</td></tr> 
 
                     <tr>
-                        <td>Perfil del usuario</td>
+                        <td>Usuario 1</td>
                         <td>
-                            <a href="#/perfil/view/{{bean.obj_perfil.id}}">{{bean.obj_perfil.id}}</a>
+                            <a href="#/usuario/view/{{bean.obj_usuario1.id}}">{{bean.obj_usuario1.id}} {{bean.obj_usuario1.nombre}}</a>
+                        </td>
+                    </tr> 
+                    
+                    <tr>
+                        <td>Usuario 2</td>
+                        <td>
+                            <a href="#/usuario/view/{{bean.obj_usuario2.id}}">{{bean.obj_usuario2.id}} {{bean.obj_usuario2.nombre}}</a>
+                        </td>
+                    </tr> 
+                    
+                    <tr>
+                        <td>Grupo</td>
+                        <td>
+                            <a href="#/grupo/view/{{bean.obj_grupo.id}}">{{bean.obj_grupo.id}} {{bean.obj_grupo.descripcion}}</a>
                         </td>
                     </tr> 
                     

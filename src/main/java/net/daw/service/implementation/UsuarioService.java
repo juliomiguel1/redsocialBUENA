@@ -319,7 +319,7 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
         String strAnswer = null;
         String strCode = "200";
         if (oUserBean == null) {
-            String login = oRequest.getParameter("email");
+            String login = oRequest.getParameter("login");
             String pass = oRequest.getParameter("password");
             if (!login.equals("") && !pass.equals("")) {
                 ConnectionInterface oDataConnectionSource = null;

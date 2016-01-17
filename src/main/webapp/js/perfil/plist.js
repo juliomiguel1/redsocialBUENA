@@ -29,22 +29,22 @@
 
 'use strict';
 
-moduloUsuario.controller('UsuarioPListController', ['$scope', '$routeParams', 'serverService', '$location',
+moduloPerfil.controller('PerfilPListController', ['$scope', '$routeParams', 'serverService', '$location',
     function ($scope, $routeParams, serverService, $location) {
         
         $scope.visibles={};
         $scope.visibles.id = true;
-        $scope.visibles.nombre = true;
-        $scope.visibles.password = true;
-        $scope.visibles.id_perfil = true;
-        $scope.visibles.apellido = true;
-        $scope.visibles.email = true;
+        $scope.visibles.direccion = true;
+        $scope.visibles.estado_civil = true;        
+        $scope.visibles.ocupacion = true;
+        $scope.visibles.estudio = true;
+        $scope.visibles.id_usuario = true;
 
 
-        $scope.ob = "usuario";
+        $scope.ob = "perfil";
         $scope.op = "plist";
-        $scope.title = "Listado de usuarios";
-        $scope.icon = "fa-user";
+        $scope.title = "Listado de perfiles";
+        $scope.icon = "fa fa-file-text";
         $scope.neighbourhood = 2;
 
         if (!$routeParams.page) {

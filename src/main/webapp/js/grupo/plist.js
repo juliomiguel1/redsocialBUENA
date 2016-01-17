@@ -29,22 +29,18 @@
 
 'use strict';
 
-moduloUsuario.controller('UsuarioPListController', ['$scope', '$routeParams', 'serverService', '$location',
+moduloGrupo.controller('GrupoPListController', ['$scope', '$routeParams', 'serverService', '$location',
     function ($scope, $routeParams, serverService, $location) {
         
         $scope.visibles={};
         $scope.visibles.id = true;
-        $scope.visibles.nombre = true;
-        $scope.visibles.password = true;
-        $scope.visibles.id_perfil = true;
-        $scope.visibles.apellido = true;
-        $scope.visibles.email = true;
+        $scope.visibles.descripcion = true;
 
 
-        $scope.ob = "usuario";
+        $scope.ob = "grupo";
         $scope.op = "plist";
-        $scope.title = "Listado de usuarios";
-        $scope.icon = "fa-user";
+        $scope.title = "Listado de grupos";
+        $scope.icon = "fa fa-users";
         $scope.neighbourhood = 2;
 
         if (!$routeParams.page) {

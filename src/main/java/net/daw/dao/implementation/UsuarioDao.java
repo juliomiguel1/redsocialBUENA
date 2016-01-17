@@ -171,7 +171,7 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
 
 public UsuarioBean getFromLogin(UsuarioBean oUsuario) throws Exception {
         try {
-            String strId = oMysql.getId("usuario", "email", oUsuario.getNombre());
+            String strId = oMysql.getId("usuario", "email", oUsuario.getEmail());
             if (strId == null) {
                 oUsuario.setId(0);
             } else {

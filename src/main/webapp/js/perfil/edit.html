@@ -38,47 +38,47 @@ THE SOFTWARE.
         </div>
 
 
-        <div id="nombre-group" class="form-group">
-            <label class="col-sm-2 control-label" for="login">Nombre:</label>
+        <div id="direccion-group" class="form-group">
+            <label class="col-sm-2 control-label" for="direccion">Dirección:</label>
             <div class="control col-sm-8">
-                <input ng-model="obj.nombre" type="text" id="login" class="form-control" name="login" size="15" placeholder="Nombre">
+                <input ng-model="obj.direccion" type="text" id="direccion" class="form-control" name="direccion" size="15" placeholder="Direccion">
             </div>
         </div>
 
 
-        <div id="apellido-group" class="form-group">
-            <label class="col-sm-2 control-label" for="contenido">Apellidos:</label>
+        <div id="estado_civil-group" class="form-group">
+            <label class="col-sm-2 control-label" for="estado_civil">Estado civil:</label>
             <div class="control col-sm-9">
-                <input ng-model="obj.apellido" type="text" id="password" class="form-control" name="password" size="15" placeholder="Apellidos">
+                <input ng-model="obj.estado_civil" type="text" id="estado_civil" class="form-control" name="estado_civil" size="15" placeholder="Estado civil">
             </div>
         </div>
         
-        <div id="email-group" class="form-group">
-            <label class="col-sm-2 control-label" for="contenido">Email:</label>
+        <div id="ocupacion-group" class="form-group">
+            <label class="col-sm-2 control-label" for="ocupacion">Ocupacion:</label>
             <div class="control col-sm-9">
-                <input ng-model="obj.email" type="text" id="email" class="form-control" name="email" size="15" placeholder="Email">
+                <input ng-model="obj.ocupacion" type="text" id="ocupacion" class="form-control" name="ocupacion" size="15" placeholder="Ocupacion">
             </div>
         </div>
         
-        <div id="password-group" class="form-group">
-            <label class="col-sm-2 control-label" for="contenido">Password:</label>
+        <div id="estudio-group" class="form-group">
+            <label class="col-sm-2 control-label" for="estudio">Estudio:</label>
             <div class="control col-sm-9">
-                <input ng-model="obj.password" type="text" id="password" class="form-control" name="password" size="15" placeholder="Password">
+                <input ng-model="obj.estudio" type="text" id="estudio" class="form-control" name="estudio" size="15" placeholder="Estudio">
             </div>
         </div>
  
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="obj_perfil">Perfil:</label>
+            <label class="col-sm-2 control-label" for="obj_usuario">Usuario:</label>
             <div class="control col-sm-3">
-                <div class="input-group foreign" id="obj_perfil_group">
-                    <span class="input-group-addon" id="obj_perfil_button">
-                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('perfil')">
+                <div class="input-group foreign" id="obj_usuario_group">
+                    <span class="input-group-addon" id="obj_usuario_button">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('usuario')">
                         </span>
                     </span>
-                    <input ng-model="obj.obj_perfil.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_tipousuario" name="obj_tipousuario" type="text" size="5" maxlength="5">
+                    <input ng-model="obj.obj_usuario.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_usuario" name="obj_usuario" type="text" size="5" maxlength="5">
                     <span class="input-group-addon">
-                        <a href="#/perfil/view/{{obj.obj_perfil.id}}">
-                            <span>{{obj.obj_perfil.id}}</span>     
+                        <a href="#/usuario/view/{{obj.obj_usuario.id}}">
+                            <span>{{obj.obj_usuario.nombre}} {{obj.obj_usuario.apellido}}</span>     
                         </a>       
                     </span>
                 </div>
@@ -100,8 +100,8 @@ THE SOFTWARE.
     </form>
     <div ng-show="result != null">    
         <div class="alert alert-success" ng-show="result.status == 200">
-            <h2>Se ha modificado el usuario</h2>
-            <a ng-href="#/usuario/view/{{id}}">Ver el usuario modificado</a>
+            <h2>Se ha modificado el perfil</h2>
+            <a ng-href="#/perfil/view/{{id}}">Ver el perfil modificado</a>
         </div>
         <div class="alert alert-danger" ng-show="result.status != 200">
             <h2>Error al modificar el usuario: no se ha modificado el usuario</h2>

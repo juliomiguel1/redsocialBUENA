@@ -40,9 +40,7 @@ public class UsuarioBean implements GenericBean{
     @Expose
     private String nombre = "";
     @Expose
-    private String apellido1 = "";
-    @Expose
-    private String apellido2 = "";
+    private String apellido = "";
     @Expose
     private String email = "";    
     @Expose
@@ -91,30 +89,18 @@ public class UsuarioBean implements GenericBean{
     /**
      * @return the apellido1
      */
-    public String getApellido1() {
-        return apellido1;
+    public String getApellido() {
+        return apellido;
     }
 
     /**
      * @param apellido1 the apellido1 to set
      */
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    /**
-     * @return the apellido2
-     */
-    public String getApellido2() {
-        return apellido2;
-    }
-
-    /**
-     * @param apellido2 the apellido2 to set
-     */
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
-    }
+    
 
     /**
      * @return the email
@@ -176,8 +162,7 @@ public class UsuarioBean implements GenericBean{
         String strJson = "{";
         strJson += "id:" + getId() + ",";
         strJson += "nombre:" + nombre + ",";
-        strJson += "apellido1:" + apellido1 + ",";
-        strJson += "apellido2:" + apellido2 + ",";
+        strJson += "apellido1:" + apellido + ",";
         strJson += "email:" + email + ",";
         strJson += "password:" + getPassword() + ",";
         if (expand) {
@@ -209,8 +194,7 @@ public class UsuarioBean implements GenericBean{
         String strColumns = "";
         strColumns += getId() + ",";
         strColumns += nombre + ",";
-        strColumns += apellido1 + ",";
-        strColumns += apellido2 + ",";
+        strColumns += apellido + ",";
         strColumns += email + ",";
         strColumns += password + ",";
         strColumns += id_perfil;
@@ -224,8 +208,7 @@ public class UsuarioBean implements GenericBean{
         strPairs += "id=" + getId() + ",";
         strPairs += "nombre=" + nombre + ",";
         strPairs += "password=" + getPassword() + ",";
-        strPairs += "apellido1=" + apellido1 + ",";
-        strPairs += "apellido2=" + apellido2 + ",";
+        strPairs += "apellido1=" + apellido + ",";
         strPairs += "email=" + email + ",";
         strPairs += "id_perfil=" + id_perfil;
 
@@ -238,8 +221,7 @@ public class UsuarioBean implements GenericBean{
         this.setId(oResultSet.getInt("id"));
         this.setNombre(oResultSet.getString("nombre"));
         this.setPassword(oResultSet.getString("password"));
-        this.setApellido1(oResultSet.getString("apellido1"));
-        this.setApellido2(oResultSet.getString("apellido2"));
+        this.setApellido(oResultSet.getString("apellido"));
         this.setEmail(oResultSet.getString("email"));
         if (expand > 0) {
             PerfilBean oPerfilBean = new PerfilBean();

@@ -100,12 +100,9 @@ THE SOFTWARE.
                                 <p></p>
                                 <p>Campos visibles:</p>
                                 <input type="checkbox" ng-model="visibles.id" ng-checked="visibles.id">Ident.
-                                <input type="checkbox" ng-model="visibles.nombre" ng-checked="visibles.nombre" >Nombre
-                                <input type="checkbox" ng-model="visibles.apellido" ng-checked="visibles.apellido">Apellidos
-                                <input type="checkbox" ng-model="visibles.id_perfil" ng-checked="visibles.id_perfil">Perfil
-                                <input type="checkbox" ng-model="visibles.email" ng-checked="visibles.email">Email
-                                <input type="checkbox" ng-model="visibles.password" ng-checked="visibles.password">Password
-
+                                <input type="checkbox" ng-model="visibles.id_usuario1" ng-checked="visibles.id_usuario1" >Usuario 1
+                                <input type="checkbox" ng-model="visibles.id_usuario2" ng-checked="visibles.id_usuario2">Usuario 2
+                                <input type="checkbox" ng-model="visibles.id_grupo" ng-checked="visibles.id_grupo">Grupo
 
                                 <p></p>
                             </div>
@@ -121,12 +118,9 @@ THE SOFTWARE.
                                 <select id="selectFilter" class="form-control" name="filter" style="width: 160px" ng-model="filter">
                                     <option style="display:none">selecciona un campo</option>                                    
                                     <option value="id">Identificador</option>
-                                    <option value="nombre">Nombre</option>
-                                    <option value="apellido">Apellidos</option>
-                                    <option value="email">Email</option>
-                                    <option value="id_perfil">Perfil</option>
-                                    <option value="ciudad">Ciudad</option>
-                                    <option value="password">Password</option>
+                                    <option value="id_usuario1">Usuario 1</option>
+                                    <option value="id_usuario2">Usuario 2</option>
+                                    <option value="id_grupo">Grupo</option>
                                 </select>
                                 <select id="selectFilteroperator" class="form-control" name="filteroperator" width="80" style="width: 200px" ng-model="filteroperator">
                                     <option style="display:none">selecciona una operacion</option>
@@ -180,32 +174,22 @@ THE SOFTWARE.
                         <a ng-show="visibles.id" href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id&ordervalue=asc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-up"></i></a>
                         <a ng-show="visibles.id" href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id&ordervalue=desc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-down"></i></a>
                     </th>
-                    <th ng-show="visibles.nombre">
-                        Nombre
-                        <a ng-show="visibles.nombre" href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=nombre&ordervalue=asc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-up"></i></a>
-                        <a ng-show="visibles.nombre" href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=nombre&ordervalue=desc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-down"></i></a>
+                    <th ng-show="visibles.id_usuario1">
+                        Usuario 1
+                        <a ng-show="visibles.id_usuario1" href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id_usuario1&ordervalue=asc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-up"></i></a>
+                        <a ng-show="visibles.id_usuario1" href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id_usuario1&ordervalue=desc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-down"></i></a>
                     </th>
-                    <th ng-show="visibles.apellido">
-                        Apellido
-                        <a ng-show="visibles.apellido" href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=apellido&ordervalue=asc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-up"></i></a>
-                        <a ng-show="visibles.apellido" href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=apellido&ordervalue=desc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-down"></i></a>
+                    <th ng-show="visibles.id_usuario2">
+                        Usuario 2
+                        <a ng-show="visibles.id_usuario2" href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id_usuario2&ordervalue=asc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-up"></i></a>
+                        <a ng-show="visibles.id_usuario2" href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id_usuario2&ordervalue=desc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-down"></i></a>
 
                     </th>
-                    <th  ng-show="visibles.id_perfil">
-                        Id_Perfil
-                        <a ng-show="visibles.id_perfil"  href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id_perfil&ordervalue=asc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-up"></i></a>
-                        <a ng-show="visibles.id_perfil"  href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id_perfil&ordervalue=desc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-down"></i></a>
+                    <th  ng-show="visibles.id_grupo">
+                        Grupo
+                        <a ng-show="visibles.id_grupo"  href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id_grupo&ordervalue=asc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-up"></i></a>
+                        <a ng-show="visibles.id_grupo"  href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id_grupo&ordervalue=desc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-down"></i></a>
                     </th>
-                    <th ng-show="visibles.email">
-                        Email
-                        <a ng-show="visibles.email"  href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=email&ordervalue=asc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-up"></i></a>
-                        <a ng-show="visibles.email"  href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=email&ordervalue=desc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-down"></i></a>
-                    </th>
-                    <th ng-show="visibles.password">
-                        Password
-                        <a ng-show="visibles.password"  href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=ciudad&ordervalue=asc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-up"></i></a>
-                        <a ng-show="visibles.password"  href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=ciudad&ordervalue=desc{{paramsWithoutOrder}}"><i class="glyphicon glyphicon-arrow-down"></i></a>
-                    </th>   
                     <th>
                         Acciones
                     </th>
@@ -214,11 +198,10 @@ THE SOFTWARE.
             <tbody>
                 <tr ng-repeat="obj in page">
                     <td ng-show="visibles.id" class="text-right">{{obj.id}}</td>
-                    <td ng-show="visibles.nombre">{{obj.nombre}}</td>
-                    <td ng-show="visibles.apellido">{{obj.apellido}}</td>                                                       
-                    <td ng-show="visibles.id_perfil"><a href="#/perfil/view/{{obj.obj_perfil.id}}">{{obj.obj_perfil.id}}</a></td>
-                    <td ng-show="visibles.email">{{obj.email}}</td>
-                    <td ng-show="visibles.password">{{obj.password}}</td>
+                    <td ng-show="visibles.id_usuario1"><a href="#/usuario/view/{{obj.obj_usuario1.id}}">{{obj.obj_usuario1.id}}  {{obj.obj_usuario1.nombre}}</a></td>
+                    <td ng-show="visibles.id_usuario2"><a href="#/usuario/view/{{obj.obj_usuario2.id}}">{{obj.obj_usuario2.id}}  {{obj.obj_usuario2.nombre}}</a></td>                                                       
+                    <td ng-show="visibles.id_grupo"><a href="#/grupo/view/{{obj.obj_grupo.id}}">{{obj.obj_grupo.id}} {{obj.obj_grupo.descripcion}} </a></td>
+                    
                     <td>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

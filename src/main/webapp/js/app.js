@@ -38,6 +38,9 @@ var openAusias = angular.module('myApp', [
     'usuarioControllers',    
     'tipodocumentoControllers',
     'tipousuarioControllers',
+    'perfilControllers',
+    'grupoControllers',
+    'amistadControllers',
     'ui.bootstrap',
     'ngSanitize' //http://stackoverflow.com/questions/9381926/insert-html-into-view-using-angularjs
 ]);
@@ -61,6 +64,25 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuario/remove/:id', {templateUrl: 'js/usuario/remove.html',   controller: 'UsuarioRemoveController'});
         $routeProvider.when('/usuario/plist/:page?/:rpp?', {templateUrl: 'js/usuario/plist.html', controller: 'UsuarioPListController'});
         //------------
+        $routeProvider.when('/perfil/view/:id', {templateUrl: 'js/perfil/view.html', controller: 'PerfilViewController'});
+        $routeProvider.when('/perfil/new/:id', {templateUrl: 'js/perfil/new.html', controller: 'PerfilNewController'});
+        $routeProvider.when('/perfil/edit/:id', {templateUrl: 'js/perfil/edit.html', controller: 'PerfilEditController'});
+        $routeProvider.when('/perfil/remove/:id', {templateUrl: 'js/perfil/remove.html',   controller: 'PerfilRemoveController'});
+        $routeProvider.when('/perfil/plist/:page?/:rpp?', {templateUrl: 'js/perfil/plist.html', controller: 'PerfilPListController'});
+        //------------
+        $routeProvider.when('/grupo/view/:id', {templateUrl: 'js/grupo/view.html', controller: 'GrupoViewController'});
+        $routeProvider.when('/grupo/new/:id', {templateUrl: 'js/grupo/new.html', controller: 'GrupoNewController'});
+        $routeProvider.when('/grupo/edit/:id', {templateUrl: 'js/grupo/edit.html', controller: 'GrupoEditController'});
+        $routeProvider.when('/grupo/remove/:id', {templateUrl: 'js/grupo/remove.html',   controller: 'GrupoRemoveController'});
+        $routeProvider.when('/grupo/plist/:page?/:rpp?', {templateUrl: 'js/grupo/plist.html', controller: 'GrupoPListController'});
+        //------------
+        $routeProvider.when('/amistad/view/:id', {templateUrl: 'js/amistad/view.html', controller: 'AmistadViewController'});
+        $routeProvider.when('/amistad/new/:id', {templateUrl: 'js/amistad/new.html', controller: 'AmistadNewController'});
+        $routeProvider.when('/amistad/edit/:id', {templateUrl: 'js/amistad/edit.html', controller: 'AmistadEditController'});
+        $routeProvider.when('/amistad/remove/:id', {templateUrl: 'js/amistad/remove.html',   controller: 'AmistadRemoveController'});
+        $routeProvider.when('/amistad/plist/:page?/:rpp?', {templateUrl: 'js/amistad/plist.html', controller: 'AmistadPListController'});
+        
+        //------------
         $routeProvider.when('/tipodocumento/view/:id', {templateUrl: 'js/tipodocumento/view.html', controller: 'TipodocumentoViewController'});
         $routeProvider.when('/tipodocumento/selection/:page/:rpp', {templateUrl: 'js/tipodocumento/selection.html', controller: 'TipodocumentoSelectionController'});
         
@@ -80,4 +102,8 @@ var moduloUsuario = angular.module('usuarioControllers', []);
 var moduloDocumento = angular.module('documentoControllers', []);
 var moduloTipodocumento = angular.module('tipodocumentoControllers', []);
 var moduloTipousuario = angular.module('tipousuarioControllers', []);
+var moduloPerfil = angular.module('perfilControllers', []);
+var moduloGrupo = angular.module('grupoControllers', []);
+var moduloAmistad = angular.module('amistadControllers', []);
+
 

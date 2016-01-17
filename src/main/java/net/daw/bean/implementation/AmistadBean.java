@@ -166,9 +166,10 @@ public class AmistadBean implements GenericBean {
         strJson += "id:" + getId() + ",";
         if (expand) {
             strJson += "obj_usuario1:" + obj_usuario1.toJson(false) + ",";
-            strJson += "obj_usuario1:" + obj_usuario1.toJson(false) + ",";
+            strJson += "obj_usuario2:" + obj_usuario2.toJson(false) + ",";
         } else {
             strJson += "id_usuario1:" + id_usuario1 + ",";
+            strJson += "id_usuario2:" + id_usuario2 + ",";
         }
         strJson += "}";
         return strJson;
@@ -209,19 +210,19 @@ public class AmistadBean implements GenericBean {
         this.setId(oResultSet.getInt("id"));
         if (expand > 0) {
             UsuarioBean oUsuarioBean1 = new UsuarioBean();
-            UsuarioDao oUsuarioDao = new UsuarioDao(pooledConnection);
+            UsuarioDao oUsuarioDao1 = new UsuarioDao(pooledConnection);
             oUsuarioBean1.setId(oResultSet.getInt("id_usuario1"));
-            oUsuarioBean1 = oUsuarioDao.get(oUsuarioBean1, expand - 1);
+            oUsuarioBean1 = oUsuarioDao1.get(oUsuarioBean1, expand - 1);
             this.setObj_usuario1(oUsuarioBean1);
         } else {
             this.setId_usuario1(oResultSet.getInt("id_usuario1"));
         }
         if (expand > 0) {
             UsuarioBean oUsuarioBean2 = new UsuarioBean();
-            UsuarioDao oUsuarioDao = new UsuarioDao(pooledConnection);
+            UsuarioDao oUsuarioDao2 = new UsuarioDao(pooledConnection);
             oUsuarioBean2.setId(oResultSet.getInt("id_usuario2"));
-            oUsuarioBean2 = oUsuarioDao.get(oUsuarioBean2, expand - 1);
-            this.setObj_usuario1(oUsuarioBean2);
+            oUsuarioBean2 = oUsuarioDao2.get(oUsuarioBean2, expand - 1);
+            this.setObj_usuario2(oUsuarioBean2);
         } else {
             this.setId_usuario2(oResultSet.getInt("id_usuario2"));
         }

@@ -59,25 +59,25 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
 
         //------------
         $routeProvider.when('/usuario/view/:id', {templateUrl: 'js/usuario/view.html', controller: 'UsuarioViewController'});
-        $routeProvider.when('/usuario/new/:id', {templateUrl: 'js/usuario/new.html', controller: 'UsuarioNewController'});
+        $routeProvider.when('/usuario/new', {templateUrl: 'js/usuario/new.html', controller: 'UsuarioNewController'});
         $routeProvider.when('/usuario/edit/:id', {templateUrl: 'js/usuario/edit.html', controller: 'UsuarioEditController'});
         $routeProvider.when('/usuario/remove/:id', {templateUrl: 'js/usuario/remove.html',   controller: 'UsuarioRemoveController'});
         $routeProvider.when('/usuario/plist/:page?/:rpp?', {templateUrl: 'js/usuario/plist.html', controller: 'UsuarioPListController'});
         //------------
         $routeProvider.when('/perfil/view/:id', {templateUrl: 'js/perfil/view.html', controller: 'PerfilViewController'});
-        $routeProvider.when('/perfil/new/:id', {templateUrl: 'js/perfil/new.html', controller: 'PerfilNewController'});
+        $routeProvider.when('/perfil/new', {templateUrl: 'js/perfil/new.html', controller: 'PerfilNewController'});
         $routeProvider.when('/perfil/edit/:id', {templateUrl: 'js/perfil/edit.html', controller: 'PerfilEditController'});
         $routeProvider.when('/perfil/remove/:id', {templateUrl: 'js/perfil/remove.html',   controller: 'PerfilRemoveController'});
         $routeProvider.when('/perfil/plist/:page?/:rpp?', {templateUrl: 'js/perfil/plist.html', controller: 'PerfilPListController'});
         //------------
         $routeProvider.when('/grupo/view/:id', {templateUrl: 'js/grupo/view.html', controller: 'GrupoViewController'});
-        $routeProvider.when('/grupo/new/:id', {templateUrl: 'js/grupo/new.html', controller: 'GrupoNewController'});
+        $routeProvider.when('/grupo/new', {templateUrl: 'js/grupo/new.html', controller: 'GrupoNewController'});
         $routeProvider.when('/grupo/edit/:id', {templateUrl: 'js/grupo/edit.html', controller: 'GrupoEditController'});
         $routeProvider.when('/grupo/remove/:id', {templateUrl: 'js/grupo/remove.html',   controller: 'GrupoRemoveController'});
         $routeProvider.when('/grupo/plist/:page?/:rpp?', {templateUrl: 'js/grupo/plist.html', controller: 'GrupoPListController'});
         //------------
         $routeProvider.when('/amistad/view/:id', {templateUrl: 'js/amistad/view.html', controller: 'AmistadViewController'});
-        $routeProvider.when('/amistad/new/:id', {templateUrl: 'js/amistad/new.html', controller: 'AmistadNewController'});
+        $routeProvider.when('/amistad/new', {templateUrl: 'js/amistad/new.html', controller: 'AmistadNewController'});
         $routeProvider.when('/amistad/edit/:id', {templateUrl: 'js/amistad/edit.html', controller: 'AmistadEditController'});
         $routeProvider.when('/amistad/remove/:id', {templateUrl: 'js/amistad/remove.html',   controller: 'AmistadRemoveController'});
         $routeProvider.when('/amistad/plist/:page?/:rpp?', {templateUrl: 'js/amistad/plist.html', controller: 'AmistadPListController'});

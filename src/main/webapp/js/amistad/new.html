@@ -37,57 +37,59 @@ THE SOFTWARE.
             </div>
         </div>
 
-
-        <div id="nombre-group" class="form-group">
-            <label class="col-sm-2 control-label" for="titulo">Nombre:</label>
-            <div class="control col-sm-8">
-                <input ng-model="obj.nombre" type="text" id="nombre" class="form-control" name="nombre" size="15" placeholder="Nombre">
-            </div>
-        </div>
-
-
-        <div id="apellido-group" class="form-group">
-            <label class="col-sm-2 control-label" for="apellido">Apellido:</label>
-            <div class="control col-sm-9">
-                <input ng-model="obj.apellido" type="text" id="apellido" class="form-control" name="apellido" size="15" placeholder="Apellido">
-            </div>
-        </div>
-        
-        <div id="email-group" class="form-group">
-            <label class="col-sm-2 control-label" for="email">Email:</label>
-            <div class="control col-sm-9">
-                <input ng-model="obj.email" type="text" id="email" class="form-control" name="email" size="15" placeholder="Email">
-            </div>
-        </div>
-
-
-        <div id="password-group" class="form-group">
-            <label class="col-sm-2 control-label" for="hits">Password:</label>
-            <div class="control col-sm-3">
-                <input ng-model="obj.password" type="text" id="password" class="form-control" name="password" size="15" placeholder="hits">
-            </div>
-        </div>
-
-
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="obj_perfil">Perfil:</label>
+            <label class="col-sm-2 control-label" for="obj_usuario1">Usuario 1: </label>
             <div class="control col-sm-3">
-                <div class="input-group foreign" id="obj_perfil_group">
-                    <span class="input-group-addon" id="obj_perfil_button">
-                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('perfil')">
+                <div class="input-group foreign" id="obj_usuairo1_group">
+                    <span class="input-group-addon" id="obj_usuario1_button">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('usuario')">
                         </span>
                     </span>
-                    <input ng-model="obj.obj_perfil.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_perfil" name="obj_perfil" type="text" size="5" maxlength="5">
+                    <input ng-model="obj.obj_usuario1.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_usuario1" name="obj_usuario1" type="text" size="5" maxlength="5">
                     <span class="input-group-addon">
-                        <a href="#/perfil/view/{{obj.obj_perfil.id}}">
-                            <span>{{obj.obj_perfil.id}}</span>     
+                        <a href="#/usuario/view/{{obj.usuario1.id}}">
+                            <span>{{obj.obj_usuario1.id}}</span>     
                         </a>       
                     </span>
                 </div>
             </div>            
         </div>
 
-
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="obj_usuario2">Usuario 2: </label>
+            <div class="control col-sm-3">
+                <div class="input-group foreign" id="obj_usuairo2_group">
+                    <span class="input-group-addon" id="obj_usuario2_button">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('usuario')">
+                        </span>
+                    </span>
+                    <input ng-model="obj.obj_usuario2.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_usuario2" name="obj_usuario2" type="text" size="5" maxlength="5">
+                    <span class="input-group-addon">
+                        <a href="#/usuario/view/{{obj.usuario2.id}}">
+                            <span>{{obj.obj_usuario2.id}}</span>     
+                        </a>       
+                    </span>
+                </div>
+            </div>            
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="obj_grupo">Grupo:</label>
+            <div class="control col-sm-3">
+                <div class="input-group foreign" id="obj_grupo_group">
+                    <span class="input-group-addon" id="obj_grupo_button">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('grupo')">
+                        </span>
+                    </span>
+                    <input ng-model="obj.obj_usuario1.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_grupo" name="obj_grupo" type="text" size="5" maxlength="5">
+                    <span class="input-group-addon">
+                        <a href="#/grupo/view/{{obj.grupo.id}}">
+                            <span>{{obj.obj_grupo.id}}</span>     
+                        </a>       
+                    </span>
+                </div>
+            </div>            
+        </div>
 
 
         <div class="control-group text-right">
@@ -101,7 +103,7 @@ THE SOFTWARE.
     <div ng-show="result != null">    
         <div class="alert alert-success" ng-show="result.status == 200">
             <h2>Se ha modificado el registro</h2>
-            <a ng-href="#/usuario/view/{{id}}">Ver el registro modificado</a>
+            <a ng-href="#/amistad/view/{{id}}">Ver el registro modificado</a>
         </div>
         <div class="alert alert-danger" ng-show="result.status != 200">
             <h2>Error al crear el documento: no se ha creado el documento</h2>

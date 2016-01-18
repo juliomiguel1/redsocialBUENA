@@ -26,34 +26,37 @@
  * 
  */
 
+
 'use strict';
-moduloAmistad.controller('AmistadEditController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService',
+moduloUsuario.controller('UsuarioNewController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService',
     function ($scope, $routeParams, $location, serverService, sharedSpaceService) {
-        $scope.obj = null;
         $scope.id = $routeParams.id;
-        $scope.ob = 'amistad';
+        $scope.ob = 'usuario';
         $scope.result = null;
-        $scope.title = "Edición de amistad";
+        $scope.title = "Crear un nuevo Usuario";
         $scope.icon = "fa-user";
         if (sharedSpaceService.getFase() == 0) {
-            serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {
-                $scope.obj = data.message;
-            });
+            $scope.obj = {
+                id: 0,
+                nombre: "",
+                apellido: "",
+                email: "",
+                password: "",
+                id_perfil: 0,
+                obj_perfil: {
+                    id: 0
+                }
+            };
         } else {
             $scope.obj = sharedSpaceService.getObject();
             sharedSpaceService.setFase(0);
         }
-        
-        
         $scope.chooseOne = function (foreignObjectName) {
             sharedSpaceService.setObject($scope.obj);
-            sharedSpaceService.setReturnLink('/' + $scope.ob + '/edit/' + $scope.id);
+            sharedSpaceService.setReturnLink('/' + $scope.ob + '/new');
             sharedSpaceService.setFase(1);
             $location.path('/' + foreignObjectName + '/selection/1/10');
         }
-        
-        
-        
         $scope.save = function () {
             console.log("save");
             console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});
@@ -62,20 +65,11 @@ moduloAmistad.controller('AmistadEditController', ['$scope', '$routeParams', '$l
                 $scope.result = data;
             });
         };
-
-        
-//        $scope.$watch('obj.obj_usuario.id', function () {
-//            if ($scope.obj) {
-//                serverService.getDataFromPromise(serverService.promise_getOne('usuario', $scope.obj.obj_usuario.id)).then(function (data2) {
-//                    $scope.obj.obj_usuario = data2.message;
-//                });
-//            }
-//        });
-
-
-
-
-
+        $scope.$watch('obj.obj_perfil.id', function () {
+            serverService.getDataFromPromise(serverService.promise_getOne('perfil', $scope.obj.obj_perfil.id)).then(function (data2) {
+                $scope.obj.obj_perfil = data2.message;
+            });
+        });
         $scope.back = function () {
             window.history.back();
         };
@@ -83,9 +77,8 @@ moduloAmistad.controller('AmistadEditController', ['$scope', '$routeParams', '$l
             $location.path('/home');
         };
         $scope.plist = function () {
-            $location.path('/' + $scope.ob + '/plist');
+            $location.path('/usuario/plist');
         };
 
 
-        
     }]);

@@ -137,14 +137,32 @@ moduloUsuario.controller('UsuarioSelectionController', ['$scope', '$routeParams'
             return false;
         };
 
-        $scope.go = function (num) {
+       /* $scope.go = function (num) {
+          
+            sharedSpaceService.getObject().obj_usuario.id = num;
+            sharedSpaceService.setFase(2);
+            $location.path(sharedSpaceService.getReturnLink());
+        };*/
+        
+        /*   $scope.go = function (num) {
             if (sharedSpaceService.getNumeroUsuario() == 1) {
                 sharedSpaceService.getObject().obj_usuario1.id = num;
-            } else {
+            }else{
+                sharedSpaceService.getObject().obj_usuario.id = num;
+            }
+            sharedSpaceService.setFase(2);
+            $location.path(sharedSpaceService.getReturnLink());
+        };*/
+        
+           $scope.go = function (num) {
+            if (num == 1) {
+                sharedSpaceService.getObject().obj_usuario1.id = num;
+            }else{
                 sharedSpaceService.getObject().obj_usuario2.id = num;
             }
             sharedSpaceService.setFase(2);
             $location.path(sharedSpaceService.getReturnLink());
         };
-
+        
+        
     }]);

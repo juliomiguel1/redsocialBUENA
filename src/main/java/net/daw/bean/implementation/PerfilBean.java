@@ -207,11 +207,11 @@ public class PerfilBean implements GenericBean {
     public String getValues() {
         String strColumns = "";
         strColumns += id + ",";        
-        strColumns += direccion + ",";        
-        strColumns += estado_civil + ",";        
-        strColumns += ocupacion + ",";
-        strColumns += estudio + ",";
-        strColumns += sexo + ",";
+        strColumns += '"'+direccion +'"'+ ",";        
+        strColumns += '"'+estado_civil +'"'+ ",";        
+        strColumns += '"'+ocupacion +'"'+ ",";
+        strColumns += '"'+estudio +'"'+ ",";
+        strColumns += sexo +",";
         strColumns += id_usuario;
         return strColumns;
     }

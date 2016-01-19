@@ -148,7 +148,7 @@ public class ComentarioBean implements GenericBean {
     public String getValues() {
         String strColumns = "";
         strColumns += id + ",";        
-        strColumns += texto + ",";        
+        strColumns += '"'+texto +'"'+ ",";        
         strColumns += fecha + ",";
         strColumns += id_amistad;
         return strColumns;

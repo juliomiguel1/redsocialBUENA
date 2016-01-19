@@ -90,7 +90,7 @@ public class GrupoBean implements GenericBean {
     public String getValues() {
         String strColumns = "";
         strColumns += getId() + ",";
-        strColumns += descripcion;
+        strColumns += '"'+descripcion+'"';
         return strColumns;
     }
 

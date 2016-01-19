@@ -33,12 +33,23 @@ moduloAmistad.controller('AmistadNewController', ['$scope', '$routeParams', '$lo
         $scope.id = $routeParams.id;
         $scope.ob = 'amistad';
         $scope.result = null;
-        $scope.title = "Crear un nueva Amistad";
+        $scope.title = "Crear un nueva amistad";
         $scope.icon = "fa-users";
         if (sharedSpaceService.getFase() == 0) {
             $scope.obj = {
                 id: 0,
-                descripcion: ""
+                id_usuario1: 0,
+                obj_usuario1: {
+                    id: 0
+                },
+                id_usuario2: 0,
+                obj_usuario2: {
+                    id: 0
+                },
+                id_grupo: 0,
+                obj_grupo: {
+                    id: 0
+                }
             };
         } else {
             $scope.obj = sharedSpaceService.getObject();
@@ -58,7 +69,16 @@ moduloAmistad.controller('AmistadNewController', ['$scope', '$routeParams', '$lo
                 $scope.result = data;
             });
         };
-       
+        $scope.$watch('obj.obj_usuario1.id', function () {
+            serverService.getDataFromPromise(serverService.promise_getOne('usuario', $scope.obj.obj_usuario1.id)).then(function (data2) {
+                $scope.obj.obj_usuario1 = data2.message;
+            });
+        });
+        $scope.$watch('obj.obj_usuario2.id', function () {
+            serverService.getDataFromPromise(serverService.promise_getOne('usuario', $scope.obj.obj_usuario2.id)).then(function (data2) {
+                $scope.obj.obj_usuario2 = data2.message;
+            });
+        });
         $scope.back = function () {
             window.history.back();
         };
@@ -68,6 +88,5 @@ moduloAmistad.controller('AmistadNewController', ['$scope', '$routeParams', '$lo
         $scope.plist = function () {
             $location.path('/amistad/plist');
         };
-
 
     }]);

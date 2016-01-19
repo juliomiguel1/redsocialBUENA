@@ -32,6 +32,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import net.daw.bean.publicinterface.GenericBean;
 import net.daw.dao.implementation.PerfilDao;
+import net.daw.helper.statics.EncodingUtilHelper;
 
 public class UsuarioBean implements GenericBean{
 
@@ -162,7 +163,7 @@ public class UsuarioBean implements GenericBean{
         String strJson = "{";
         strJson += "id:" + getId() + ",";
         strJson += "nombre:" + nombre + ",";
-        strJson += "apellido1:" + apellido + ",";
+        strJson += "apellido:" + apellido + ",";
         strJson += "email:" + email + ",";
         strJson += "password:" + getPassword() + ",";
         if (expand) {
@@ -180,8 +181,7 @@ public class UsuarioBean implements GenericBean{
         String strColumns = "";
         strColumns += "id,";
         strColumns += "nombre,";
-        strColumns += "apellido1,";
-        strColumns += "apellido2,";
+        strColumns += "apellido,";
         strColumns += "email,";
         strColumns += "password,";
         strColumns += "id_perfil";
@@ -193,10 +193,10 @@ public class UsuarioBean implements GenericBean{
     public String getValues() {
         String strColumns = "";
         strColumns += getId() + ",";
-        strColumns += nombre + ",";
-        strColumns += apellido + ",";
-        strColumns += email + ",";
-        strColumns += password + ",";
+        strColumns += '"'+nombre +'"'+ ",";
+        strColumns += '"'+apellido +'"'+ ",";
+        strColumns += '"'+email + '"'+",";
+        strColumns += '"'+password + '"'+",";
         strColumns += id_perfil;
 
         return strColumns;
@@ -206,10 +206,10 @@ public class UsuarioBean implements GenericBean{
     public String toPairs() {
         String strPairs = "";
         strPairs += "id=" + getId() + ",";
-        strPairs += "nombre=" + nombre + ",";
-        strPairs += "password=" + getPassword() + ",";
-        strPairs += "apellido1=" + apellido + ",";
-        strPairs += "email=" + email + ",";
+        strPairs += "nombre=" + EncodingUtilHelper.quotate(nombre) + ",";
+        strPairs += "password=" + EncodingUtilHelper.quotate(getPassword()) + ",";
+        strPairs += "apellido=" + EncodingUtilHelper.quotate(apellido) + ",";
+        strPairs += "email=" + EncodingUtilHelper.quotate(email) + ",";
         strPairs += "id_perfil=" + id_perfil;
 
         return strPairs;

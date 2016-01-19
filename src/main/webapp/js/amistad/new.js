@@ -55,10 +55,11 @@ moduloAmistad.controller('AmistadNewController', ['$scope', '$routeParams', '$lo
             $scope.obj = sharedSpaceService.getObject();
             sharedSpaceService.setFase(0);
         }
-        $scope.chooseOne = function (foreignObjectName) {
+        $scope.chooseOne = function (foreignObjectName,numeroUsuario) {
             sharedSpaceService.setObject($scope.obj);
             sharedSpaceService.setReturnLink('/' + $scope.ob + '/new');
             sharedSpaceService.setFase(1);
+            sharedSpaceService.setNumeroUsuario=numeroUsuario;
             $location.path('/' + foreignObjectName + '/selection/1/10');
         }
         $scope.save = function () {

@@ -52,7 +52,7 @@ angular.module('Services', [])
             return {
                 date_toDate: function (input) {
                     var parts = input.split('/');
-                    return new Date(parts[2],parts[1]-1,parts[0]); 
+                    return new Date(parts[2], parts[1] - 1, parts[0]);
                 },
                 getAppName: function () {
                     var strPath = window.location.pathname;
@@ -268,6 +268,12 @@ angular.module('Services', [])
                     return fase;
                 },
                 setFase: function (value) {
+                    fase = value;
+                },
+                getNumeroUsuario: function () {
+                    return fase;
+                },
+                setNumeroUsuario: function (value) {
                     fase = value;
                 }
 

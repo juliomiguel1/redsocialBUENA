@@ -37,6 +37,7 @@ moduloAmistad.controller('AmistadPListController', ['$scope', '$routeParams', 's
         $scope.visibles.id_usuario = true;
         $scope.visibles.id_usuario2= true;
         $scope.visibles.id_grupo = true;
+        $scope.id_usuario=$routeParams.id_usuario;
 
 
         $scope.ob = "amistad";
@@ -101,7 +102,9 @@ moduloAmistad.controller('AmistadPListController', ['$scope', '$routeParams', 's
         $scope.params = ($scope.orderParams + $scope.filterParams + $scope.systemFilterParams);
         $scope.params = $scope.params.replace('&', '?');
 
-        serverService.getDataFromPromise(serverService.promise_getSome($scope.ob, $scope.rpp, $scope.numpage, $scope.filterParams, $scope.orderParams, $scope.systemFilterParams)).then(function (data) {
+       
+        
+         serverService.getDataFromPromise(serverService.promise_getSomexidusuario($scope.ob, $scope.rpp, $scope.numpage,$scope.id_usuario, $scope.filterParams, $scope.orderParams, $scope.systemFilterParams)).then(function (data) {
             if (data.status != 200) {
                 $scope.status = "Error en la recepción de datos del servidor";
             } else {
@@ -114,6 +117,7 @@ moduloAmistad.controller('AmistadPListController', ['$scope', '$routeParams', 's
                 $scope.status = "";
             }
         });
+
 
         $scope.getRangeArray = function (lowEnd, highEnd) {
             var rangeArray = [];

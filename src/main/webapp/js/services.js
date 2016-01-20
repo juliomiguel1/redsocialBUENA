@@ -72,6 +72,9 @@ angular.module('Services', [])
                 promise_getSome: function (strClass, rpp, page, filterParams, orderParams, systemfilterParams) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsome' + '&rpp=' + rpp + '&page=' + page + filterParams + orderParams + systemfilterParams, 'GET', '');
                 },
+                promise_getSomexidusuario: function (strClass, rpp, page, id_usuario, filterParams, orderParams, systemfilterParams) {
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsomexusuario'  + '&rpp=' + rpp + '&page=' + page + '&id_usuario=' + id_usuario + filterParams + orderParams + systemfilterParams, 'GET', '');
+                },
                 promise_getAll: function (strClass, filterParams, orderParams, systemfilterParams) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewall' + filterParams + orderParams + systemfilterParams, 'GET', '');
                 },
@@ -272,12 +275,12 @@ angular.module('Services', [])
                     fase = value;
                 },
                 getNumeroUsuario: function () {
-                    return nuevo ;
+                    return nuevo;
                 },
                 devuelveNumero: function (value) {
                     nuevo = value
                 }
-                
+
 
             };
         })

@@ -92,6 +92,35 @@ public class AmistadService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
+    
+    
+    public String getcountporidusuario() throws Exception {
+        if (this.checkpermission("getcount")) {
+            String data = null;
+            ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
+            int id_usuario = ParameterCook.prepareInt("id_usuario",oRequest);
+            Connection oConnection = null;
+            ConnectionInterface oDataConnectionSource = null;
+            try {
+                oDataConnectionSource = getSourceConnection();
+                oConnection = oDataConnectionSource.newConnection();
+                AmistadDao oAmistadDao = new AmistadDao(oConnection);
+                data = JsonMessage.getJson("200", Integer.toString(oAmistadDao.getCountxidusuario(id_usuario,alFilter)));
+            } catch (Exception ex) {
+                ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
+            } finally {
+                if (oConnection != null) {
+                    oConnection.close();
+                }
+                if (oDataConnectionSource != null) {
+                    oDataConnectionSource.disposeConnection();
+                }
+            }
+            return data;
+        } else {
+            return JsonMessage.getJsonMsg("401", "Unauthorized");
+        }
+    }
 
     @Override
     public String get() throws Exception {
@@ -156,7 +185,43 @@ public class AmistadService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
+    
 
+    @SuppressWarnings("empty-statement")
+    public String getpageporidusuario() throws Exception {
+        if (this.checkpermission("getpageporidusuario")) {
+            int intRegsPerPag = ParameterCook.prepareRpp(oRequest);;
+            int intPage = ParameterCook.preparePage(oRequest);
+            int id_usuario = ParameterCook.prepareInt("id_usuario",oRequest);
+            ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
+            HashMap<String, String> hmOrder = ParameterCook.prepareOrder(oRequest);
+            String data = null;
+            Connection oConnection = null;
+            ConnectionInterface oDataConnectionSource = null;
+            try {
+                oDataConnectionSource = getSourceConnection();
+                oConnection = oDataConnectionSource.newConnection();
+                AmistadDao oAmistadDao = new AmistadDao(oConnection);
+                List<AmistadBean> arrBeans = oAmistadDao.getPagexidusuario(id_usuario,intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
+                data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
+            } catch (Exception ex) {
+                ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
+            } finally {
+                if (oConnection != null) {
+                    oConnection.close();
+                }
+                if (oDataConnectionSource != null) {
+                    oDataConnectionSource.disposeConnection();
+                }
+            }
+            return data;
+        } else {
+            return JsonMessage.getJsonMsg("401", "Unauthorized");
+        }
+    }
+    
+    
+    
     @Override
     @SuppressWarnings("empty-statement")
     public String getpage() throws Exception {
@@ -189,7 +254,38 @@ public class AmistadService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
-
+    
+    
+    public String getpagesporidusuario() throws Exception {
+        if (this.checkpermission("getpages")) {
+            int intRegsPerPag = ParameterCook.prepareRpp(oRequest);
+            int id_usuario = ParameterCook.prepareInt("id_usuario",oRequest);
+            ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
+            String data = null;
+            Connection oConnection = null;
+            ConnectionInterface oDataConnectionSource = null;
+            try {
+                oDataConnectionSource = getSourceConnection();
+                oConnection = oDataConnectionSource.newConnection();
+                AmistadDao oAmistadDao = new AmistadDao(oConnection);
+                data = JsonMessage.getJson("200", Integer.toString(oAmistadDao.getPagesxidusuario(id_usuario,intRegsPerPag, alFilter)));
+            } catch (Exception ex) {
+                ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPages ERROR: " + ex.getMessage()));
+            } finally {
+                if (oConnection != null) {
+                    oConnection.close();
+                }
+                if (oDataConnectionSource != null) {
+                    oDataConnectionSource.disposeConnection();
+                }
+            }
+            return data;
+        } else {
+            return JsonMessage.getJsonMsg("401", "Unauthorized");
+        }
+    }
+    
+    
     @Override
     public String getpages() throws Exception {
         if (this.checkpermission("getpages")) {
@@ -219,6 +315,30 @@ public class AmistadService implements TableServiceInterface, ViewServiceInterfa
         }
     }
 
+    
+        public String getaggregateviewsomexusuario() throws Exception {
+        if (this.checkpermission("getaggregateviewsomexusuario")) {
+            String data = null;
+            try {
+                String page = this.getpageporidusuario();
+                String pages = this.getpagesporidusuario();
+                String registers = this.getcountporidusuario();
+                data = "{"
+                        + "\"page\":" + page
+                        + ",\"pages\":" + pages
+                        + ",\"registers\":" + registers
+                        + "}";
+                data = JsonMessage.getJson("200", data);
+            } catch (Exception ex) {
+                ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getAggregateViewSome ERROR: " + ex.getMessage()));
+            }
+            return data;
+        } else {
+            return JsonMessage.getJsonMsg("401", "Unauthorized");
+        }
+    }
+
+    
     @Override
     public String getaggregateviewsome() throws Exception {
         if (this.checkpermission("getaggregateviewsome")) {

@@ -39,25 +39,12 @@ THE SOFTWARE.
                 </thead>
                 <tbody>
                     <tr><td>id</td><td>{{bean.id}}</td></tr> 
-
+                    <tr><td>texto</td><td>{{bean.texto}}</td></tr>
+                    <tr><td>fecha</td><td>{{bean.fecha}}</td></tr>
                     <tr>
-                        <td>Usuario </td>
+                        <td>Amistad</td>
                         <td>
-                            <a href="#/usuario/view/{{bean.obj_usuario.id}}">{{bean.obj_usuario.id}} {{bean.obj_usuario.nombre}}</a>
-                        </td>
-                    </tr> 
-                    
-                    <tr>
-                        <td>Usuario 2</td>
-                        <td>
-                            <a href="#/usuario/view/{{bean.obj_usuario2.id}}">{{bean.obj_usuario2.id}} {{bean.obj_usuario2.nombre}}</a>
-                        </td>
-                    </tr> 
-                    
-                    <tr>
-                        <td>Grupo</td>
-                        <td>
-                            <a href="#/grupo/view/{{bean.obj_grupo.id}}">{{bean.obj_grupo.id}} {{bean.obj_grupo.descripcion}}</a>
+                            <a href="#/amistad/view/{{bean.obj_amistad.id}}">{{bean.obj_amistad.id}}</a>
                         </td>
                     </tr> 
                     
@@ -65,8 +52,8 @@ THE SOFTWARE.
                 </tbody>
             </table>  
             <div class="text-right" > 
-                <a class="btn btn-primary" href="#/usuario/edit/{{bean.id}}">Editar</a>
-                <a class="btn btn-danger" href="#/usuario/remove/{{bean.id}}">Borrar</a>
+                <a class="btn btn-primary" href="#/comentario/edit/{{bean.id}}">Editar</a>
+                <a class="btn btn-danger" href="#/comentario/remove/{{bean.id}}">Borrar</a>
                 <a class="btn btn-default" ng-click="plist()">Ir al listado de usuarios</a>
                 <a class="btn btn-default" ng-click="close()">Cerrar</a>
             </div>

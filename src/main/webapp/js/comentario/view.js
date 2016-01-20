@@ -33,11 +33,11 @@
 
 
 
-moduloUsuario.controller('UsuarioViewController', ['$scope', '$routeParams', 'serverService','$location',
+moduloComentario.controller('ComentarioViewController', ['$scope', '$routeParams', 'serverService','$location',
     function ($scope, $routeParams, serverService, $location) {
-        $scope.title = "Vista de usuario";
+        $scope.title = "Vista de comentario";
         $scope.icon = "fa-text";
-        $scope.ob = 'usuario';
+        $scope.ob = 'comentario';
         $scope.id = $routeParams.id;                        
         serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {
             $scope.bean = data.message;
@@ -46,7 +46,7 @@ moduloUsuario.controller('UsuarioViewController', ['$scope', '$routeParams', 'se
             $location.path('/home');
         };
         $scope.plist = function () {
-            $location.path('/usuario/plist');
+            $location.path('/comentario/plist');
         };
         $scope.back = function () {
             window.history.back();

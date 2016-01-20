@@ -26,50 +26,68 @@
  * 
  */
 
-
 'use strict';
-moduloPerfil.controller('PerfilNewController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService',
-    function ($scope, $routeParams, $location, serverService, sharedSpaceService) {
+moduloComentario.controller('ComentarioEditController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService', '$filter',
+    function ($scope, $routeParams, $location, serverService, sharedSpaceService, $filter) {
+        $scope.obj = null;
         $scope.id = $routeParams.id;
-        $scope.ob = 'perfil';
+        $scope.ob = 'comentario';
         $scope.result = null;
-        $scope.title = "Crear un nuevo Perfil";
+        $scope.title = "Edición de comentario";
         $scope.icon = "fa-user";
         if (sharedSpaceService.getFase() == 0) {
-            $scope.obj = {
-                id: 0,
-                direccion: "",
-                estado_civil: "",
-                ocupacion: "",
-                estudio: "",
-                id_usuario: 0,
-                obj_usuario: {
-                    id: 0
-                }
-            };
+            serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {
+                $scope.obj = data.message;
+                
+                $scope.obj.fecha = serverService.date_toDate($scope.obj.fecha)
+            });
         } else {
             $scope.obj = sharedSpaceService.getObject();
             sharedSpaceService.setFase(0);
         }
+        
+        
         $scope.chooseOne = function (foreignObjectName) {
             sharedSpaceService.setObject($scope.obj);
-            sharedSpaceService.setReturnLink('/' + $scope.ob + '/new');
-            sharedSpaceService.setFase(1);            
+            sharedSpaceService.setReturnLink('/' + $scope.ob + '/edit/' + $scope.id);
+            sharedSpaceService.setFase(1);
             $location.path('/' + foreignObjectName + '/selection/1/10');
         }
-        $scope.save = function () {
-            console.log("save");
-            console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});
-            //strValues = serverService.array_identificarArray(thisObject.form_getFormValues(strClass));
+        
+        
+        
+       $scope.save = function () {
+            var dateFechaAsString = $filter('date')($scope.obj.fecha, "dd/MM/yyyy");
+            $scope.obj.fecha = dateFechaAsString;
+            //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
             serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
                 $scope.result = data;
             });
         };
-        $scope.$watch('obj.obj_usuario.id', function () {
-            serverService.getDataFromPromise(serverService.promise_getOne('usuario', $scope.obj.obj_usuario.id)).then(function (data2) {
-                $scope.obj.obj_usuario = data2.message;
-            });
+
+
+
+        $scope.$watch('obj.obj_amistad.id', function () {
+            if ($scope.obj) {
+                serverService.getDataFromPromise(serverService.promise_getOne('amistad', $scope.obj.obj_amistad.id)).then(function (data2) {
+                    $scope.obj.obj_amistad = data2.message;
+                });
+            }
         });
+        
+        
+//        $scope.$watch('obj.obj_usuario.id', function () {
+//            if ($scope.obj) {
+//                serverService.getDataFromPromise(serverService.promise_getOne('usuario', $scope.obj.obj_usuario.id)).then(function (data2) {
+//                    $scope.obj.obj_usuario = data2.message;
+//                });
+//            }
+//        });
+
+
+
+
+
         $scope.back = function () {
             window.history.back();
         };
@@ -77,8 +95,23 @@ moduloPerfil.controller('PerfilNewController', ['$scope', '$routeParams', '$loca
             $location.path('/home');
         };
         $scope.plist = function () {
-            $location.path('/perfil/plist');
+            $location.path('/' + $scope.ob + '/plist');
         };
 
-
+        //datepicker
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.disabled = function (date, mode) {
+            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+        };
+        $scope.dateOptions = {
+            formatYear: 'yyyy',
+            startingDay: 1
+        };
+        
+        
     }]);

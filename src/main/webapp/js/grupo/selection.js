@@ -137,9 +137,7 @@ moduloGrupo.controller('GrupoSelectionController', ['$scope', '$routeParams', 's
             return false;
         };
 
-        $scope.go = function (num) {
-            sharedSpaceService.getObject().obj_usuario1.id = num;
-            sharedSpaceService.getObject().obj_usuario2.id = num;
+        $scope.go = function (num) {         
             sharedSpaceService.getObject().obj_grupo.id = num;
             sharedSpaceService.setFase(2);
             $location.path(sharedSpaceService.getReturnLink());

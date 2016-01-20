@@ -38,8 +38,8 @@ moduloAmistad.controller('AmistadNewController', ['$scope', '$routeParams', '$lo
         if (sharedSpaceService.getFase() == 0) {
             $scope.obj = {
                 id: 0,
-                id_usuario1: 0,
-                obj_usuario1: {
+                id_usuario: 0,
+                obj_usuario: {
                     id: 0
                 },
                 id_usuario2: 0,
@@ -70,9 +70,9 @@ moduloAmistad.controller('AmistadNewController', ['$scope', '$routeParams', '$lo
                 $scope.result = data;
             });
         };
-        $scope.$watch('obj.obj_usuario1.id', function () {
-            serverService.getDataFromPromise(serverService.promise_getOne('usuario', $scope.obj.obj_usuario1.id)).then(function (data2) {
-                $scope.obj.obj_usuario1 = data2.message;
+        $scope.$watch('obj.obj_usuario.id', function () {
+            serverService.getDataFromPromise(serverService.promise_getOne('usuario', $scope.obj.obj_usuario.id)).then(function (data2) {
+                $scope.obj.obj_usuario = data2.message;
             });
         });
         $scope.$watch('obj.obj_usuario2.id', function () {
@@ -80,6 +80,12 @@ moduloAmistad.controller('AmistadNewController', ['$scope', '$routeParams', '$lo
                 $scope.obj.obj_usuario2 = data2.message;
             });
         });
+        $scope.$watch('obj.obj_grupo.id', function () {
+            serverService.getDataFromPromise(serverService.promise_getOne('grupo', $scope.obj.obj_grupo.id)).then(function (data2) {
+                $scope.obj.obj_grupo = data2.message;
+            });
+        });
+       
         $scope.back = function () {
             window.history.back();
         };

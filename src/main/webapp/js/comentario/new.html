@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!--
 Copyright (c) 2015 by Rafael Angel Aznar Aparici (rafaaznar at gmail dot com)
 
@@ -26,66 +27,50 @@ THE SOFTWARE.
 
 -->
 <div class="panel-heading" style="font-family:Oswald , serif;"  ng-include="'js/system/header.html'"></div>
-
 <div class="panel-body">
     <form name="outerForm" class="form-horizontal" ng-show="result == null">
 
-        <div id="id-group" class="form-group">
+         <div id="id-group" class="form-group">
             <label class="col-sm-2 control-label" for="id">Identificador:</label>
             <div class="control col-sm-3">
                 <input ng-model="obj.id" type="text" id="id" class="form-control" name="id" size="15" placeholder="id" disabled="disabled">
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="obj_usuario">Usuario :</label>
+
+        <div id="texto-group" class="form-group">
+            <label class="col-sm-2 control-label" for="texto">Texto:</label>
             <div class="control col-sm-3">
-                <div class="input-group foreign" id="obj_usuario">
-                    <span class="input-group-addon" id="obj_usuario1_button">
-                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('usuario')">
-                        </span>
-                    </span>
-                    <input ng-model="obj.obj_usuario.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_usuario" name="obj_usuario" type="text" size="5" maxlength="5">
-                    <span class="input-group-addon">
-                        <a href="#/usuario/view/{{obj.obj_usuario.id}}">
-                            <span>{{obj.obj_usuario.id}} {{obj.obj_usuario.nombre}}</span>     
-                        </a>       
-                    </span>
-                </div>
-            </div>            
+                <textarea ng-model="obj.texto"  id="texto" class="form-control" name="texto" rows="5" cols="30" placeholder="texto"></textarea>
+            </div>
         </div>
 
-         <div class="form-group">
-            <label class="col-sm-2 control-label" for="obj_usuario2">Usuario 2:</label>
+
+         <div id="fecha-group" class="form-group">
+            <label class="col-sm-2 control-label" for="cambio">Fecha:</label>
             <div class="control col-sm-3">
-                <div class="input-group foreign" id="obj_usuario1">
-                    <span class="input-group-addon" id="obj_usuario2_button">
-                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('usuario')">
-                        </span>
-                    </span>
-                    <input ng-model="obj.obj_usuario2.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_usuario2" name="obj_usuario2" type="text" size="5" maxlength="5">
-                    <span class="input-group-addon">
-                        <a href="#/usuario/view/{{obj.obj_usuario2.id}}">
-                            <span>{{obj.obj_usuario2.id}} {{obj.obj_usuario2.nombre}}</span>     
-                        </a>       
+                <div class="input-group date" id="fecha_group">
+                    <input type="text" class="form-control" starting-day="1" uib-datepicker-popup="dd/MM/yyyy" ng-model="obj.fecha" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Cerrar" alt-input-formats="altInputFormats" placeholder="Fecha" />
+                    <span class="input-group-addon" ng-click="open1()">
+                        <i class="glyphicon glyphicon-calendar"></i>
                     </span>
                 </div>
-            </div>            
+            </div>
         </div>
-
         
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="obj_grupo">Grupo:</label>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="obj_amistad">Amistad:</label>
             <div class="control col-sm-3">
-                <div class="input-group foreign" id="obj_grupo_group">
-                    <span class="input-group-addon" id="obj_grupo_button">
-                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('grupo')">
+                <div class="input-group foreign" id="obj_amistad_group">
+                    <span class="input-group-addon" id="obj_amistad_button">
+                        <span class="glyphicon glyphicon-search" ng-click="chooseOne('amistad')">
                         </span>
                     </span>
-                    <input ng-model="obj.obj_grupo.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_grupo" name="obj_grupo" type="text" size="5" maxlength="5">
+                    <input ng-model="obj.obj_amistad.id" readonly="true" aria-describedby="basic-addon2" class="form-control" id="obj_amistad" name="obj_amistad" type="text" size="5" maxlength="5">
                     <span class="input-group-addon">
-                        <a href="#/grupo/view/{{obj.obj_grupo.id}}">
-                            <span>{{obj.obj_grupo.id}}  {{obj.obj_grupo.descripcion}}</span>     
+                        <a href="#/amistad/view/{{obj.obj_amistad.id}}">
+                            <span>{{obj.obj_amistad.id}}</span>     
                         </a>       
                     </span>
                 </div>
@@ -98,18 +83,18 @@ THE SOFTWARE.
         <div class="control-group text-right">
             <div class="controls">
                 <a class="btn btn-primary" ng-click="save()">Guardar</a>
-                <a class="btn btn-default" ng-click="plist()">Ir al listado de usuarios</a>
+                <a class="btn btn-default" ng-click="plist()">Ir al listado de documentos</a>
                 <a class="btn btn-default" ng-click="close()">Cerrar</a>
             </div>
         </div>
     </form>
     <div ng-show="result != null">    
         <div class="alert alert-success" ng-show="result.status == 200">
-            <h2>Se ha modificado el usuario</h2>
-            <a ng-href="#/amistad/view/{{id}}">Ver la amistad modificado</a>
+            <h2>Se ha modificado el registro</h2>
+            <a ng-href="#/comentario/view/{{id}}">Ver el registro modificado</a>
         </div>
         <div class="alert alert-danger" ng-show="result.status != 200">
-            <h2>Error al modificar la amistad: no se ha modificado la amistad</h2>
+            <h2>Error al crear el documento: no se ha creado el documento</h2>
             <h3>Código: {{result.status}}</h3>
             <h3>Mensaje: {{result.message}}</h3>             
         </div>

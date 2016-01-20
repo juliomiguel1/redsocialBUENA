@@ -38,6 +38,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import net.daw.dao.implementation.AmistadDao;
+import net.daw.helper.statics.EncodingUtilHelper;
 
 public class ComentarioBean implements GenericBean {
 
@@ -149,7 +150,7 @@ public class ComentarioBean implements GenericBean {
         String strColumns = "";
         strColumns += id + ",";        
         strColumns += '"'+texto +'"'+ ",";        
-        strColumns += fecha + ",";
+        strColumns += EncodingUtilHelper.stringifyAndQuotate(fecha)+ ",";
         strColumns += id_amistad;
         return strColumns;
     }
@@ -158,8 +159,8 @@ public class ComentarioBean implements GenericBean {
     public String toPairs() {
         String strPairs = "";
         strPairs += "id=" + id + ",";
-        strPairs += "texto=" + texto + ",";
-        strPairs += "fecha=" + fecha + ",";
+        strPairs += "texto=" + EncodingUtilHelper.quotate(texto) + ",";
+        strPairs += "fecha=" + EncodingUtilHelper.stringifyAndQuotate(fecha) + ",";
         strPairs += "id_amistad=" + id_amistad;
         return strPairs;
     }

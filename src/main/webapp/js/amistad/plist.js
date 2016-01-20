@@ -34,7 +34,7 @@ moduloAmistad.controller('AmistadPListController', ['$scope', '$routeParams', 's
         
         $scope.visibles={};
         $scope.visibles.id = true;
-        $scope.visibles.id_usuario1 = true;
+        $scope.visibles.id_usuario = true;
         $scope.visibles.id_usuario2= true;
         $scope.visibles.id_grupo = true;
 

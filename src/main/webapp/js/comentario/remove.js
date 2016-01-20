@@ -26,29 +26,28 @@
  * 
  */
 
-
 'use strict';
 
-
-
-
-
-moduloUsuario.controller('UsuarioViewController', ['$scope', '$routeParams', 'serverService','$location',
-    function ($scope, $routeParams, serverService, $location) {
-        $scope.title = "Vista de usuario";
-        $scope.icon = "fa-text";
-        $scope.ob = 'usuario';
-        $scope.id = $routeParams.id;                        
-        serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {
-            $scope.bean = data.message;
-        });
-        $scope.close = function () {
-            $location.path('/home');
-        };
-        $scope.plist = function () {
-            $location.path('/usuario/plist');
-        };
+moduloComentario.controller('ComentarioRemoveController', ['$scope', '$routeParams', 'serverService',
+    function ($scope, $routeParams, serverService) {
+        $scope.result = "";
         $scope.back = function () {
             window.history.back();
         };
+        $scope.ob = 'comentario';
+        $scope.id = $routeParams.id;
+        $scope.title = "Borrado de un comentario";
+        $scope.icon = "fa-text";
+        serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {            
+            $scope.bean = data.message;
+        });
+
+
+
+        $scope.remove = function () {
+            serverService.getDataFromPromise(serverService.promise_removeOne($scope.ob, $scope.id)).then(function (data) {
+                $scope.result = data;
+            });
+        }
+        ;
     }]);

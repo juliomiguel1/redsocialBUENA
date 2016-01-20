@@ -28,22 +28,20 @@
 
 
 'use strict';
-moduloPerfil.controller('PerfilNewController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService',
+moduloComentario.controller('ComentarioNewController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService',
     function ($scope, $routeParams, $location, serverService, sharedSpaceService) {
         $scope.id = $routeParams.id;
-        $scope.ob = 'perfil';
+        $scope.ob = 'comentario';
         $scope.result = null;
-        $scope.title = "Crear un nuevo Perfil";
-        $scope.icon = "fa-user";
+        $scope.title = "Crear un nuevo Comentario";
+        $scope.icon = "fa-file-text-o";
         if (sharedSpaceService.getFase() == 0) {
             $scope.obj = {
                 id: 0,
-                direccion: "",
-                estado_civil: "",
-                ocupacion: "",
-                estudio: "",
-                id_usuario: 0,
-                obj_usuario: {
+                texto: "",
+                fecha: "",
+                id_amistad: 0,
+                obj_amistad: {
                     id: 0
                 }
             };
@@ -54,7 +52,7 @@ moduloPerfil.controller('PerfilNewController', ['$scope', '$routeParams', '$loca
         $scope.chooseOne = function (foreignObjectName) {
             sharedSpaceService.setObject($scope.obj);
             sharedSpaceService.setReturnLink('/' + $scope.ob + '/new');
-            sharedSpaceService.setFase(1);            
+            sharedSpaceService.setFase(1);
             $location.path('/' + foreignObjectName + '/selection/1/10');
         }
         $scope.save = function () {
@@ -65,9 +63,9 @@ moduloPerfil.controller('PerfilNewController', ['$scope', '$routeParams', '$loca
                 $scope.result = data;
             });
         };
-        $scope.$watch('obj.obj_usuario.id', function () {
-            serverService.getDataFromPromise(serverService.promise_getOne('usuario', $scope.obj.obj_usuario.id)).then(function (data2) {
-                $scope.obj.obj_usuario = data2.message;
+        $scope.$watch('obj.obj_amistad.id', function () {
+            serverService.getDataFromPromise(serverService.promise_getOne('amistad', $scope.obj.obj_amistad.id)).then(function (data2) {
+                $scope.obj.obj_amistad = data2.message;
             });
         });
         $scope.back = function () {
@@ -77,8 +75,11 @@ moduloPerfil.controller('PerfilNewController', ['$scope', '$routeParams', '$loca
             $location.path('/home');
         };
         $scope.plist = function () {
-            $location.path('/perfil/plist');
+            $location.path('/comentario/plist');
         };
 
 
-    }]);
+    }
+
+]);
+$("#fecha_group").datetimepicker();

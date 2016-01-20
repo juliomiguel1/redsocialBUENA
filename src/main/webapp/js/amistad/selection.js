@@ -138,7 +138,7 @@ moduloAmistad.controller('AmistadSelectionController', ['$scope', '$routeParams'
         };
 
         $scope.go = function (num) {
-            sharedSpaceService.getObject().obj_usuario.id = num;
+            sharedSpaceService.getObject().obj_amistad.id = num;
             sharedSpaceService.setFase(2);
             $location.path(sharedSpaceService.getReturnLink());
         };

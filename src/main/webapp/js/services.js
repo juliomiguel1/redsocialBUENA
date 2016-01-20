@@ -251,6 +251,7 @@ angular.module('Services', [])
             var obj = {};
             var link = "";
             var fase = 0;
+            var nuevo = 0;
             return {
                 getObject: function () {
                     return obj;
@@ -271,11 +272,12 @@ angular.module('Services', [])
                     fase = value;
                 },
                 getNumeroUsuario: function () {
-                    return fase;
+                    return nuevo ;
                 },
-                setNumeroUsuario: function (value) {
-                    fase = value;
+                devuelveNumero: function (value) {
+                    nuevo = value
                 }
+                
 
             };
         })

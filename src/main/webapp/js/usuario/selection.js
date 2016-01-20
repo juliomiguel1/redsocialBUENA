@@ -34,10 +34,11 @@ moduloUsuario.controller('UsuarioSelectionController', ['$scope', '$routeParams'
 
         $scope.ob = "usuario";
         $scope.op = "selection";
-        $scope.title = "Selección de usuario";
+        $scope.title = "Selecci?n de usuario";
         $scope.icon = "fa-user";
         $scope.neighbourhood = 2;
-
+        $scope.numero=1;
+        var variable = 1;
         if (!$routeParams.page) {
             $routeParams.page = 1;
         }
@@ -96,7 +97,7 @@ moduloUsuario.controller('UsuarioSelectionController', ['$scope', '$routeParams'
 
         serverService.getDataFromPromise(serverService.promise_getSome($scope.ob, $scope.rpp, $scope.numpage, $scope.filterParams, $scope.orderParams, $scope.systemFilterParams)).then(function (data) {
             if (data.status != 200) {
-                $scope.status = "Error en la recepción de datos del servidor";
+                $scope.status = "Error en la recepci?n de datos del servidor";
             } else {
                 $scope.pages = data.message.pages.message;
                 if (parseInt($scope.numpage) > parseInt($scope.pages))
@@ -153,12 +154,17 @@ moduloUsuario.controller('UsuarioSelectionController', ['$scope', '$routeParams'
             sharedSpaceService.setFase(2);
             $location.path(sharedSpaceService.getReturnLink());
         };*/
-        
+         
            $scope.go = function (num) {
-            if (num == 1) {
-                sharedSpaceService.getObject().obj_usuario1.id = num;
-            }else{
+            
+            if( sharedSpaceService.getNumeroUsuario() === 0){
+                sharedSpaceService.getObject().obj_usuario.id = num;
+                sharedSpaceService.devuelveNumero(1);
+            }else {
                 sharedSpaceService.getObject().obj_usuario2.id = num;
+                sharedSpaceService.devuelveNumero(0);
+               // sharedSpaceService.setNumeroUsuario(1);
+              //  sharedSpaceService.getObject().obj_usuario.id = num;
             }
             sharedSpaceService.setFase(2);
             $location.path(sharedSpaceService.getReturnLink());

@@ -41,6 +41,7 @@ var openAusias = angular.module('myApp', [
     'perfilControllers',
     'grupoControllers',
     'amistadControllers',
+    'comentarioControllers',
     'ui.bootstrap',
     'ngSanitize' //http://stackoverflow.com/questions/9381926/insert-html-into-view-using-angularjs
 ]);
@@ -88,7 +89,15 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/amistad/remove/:id', {templateUrl: 'js/amistad/remove.html',   controller: 'AmistadRemoveController'});
         $routeProvider.when('/amistad/plist/:page?/:rpp?', {templateUrl: 'js/amistad/plist.html', controller: 'AmistadPListController'});
         $routeProvider.when('/amistad/selection/:page/:rpp', {templateUrl: 'js/amistad/selection.html', controller: 'AmistadSelectionController'});
-
+        
+        //------------
+        $routeProvider.when('/comentario/view/:id', {templateUrl: 'js/comentario/view.html', controller: 'ComentarioViewController'});
+        $routeProvider.when('/comentario/new', {templateUrl: 'js/comentario/new.html', controller: 'ComentarioNewController'});
+        $routeProvider.when('/comentario/edit/:id', {templateUrl: 'js/comentario/edit.html', controller: 'ComentarioEditController'});
+        $routeProvider.when('/comentario/remove/:id', {templateUrl: 'js/comentario/remove.html',   controller: 'ComentarioRemoveController'});
+        $routeProvider.when('/comentario/plist/:page?/:rpp?', {templateUrl: 'js/comentario/plist.html', controller: 'ComentarioPListController'});
+        
+        
         //------------
         $routeProvider.when('/tipodocumento/view/:id', {templateUrl: 'js/tipodocumento/view.html', controller: 'TipodocumentoViewController'});
         $routeProvider.when('/tipodocumento/selection/:page/:rpp', {templateUrl: 'js/tipodocumento/selection.html', controller: 'TipodocumentoSelectionController'});
@@ -112,5 +121,7 @@ var moduloTipousuario = angular.module('tipousuarioControllers', []);
 var moduloPerfil = angular.module('perfilControllers', []);
 var moduloGrupo = angular.module('grupoControllers', []);
 var moduloAmistad = angular.module('amistadControllers', []);
+var moduloComentario = angular.module('comentarioControllers', []);
+
 
 

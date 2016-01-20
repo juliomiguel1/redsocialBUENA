@@ -107,8 +107,8 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
             ResultSet oResultSet = oMysql.getAllSql(strSQL);
             if (oResultSet != null) {
                 while (oResultSet.next()) {
-                    AmistadBean oComentarioBean = new AmistadBean();
-                    arrAmistad.add(oComentarioBean.fill(oResultSet, oConnection, expand));
+                    AmistadBean oAmistadBean = new AmistadBean();
+                    arrAmistad.add(oAmistadBean.fill(oResultSet, oConnection, expand));
                 }
             }
         } catch (Exception ex) {

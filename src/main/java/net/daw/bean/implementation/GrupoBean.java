@@ -79,7 +79,15 @@ public class GrupoBean implements GenericBean {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
+    
+    public String toJson(Boolean expand) {
+        String strJson = "{";
+        strJson += "id:" + getId() + ",";
+        strJson += "id:" + descripcion;
+        strJson += "}";
+        return strJson;
+    }
+    
     public String getColumns() {
         String strColumns = "";
         strColumns += "id,";

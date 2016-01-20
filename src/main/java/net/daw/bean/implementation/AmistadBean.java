@@ -43,9 +43,9 @@ public class AmistadBean implements GenericBean {
     @Expose
     private Integer id;
     @Expose(serialize = false)
-    private Integer id_usuario1 = 0;
+    private Integer id_usuario = 0;
     @Expose(deserialize = false)
-    private UsuarioBean obj_usuario1 = null;
+    private UsuarioBean obj_usuario = null;
     @Expose(serialize = false)
     private Integer id_usuario2 = 0;
     @Expose(deserialize = false)
@@ -80,29 +80,29 @@ public class AmistadBean implements GenericBean {
     /**
      * @return the id_usuario1
      */
-    public Integer getId_usuario1() {
-        return id_usuario1;
+    public Integer getId_usuario() {
+        return id_usuario;
     }
 
     /**
      * @param id_usuario1 the id_usuario1 to set
      */
-    public void setId_usuario1(Integer id_usuario1) {
-        this.id_usuario1 = id_usuario1;
+    public void setId_usuario(Integer id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     /**
      * @return the obj_usuario1
      */
-    public UsuarioBean getObj_usuario1() {
-        return obj_usuario1;
+    public UsuarioBean getObj_usuario() {
+        return obj_usuario;
     }
 
     /**
      * @param obj_usuario1 the obj_usuario1 to set
      */
-    public void setObj_usuario1(UsuarioBean obj_usuario1) {
-        this.obj_usuario1 = obj_usuario1;
+    public void setObj_usuario(UsuarioBean obj_usuario) {
+        this.obj_usuario = obj_usuario;
     }
 
     /**
@@ -165,11 +165,13 @@ public class AmistadBean implements GenericBean {
         String strJson = "{";
         strJson += "id:" + getId() + ",";
         if (expand) {
-            strJson += "obj_usuario1:" + obj_usuario1.toJson(false) + ",";
+            strJson += "obj_usuario:" + obj_usuario.toJson(false) + ",";
             strJson += "obj_usuario2:" + obj_usuario2.toJson(false) + ",";
+            strJson += "obj_grupo:" + obj_grupo.toJson(false) + ",";
         } else {
-            strJson += "id_usuario1:" + id_usuario1 + ",";
+            strJson += "id_usuario:" + id_usuario + ",";
             strJson += "id_usuario2:" + id_usuario2 + ",";
+            strJson += "id_grupo:" + id_grupo + ",";
         }
         strJson += "}";
         return strJson;
@@ -179,7 +181,7 @@ public class AmistadBean implements GenericBean {
     public String getColumns() {
         String strColumns = "";
         strColumns += "id,";
-        strColumns += "id_usuario1,";
+        strColumns += "id_usuario,";
         strColumns += "id_usuario2,";
         strColumns += "id_grupo";
         return strColumns;
@@ -188,7 +190,7 @@ public class AmistadBean implements GenericBean {
     public String getValues() {
         String strColumns = "";
         strColumns += getId() + ",";
-        strColumns += id_usuario1 + ",";
+        strColumns += id_usuario + ",";
         strColumns += id_usuario2 + ",";
         strColumns += id_grupo;
         return strColumns;
@@ -198,7 +200,7 @@ public class AmistadBean implements GenericBean {
     public String toPairs() {
         String strPairs = "";
         strPairs += "id=" + getId() + ",";
-        strPairs += "id_usuario1=" + id_usuario1 + ",";
+        strPairs += "id_usuario=" + id_usuario + ",";
         strPairs += "id_usuario2=" + id_usuario2 + ",";
         strPairs += "id_grupo=" + id_grupo;
 
@@ -211,11 +213,11 @@ public class AmistadBean implements GenericBean {
         if (expand > 0) {
             UsuarioBean oUsuarioBean1 = new UsuarioBean();
             UsuarioDao oUsuarioDao1 = new UsuarioDao(pooledConnection);
-            oUsuarioBean1.setId(oResultSet.getInt("id_usuario1"));
+            oUsuarioBean1.setId(oResultSet.getInt("id_usuario"));
             oUsuarioBean1 = oUsuarioDao1.get(oUsuarioBean1, expand - 1);
-            this.setObj_usuario1(oUsuarioBean1);
+            this.setObj_usuario(oUsuarioBean1);
         } else {
-            this.setId_usuario1(oResultSet.getInt("id_usuario1"));
+            this.setId_usuario(oResultSet.getInt("id_usuario"));
         }
         if (expand > 0) {
             UsuarioBean oUsuarioBean2 = new UsuarioBean();

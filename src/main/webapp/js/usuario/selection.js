@@ -158,7 +158,7 @@ moduloUsuario.controller('UsuarioSelectionController', ['$scope', '$routeParams'
            $scope.go = function (num) {
             
             if( sharedSpaceService.getNumeroUsuario() === 0){
-                sharedSpaceService.getObject().obj_usuario.id = num;
+                sharedSpaceService.getObject().obj_usuario2.id = num;
                 sharedSpaceService.devuelveNumero(1);
             }else {
                 sharedSpaceService.getObject().obj_usuario2.id = num;

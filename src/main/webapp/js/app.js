@@ -68,7 +68,7 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
 
         //------------
         $routeProvider.when('/perfil/view/:id', {templateUrl: 'js/perfil/view.html', controller: 'PerfilViewController'});
-        $routeProvider.when('/perfil/new', {templateUrl: 'js/perfil/new.html', controller: 'PerfilNewController'});
+        $routeProvider.when('/perfil/new/:id_usuario?', {templateUrl: 'js/perfil/new.html', controller: 'PerfilNewController'});
         $routeProvider.when('/perfil/edit/:id', {templateUrl: 'js/perfil/edit.html', controller: 'PerfilEditController'});
         $routeProvider.when('/perfil/remove/:id', {templateUrl: 'js/perfil/remove.html',   controller: 'PerfilRemoveController'});
         $routeProvider.when('/perfil/plist/:page?/:rpp?', {templateUrl: 'js/perfil/plist.html', controller: 'PerfilPListController'});
@@ -84,10 +84,10 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
 
         //------------
         $routeProvider.when('/amistad/view/:id', {templateUrl: 'js/amistad/view.html', controller: 'AmistadViewController'});
-        $routeProvider.when('/amistad/new', {templateUrl: 'js/amistad/new.html', controller: 'AmistadNewController'});
+        $routeProvider.when('/amistad/new/:id_usuario?', {templateUrl: 'js/amistad/new.html', controller: 'AmistadNewController'});
         $routeProvider.when('/amistad/edit/:id', {templateUrl: 'js/amistad/edit.html', controller: 'AmistadEditController'});
         $routeProvider.when('/amistad/remove/:id', {templateUrl: 'js/amistad/remove.html',   controller: 'AmistadRemoveController'});
-        $routeProvider.when('/amistad/plist/:page?/:rpp?', {templateUrl: 'js/amistad/plist.html', controller: 'AmistadPListController'});
+        //$routeProvider.when('/amistad/plist/:page?/:rpp?', {templateUrl: 'js/amistad/plist.html', controller: 'AmistadPListController'});
         $routeProvider.when('/amistad/selection/:page/:rpp', {templateUrl: 'js/amistad/selection.html', controller: 'AmistadSelectionController'});
 
         $routeProvider.when('/amistad/plist/:id_usuario?', {templateUrl: 'js/amistad/plist.html', controller: 'AmistadPListController'});

@@ -40,7 +40,7 @@ moduloAmistad.controller('AmistadNewController', ['$scope', '$routeParams', '$lo
                 id: 0,
                 id_usuario: 0,
                 obj_usuario: {
-                    id: 0
+                    id: $routeParams.id_usuario
                 },
                 id_usuario2: 0,
                 obj_usuario2: {

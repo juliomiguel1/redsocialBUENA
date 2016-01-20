@@ -37,7 +37,7 @@ moduloAmistad.controller('AmistadPListController', ['$scope', '$routeParams', 's
         $scope.visibles.id_usuario = true;
         $scope.visibles.id_usuario2= true;
         $scope.visibles.id_grupo = true;
-        $scope.id_usuario=$routeParams.id_usuario;
+        $scope.id_usuario= $routeParams.id_usuario;
 
 
         $scope.ob = "amistad";

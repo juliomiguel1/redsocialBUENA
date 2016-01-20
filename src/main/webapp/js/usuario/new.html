@@ -40,7 +40,7 @@ THE SOFTWARE.
 
         <div id="nombre-group" class="form-group">
             <label class="col-sm-2 control-label" for="nombre">Nombre:</label>
-            <div class="control col-sm-8">
+            <div class="control col-sm-4">
                 <input ng-model="obj.nombre" type="text" id="nombre" class="form-control" name="nombre" size="15" placeholder="Nombre">
             </div>
         </div>
@@ -48,14 +48,14 @@ THE SOFTWARE.
 
         <div id="apellido-group" class="form-group">
             <label class="col-sm-2 control-label" for="apellido">Apellido:</label>
-            <div class="control col-sm-9">
+            <div class="control col-sm-4">
                 <input ng-model="obj.apellido" type="text" id="apellido" class="form-control" name="apellido" size="15" placeholder="Apellido">
             </div>
         </div>
         
         <div id="email-group" class="form-group">
             <label class="col-sm-2 control-label" for="email">Email:</label>
-            <div class="control col-sm-9">
+            <div class="control col-sm-4">
                 <input ng-model="obj.email" type="text" id="email" class="form-control" name="email" size="15" placeholder="Email">
             </div>
         </div>
@@ -68,6 +68,7 @@ THE SOFTWARE.
             </div>
         </div>
 
+<!-- Esto es el perfil sacar despues 
 
         <div class="form-group">
             <label class="col-sm-2 control-label" for="obj_perfil">Perfil:</label>
@@ -87,7 +88,7 @@ THE SOFTWARE.
             </div>            
         </div>
 
-
+-->
 
 
         <div class="control-group text-right">
@@ -101,7 +102,7 @@ THE SOFTWARE.
     <div ng-show="result != null">    
         <div class="alert alert-success" ng-show="result.status == 200">
             <h2>Se ha modificado el registro</h2>
-            <a ng-href="#/usuario/view/{{id}}">Ver el registro modificado</a>
+            <a ng-href="#/usuario/plist">Ver el registro modificado</a>
         </div>
         <div class="alert alert-danger" ng-show="result.status != 200">
             <h2>Error al crear el documento: no se ha creado el documento</h2>

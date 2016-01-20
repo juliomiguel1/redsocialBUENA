@@ -98,16 +98,16 @@ THE SOFTWARE.
             </div>
         </div>
     </form>
-    <!--<div ng-show="result != null">    
+    <div ng-show="result != null">    
         <div class="alert alert-success" ng-show="result.status == 200">
             <h2>Se ha modificado el registro</h2>
-            <a ng-href="#/usuario/view/{{id}}">Ver el registro modificado</a>
+            <a ng-href="#/usuario/plist">Ver el registro modificado</a>
         </div>
         <div class="alert alert-danger" ng-show="result.status != 200">
             <h2>Error al crear el documento: no se ha creado el documento</h2>
             <h3>Código: {{result.status}}</h3>
             <h3>Mensaje: {{result.message}}</h3>             
         </div>
-    </div>-->
+    </div>
 </div>
 <div class="panel-footer" style="font-family: Questrial, serif;" ng-include="'js/system/footer.html'"></div>

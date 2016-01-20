@@ -93,7 +93,7 @@ THE SOFTWARE.
     <div ng-show="result != null">    
         <div class="alert alert-success" ng-show="result.status == 200">
             <h2>Se ha modificado el registro</h2>
-            <a ng-href="#/comentario/view/{{id}}">Ver el registro modificado</a>
+            <a ng-href="#/comentario/view/{{obj.id}}">Ver el registro modificado</a>
         </div>
         <div class="alert alert-danger" ng-show="result.status != 200">
             <h2>Error al crear el documento: no se ha creado el documento</h2>

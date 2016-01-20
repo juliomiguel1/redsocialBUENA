@@ -44,7 +44,7 @@ moduloPerfil.controller('PerfilNewController', ['$scope', '$routeParams', '$loca
                 estudio: "",
                 id_usuario: 0,
                 obj_usuario: {
-                    id: 0
+                    id: $routeParams.id_usuario
                 }
             };
         } else {

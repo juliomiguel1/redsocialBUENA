@@ -33,8 +33,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import net.daw.bean.implementation.PerfilBean;
 import net.daw.bean.implementation.UsuarioBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
+import net.daw.dao.implementation.PerfilDao;
 import net.daw.dao.implementation.UsuarioDao;
 
 import net.daw.helper.statics.AppConfigurationHelper;
@@ -285,10 +287,13 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
                 oConnection.setAutoCommit(false);
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
                 UsuarioBean oUsuarioBean = new UsuarioBean();
+               // PerfilBean oPerfilBean = new PerfilBean();                
                 oUsuarioBean = AppConfigurationHelper.getGson().fromJson(jason, oUsuarioBean.getClass());
                 if (oUsuarioBean != null) {
                     Integer iResult = oUsuarioDao.set(oUsuarioBean);
+                    
                     if (iResult >= 1) {
+                        
                         resultado = JsonMessage.getJson("200", iResult.toString());
                     } else {
                         resultado = JsonMessage.getJson("500", "Error during registry set");

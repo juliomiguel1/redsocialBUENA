@@ -47,6 +47,7 @@ import net.daw.helper.statics.SqlBuilder;
 public class PerfilDao implements ViewDaoInterface<PerfilBean>, TableDaoInterface<PerfilBean>{
 private String strTable = "perfil";
     private String strSQL = "select * from perfil where 1=1 ";
+    private String actualizarusuario = "  ";
     private MysqlDataSpImpl oMysql = null;
     private Connection oConnection = null;
 
@@ -139,7 +140,25 @@ private String strTable = "perfil";
         }
         return oPerfilBean;
     }
-
+    /*
+      public PerfilBean get(PerfilBean oPerfilBean, Integer expand) throws Exception {
+        if (oPerfilBean.getId_usuario()> 0) {
+            try {
+                ResultSet oResultSet = oMysql.getAllSql(strSQL + " And id_usuario= " + oPerfilBean.getId_usuario() + " ");
+                if (oResultSet != null) {
+                    while (oResultSet.next()) {
+                        oPerfilBean = oPerfilBean.fill(oResultSet, oConnection,expand);
+                    }
+                }
+            } catch (Exception ex) {
+                ExceptionBooster.boost(new Exception(this.getClass().getName() + ":get ERROR: " + ex.getMessage()));
+            }
+        } else {
+            oPerfilBean.setId(0);
+        }
+        return oPerfilBean;
+    }
+    */
     @Override
     public Integer set(PerfilBean oPerfilBean) throws Exception {
           Integer iResult = null;
@@ -149,11 +168,24 @@ private String strTable = "perfil";
                 strSQL += "(" + oPerfilBean.getColumns() + ")";
                 strSQL += "VALUES(" + oPerfilBean.getValues() + ")";
                 iResult = oMysql.executeInsertSQL(strSQL);
+                ResultSet oResultSet = oMysql.getAllSql("SELECT MAX(id) AS id FROM usuario");
+                if(oResultSet != null){
+                while (oResultSet.next()){
+                    actualizarusuario += "UPDATE usuario " + " ";
+                    actualizarusuario += "SET id_perfil="+oResultSet.getInt("id") +" "; 
+                    actualizarusuario += "WHERE id_perfil=0";
+                    oMysql.executeUpdateSQL(actualizarusuario);
+                    }
+                 }
+                
+                
             } else {
                 strSQL = "UPDATE " + strTable + " ";
                 strSQL += " SET " + oPerfilBean.toPairs();
                 strSQL += " WHERE id=" + oPerfilBean.getId();
                 iResult = oMysql.executeUpdateSQL(strSQL);
+                
+              
             }
 
         } catch (Exception ex) {

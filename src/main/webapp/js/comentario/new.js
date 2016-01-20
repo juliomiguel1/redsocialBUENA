@@ -28,8 +28,9 @@
 
 
 'use strict';
-moduloComentario.controller('ComentarioNewController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService',
-    function ($scope, $routeParams, $location, serverService, sharedSpaceService) {
+
+moduloComentario.controller('ComentarioNewController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService', '$filter',
+    function ($scope, $routeParams, $location, serverService, sharedSpaceService,$filter) {
         $scope.id = $routeParams.id;
         $scope.ob = 'comentario';
         $scope.result = null;
@@ -55,14 +56,26 @@ moduloComentario.controller('ComentarioNewController', ['$scope', '$routeParams'
             sharedSpaceService.setFase(1);
             $location.path('/' + foreignObjectName + '/selection/1/10');
         }
-        $scope.save = function () {
+       /* $scope.save = function () {
             console.log("save");
             console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});
             //strValues = serverService.array_identificarArray(thisObject.form_getFormValues(strClass));
             serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
                 $scope.result = data;
             });
+        };*/
+        
+        $scope.save = function () {
+            var dateFechaAsString = $filter('date')($scope.obj.fecha, "dd/MM/yyyy");
+            $scope.obj.fecha = dateFechaAsString;
+            //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
+            serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
+                $scope.result = data;
+            });
         };
+        
+        
+        
         $scope.$watch('obj.obj_amistad.id', function () {
             serverService.getDataFromPromise(serverService.promise_getOne('amistad', $scope.obj.obj_amistad.id)).then(function (data2) {
                 $scope.obj.obj_amistad = data2.message;
@@ -78,8 +91,20 @@ moduloComentario.controller('ComentarioNewController', ['$scope', '$routeParams'
             $location.path('/comentario/plist');
         };
 
-
+         //datepicker
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.disabled = function (date, mode) {
+            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+        };
+        $scope.dateOptions = {
+            formatYear: 'yyyy',
+            startingDay: 1
+        };
     }
 
 ]);
-$("#fecha_group").datetimepicker();

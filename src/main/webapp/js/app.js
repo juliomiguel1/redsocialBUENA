@@ -89,7 +89,10 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/amistad/remove/:id', {templateUrl: 'js/amistad/remove.html',   controller: 'AmistadRemoveController'});
         $routeProvider.when('/amistad/plist/:page?/:rpp?', {templateUrl: 'js/amistad/plist.html', controller: 'AmistadPListController'});
         $routeProvider.when('/amistad/selection/:page/:rpp', {templateUrl: 'js/amistad/selection.html', controller: 'AmistadSelectionController'});
-        
+
+        $routeProvider.when('/amistad/plist/:id_usuario?', {templateUrl: 'js/amistad/plist.html', controller: 'AmistadPListController'});
+
+
         //------------
         $routeProvider.when('/comentario/view/:id', {templateUrl: 'js/comentario/view.html', controller: 'ComentarioViewController'});
         $routeProvider.when('/comentario/new', {templateUrl: 'js/comentario/new.html', controller: 'ComentarioNewController'});

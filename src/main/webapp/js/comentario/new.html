@@ -46,14 +46,16 @@ THE SOFTWARE.
         </div>
 
 
-        <div id="fecha-group" class="form-group">
-            <label class="col-sm-2 control-label" for="fecha">Fecha :</label>
+
+         <div id="fecha-group" class="form-group">
+            <label class="col-sm-2 control-label" for="cambio">Fecha:</label>
             <div class="control col-sm-3">
                 <div class="input-group date" id="fecha_group">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
+                    <input type="text" class="form-control" starting-day="1" uib-datepicker-popup="dd/MM/yyyy" ng-model="obj.fecha" is-open="popup1.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Cerrar" alt-input-formats="altInputFormats" placeholder="Fecha" />
+                    <span class="input-group-addon" ng-click="open1()">
+                        <i class="glyphicon glyphicon-calendar"></i>
                     </span>
-                    <input ng-model="obj.fecha" type="text" class="form-control" id="fecha" name="fecha" placeholder="Fecha">
+
                 </div>
             </div>
         </div>

@@ -27,17 +27,20 @@
  */
 
 'use strict';
-moduloUsuario.controller('UsuarioEditController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService',
-    function ($scope, $routeParams, $location, serverService, sharedSpaceService) {
+
+moduloComentario.controller('ComentarioEditController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService', '$filter',
+    function ($scope, $routeParams, $location, serverService, sharedSpaceService, $filter) {
         $scope.obj = null;
         $scope.id = $routeParams.id;
-        $scope.ob = 'usuario';
+        $scope.ob = 'comentario';
         $scope.result = null;
-        $scope.title = "Edición de usuario";
+        $scope.title = "Edición de comentario";
         $scope.icon = "fa-user";
         if (sharedSpaceService.getFase() == 0) {
             serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {
                 $scope.obj = data.message;
+                
+                $scope.obj.fecha = serverService.date_toDate($scope.obj.fecha)
             });
         } else {
             $scope.obj = sharedSpaceService.getObject();
@@ -54,10 +57,10 @@ moduloUsuario.controller('UsuarioEditController', ['$scope', '$routeParams', '$l
         
         
         
-        $scope.save = function () {
-            console.log("save");
-            console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});
-            //strValues = serverService.array_identificarArray(thisObject.form_getFormValues(strClass));
+       $scope.save = function () {
+            var dateFechaAsString = $filter('date')($scope.obj.fecha, "dd/MM/yyyy");
+            $scope.obj.fecha = dateFechaAsString;
+            //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
             serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
                 $scope.result = data;
             });
@@ -65,17 +68,13 @@ moduloUsuario.controller('UsuarioEditController', ['$scope', '$routeParams', '$l
 
 
 
-
-        $scope.$watch('obj.obj_tipousuario.id', function () {
+        $scope.$watch('obj.obj_amistad.id', function () {
             if ($scope.obj) {
-                serverService.getDataFromPromise(serverService.promise_getOne('tipousuario', $scope.obj.obj_tipousuario.id)).then(function (data2) {
-                    $scope.obj.obj_tipousuario = data2.message;
+                serverService.getDataFromPromise(serverService.promise_getOne('amistad', $scope.obj.obj_amistad.id)).then(function (data2) {
+                    $scope.obj.obj_amistad = data2.message;
                 });
             }
         });
-        
-        
-        
         
         
 //        $scope.$watch('obj.obj_usuario.id', function () {
@@ -100,6 +99,21 @@ moduloUsuario.controller('UsuarioEditController', ['$scope', '$routeParams', '$l
             $location.path('/' + $scope.ob + '/plist');
         };
 
+        //datepicker
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.disabled = function (date, mode) {
+            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+        };
+        $scope.dateOptions = {
+            formatYear: 'yyyy',
+            startingDay: 1
+        };
+        
 
         
     }]);

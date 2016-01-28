@@ -36,6 +36,8 @@ moduloComentario.controller('ComentarioNewController', ['$scope', '$routeParams'
         $scope.result = null;
         $scope.title = "Crear un nuevo Comentario";
         $scope.icon = "fa-file-text-o";
+        $scope.id_usuario = $routeParams.id_usuario;
+        
         if (sharedSpaceService.getFase() == 0) {
             $scope.obj = {
                 id: 0,
@@ -52,9 +54,9 @@ moduloComentario.controller('ComentarioNewController', ['$scope', '$routeParams'
         }
         $scope.chooseOne = function (foreignObjectName) {
             sharedSpaceService.setObject($scope.obj);
-            sharedSpaceService.setReturnLink('/' + $scope.ob + '/new');
+            sharedSpaceService.setReturnLink('/' + $scope.ob + '/new/' +$scope.id_usuario);
             sharedSpaceService.setFase(1);
-            $location.path('/' + foreignObjectName + '/selection/1/10');
+            $location.path('/' + foreignObjectName + '/selection/1/10/'+$scope.id_usuario);
         }
        /* $scope.save = function () {
             console.log("save");

@@ -88,19 +88,20 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/amistad/edit/:id', {templateUrl: 'js/amistad/edit.html', controller: 'AmistadEditController'});
         $routeProvider.when('/amistad/remove/:id', {templateUrl: 'js/amistad/remove.html',   controller: 'AmistadRemoveController'});
         //$routeProvider.when('/amistad/plist/:page?/:rpp?', {templateUrl: 'js/amistad/plist.html', controller: 'AmistadPListController'});
-        $routeProvider.when('/amistad/selection/:page/:rpp', {templateUrl: 'js/amistad/selection.html', controller: 'AmistadSelectionController'});
+        $routeProvider.when('/amistad/selection/:page/:rpp/:id_usuario?', {templateUrl: 'js/amistad/selection.html', controller: 'AmistadSelectionController'});
 
         $routeProvider.when('/amistad/plist/:id_usuario?', {templateUrl: 'js/amistad/plist.html', controller: 'AmistadPListController'});
 
 
         //------------
         $routeProvider.when('/comentario/view/:id', {templateUrl: 'js/comentario/view.html', controller: 'ComentarioViewController'});
-        $routeProvider.when('/comentario/new', {templateUrl: 'js/comentario/new.html', controller: 'ComentarioNewController'});
+        $routeProvider.when('/comentario/new/:id_usuario?', {templateUrl: 'js/comentario/new.html', controller: 'ComentarioNewController'});
         $routeProvider.when('/comentario/edit/:id', {templateUrl: 'js/comentario/edit.html', controller: 'ComentarioEditController'});
         $routeProvider.when('/comentario/remove/:id', {templateUrl: 'js/comentario/remove.html',   controller: 'ComentarioRemoveController'});
-        $routeProvider.when('/comentario/plist/:page?/:rpp?', {templateUrl: 'js/comentario/plist.html', controller: 'ComentarioPListController'});
+      //  $routeProvider.when('/comentario/plist/:page?/:rpp?', {templateUrl: 'js/comentario/plist.html', controller: 'ComentarioPListController'});
         
-        
+        $routeProvider.when('/comentario/plist/:id_usuario?', {templateUrl: 'js/comentario/plist.html', controller: 'ComentarioPListController'});
+
         //------------
         $routeProvider.when('/tipodocumento/view/:id', {templateUrl: 'js/tipodocumento/view.html', controller: 'TipodocumentoViewController'});
         $routeProvider.when('/tipodocumento/selection/:page/:rpp', {templateUrl: 'js/tipodocumento/selection.html', controller: 'TipodocumentoSelectionController'});

@@ -72,7 +72,7 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         int pages = 0;
         try {
-            pages = oMysql.getPages(strSQL + " and amistad.id_usuario="+id_usuario, intRegsPerPag);
+            pages = oMysql.getPages(strSQL + " and amistad.id_usuario="+id_usuario+" GROUP by id_usuario2 " , intRegsPerPag);
         } catch (Exception ex) {
             ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPages ERROR: " + ex.getMessage()));
         }
@@ -108,7 +108,7 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
     public ArrayList<AmistadBean> getPagexidusuario(int id_usuario,int intRegsPerPag, int intPage, ArrayList<FilterBeanHelper> hmFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
-        strSQL += "and amistad.id_usuario="+id_usuario;
+        strSQL += "and amistad.id_usuario="+id_usuario+" GROUP by id_usuario2 " ;
         strSQL += SqlBuilder.buildSqlLimit(oMysql.getCount(strSQL), intRegsPerPag, intPage);
         ArrayList<AmistadBean> arrAmistad = new ArrayList<>();
         try {
@@ -153,7 +153,7 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
         try {
             ResultSet oResultSet = oMysql.getAllSql(strSQL);
             if (oResultSet != null) {
-                while (oResultSet.next()) {
+                while (oResultSet.next()) {                    
                     AmistadBean oAmistadBean = new AmistadBean();
                     arrAmistad.add(oAmistadBean.fill(oResultSet, oConnection, expand));
                 }
@@ -192,6 +192,13 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
                 strSQL += "(" + oAmistadBean.getColumns() + ")";
                 strSQL += "VALUES(" + oAmistadBean.getValues() + ")";
                 iResult = oMysql.executeInsertSQL(strSQL);
+                
+                if(iResult != null){
+                strSQL = "INSERT INTO " + strTable + " ";
+                strSQL += "(" + oAmistadBean.getColumns() + ")";
+                strSQL += "VALUES(" + oAmistadBean.getValues2() + ")";
+                iResult = oMysql.executeInsertSQL(strSQL);
+                }
             } else {
                 strSQL = "UPDATE " + strTable + " ";
                 strSQL += " SET " + oAmistadBean.toPairs();

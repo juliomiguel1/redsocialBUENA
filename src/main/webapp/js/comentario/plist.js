@@ -37,7 +37,7 @@ moduloComentario.controller('ComentarioPListController', ['$scope', '$routeParam
         $scope.visibles.texto = true;
         $scope.visibles.fecha = true;
         $scope.visibles.id_amistad = true;
-
+        $scope.id_usuario= $routeParams.id_usuario;
 
         $scope.ob = "comentario";
         $scope.op = "plist";
@@ -101,7 +101,7 @@ moduloComentario.controller('ComentarioPListController', ['$scope', '$routeParam
         $scope.params = ($scope.orderParams + $scope.filterParams + $scope.systemFilterParams);
         $scope.params = $scope.params.replace('&', '?');
 
-        serverService.getDataFromPromise(serverService.promise_getSome($scope.ob, $scope.rpp, $scope.numpage, $scope.filterParams, $scope.orderParams, $scope.systemFilterParams)).then(function (data) {
+        serverService.getDataFromPromise(serverService.promise_getSomexidusuarioComentario($scope.ob, $scope.rpp, $scope.numpage,$scope.id_usuario, $scope.filterParams, $scope.orderParams, $scope.systemFilterParams)).then(function (data) {
             if (data.status != 200) {
                 $scope.status = "Error en la recepción de datos del servidor";
             } else {

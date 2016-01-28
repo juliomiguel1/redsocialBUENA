@@ -149,7 +149,12 @@ THE SOFTWARE.
             <thead>             
                 <tr>                                                   
                     <th class="text-right">
-                        Identificador
+                        Nombre Amigo
+                        <a href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id&ordervalue=asc"><i class="glyphicon glyphicon-arrow-up"></i></a>
+                        <a href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id&ordervalue=desc"><i class="glyphicon glyphicon-arrow-down"></i></a>
+                    </th>
+                     <th class="text-right">
+                        Apellido Amigo
                         <a href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id&ordervalue=asc"><i class="glyphicon glyphicon-arrow-up"></i></a>
                         <a href="#/{{ob}}/plist/{{numpage}}/{{rpp}}?order=id&ordervalue=desc"><i class="glyphicon glyphicon-arrow-down"></i></a>
                     </th>
@@ -160,8 +165,8 @@ THE SOFTWARE.
             </thead>
             <tbody>
                 <tr ng-repeat="obj in page">
-                    <td  class="text-right">{{obj.id}}</td>
-                    
+                    <td class="text-center">{{obj.obj_usuario2.nombre}}</td>
+                    <td class="text-center">{{obj.obj_usuario2.apellido}}</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="seleccionar">
                             <a class="btn btn-default action02" ng-click="go(obj.id)"><i class="fa fa-check fa-2g"></i> Seleccionar</a>

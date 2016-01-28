@@ -195,6 +195,15 @@ public class AmistadBean implements GenericBean {
         strColumns += id_grupo;
         return strColumns;
     }
+    
+    public String getValues2(){
+         String strColumns = "";
+        strColumns += getId() + ",";
+        strColumns += id_usuario2 + ",";
+        strColumns += id_usuario + ",";
+        strColumns += id_grupo;
+        return strColumns;
+    }
 
     @Override
     public String toPairs() {

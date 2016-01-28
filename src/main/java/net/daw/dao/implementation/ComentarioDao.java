@@ -66,7 +66,18 @@ public class ComentarioDao implements ViewDaoInterface<ComentarioBean>, TableDao
         }
         return pages;
     }
-
+    
+      public int getPagesxidusuario(int id_usuario,int intRegsPerPag, ArrayList<FilterBeanHelper> hmFilter) throws Exception {
+       // strSQL += SqlBuilder.buildSqlWhere(hmFilter);
+        int pages = 0;
+        try {
+            pages = oMysql.getPages("select comentario.id, comentario.texto, comentario.fecha, comentario.id_amistad from comentario, amistad, usuario where (usuario.id= amistad.id_usuario OR usuario.id= amistad.id_usuario2) AND amistad.id = comentario.id_amistad AND usuario.id="+id_usuario , intRegsPerPag);
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPages ERROR: " + ex.getMessage()));
+        }
+        return pages;
+    }
+    
     @Override
     public int getCount(ArrayList<FilterBeanHelper> hmFilter) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
@@ -78,7 +89,19 @@ public class ComentarioDao implements ViewDaoInterface<ComentarioBean>, TableDao
         }
         return pages;
     }
-
+    
+       public int getCountxidusuario(int id_usuario, ArrayList<FilterBeanHelper> hmFilter) throws Exception {
+        //strSQL += SqlBuilder.buildSqlWhere(hmFilter);
+        int pages = 0;
+        try {
+            pages = oMysql.getCount("select comentario.id, comentario.texto, comentario.fecha, comentario.id_amistad from comentario, amistad, usuario where (usuario.id= amistad.id_usuario OR usuario.id= amistad.id_usuario2) AND amistad.id = comentario.id_amistad AND usuario.id="+id_usuario);
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
+        }
+        return pages;
+    }
+    
+    
     @Override
     public ArrayList<ComentarioBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBeanHelper> hmFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
@@ -98,7 +121,28 @@ public class ComentarioDao implements ViewDaoInterface<ComentarioBean>, TableDao
         }
         return arrComentario;
     }
-
+    
+      public ArrayList<ComentarioBean> getPagexidusuario(int id_usuario,int intRegsPerPag, int intPage, ArrayList<FilterBeanHelper> hmFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
+        //strSQL += SqlBuilder.buildSqlWhere(hmFilter);
+       // strSQL += SqlBuilder.buildSqlOrder(hmOrder);
+        strSQL = "select comentario.id, comentario.texto, comentario.fecha, comentario.id_amistad from comentario, amistad, usuario where (usuario.id= amistad.id_usuario OR usuario.id= amistad.id_usuario2) AND amistad.id = comentario.id_amistad AND usuario.id="+id_usuario ;
+        strSQL += SqlBuilder.buildSqlLimit(oMysql.getCount(strSQL), intRegsPerPag, intPage);
+        ArrayList<ComentarioBean> arrComentario = new ArrayList<>();
+        try {
+            ResultSet oResultSet = oMysql.getAllSql(strSQL);
+            if (oResultSet != null) {
+                while (oResultSet.next()) {
+                    ComentarioBean oComentarioBean = new ComentarioBean();
+                    arrComentario.add(oComentarioBean.fill(oResultSet, oConnection, expand));
+                }
+            }
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
+        }
+        return arrComentario;
+    }
+    
+    
     @Override
     public ArrayList<ComentarioBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);

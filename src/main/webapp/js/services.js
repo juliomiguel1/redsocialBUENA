@@ -78,6 +78,9 @@ angular.module('Services', [])
                 promise_getSomexidusuarioComentario: function (strClass, rpp, page, id_usuario, filterParams, orderParams, systemfilterParams) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsomexusuarioComentario'  + '&rpp=' + rpp + '&page=' + page + '&id_usuario=' + id_usuario + filterParams + orderParams + systemfilterParams, 'GET', '');
                 },
+                promise_getSomeusuarionoduplicado: function (strClass, rpp, page, id_usuario, filterParams, orderParams, systemfilterParams) {
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsomeusuarionoduplicado'  + '&rpp=' + rpp + '&page=' + page + '&id_usuario=' + id_usuario + filterParams + orderParams + systemfilterParams, 'GET', '');
+                },
                 promise_getAll: function (strClass, filterParams, orderParams, systemfilterParams) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewall' + filterParams + orderParams + systemfilterParams, 'GET', '');
                 },

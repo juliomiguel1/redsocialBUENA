@@ -66,13 +66,58 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         }
         return pages;
     }
+    
+   public int getPagesusuarionoduplicado(int id_usuario,int intRegsPerPag, ArrayList<FilterBeanHelper> hmFilter) throws Exception {
+        strSQL ="SELECT usuario.* FROM usuario WHERE usuario.id  NOT IN (SELECT amistad.id_usuario2 FROM amistad where amistad.id_usuario="+ id_usuario +") and usuario.id !="+id_usuario;
+        strSQL += SqlBuilder.buildSqlWhere(hmFilter);
+        int pages = 0;
+        int num = 0 ;
+        
+        ResultSet oResulset = oMysql.getAllSql("SELECT COUNT(*) as id FROM usuario WHERE usuario.id  NOT IN (SELECT amistad.id_usuario2 FROM amistad where amistad.id_usuario="+ id_usuario +") and usuario.id !="+id_usuario);
+        
+        if(oResulset != null){
+            while(oResulset.next()){
+                num = oResulset.getInt("id");
+            }
+        }
+        try {
+            pages = oMysql.getPagesusuarionoduplicado(strSQL , intRegsPerPag, num);
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPages ERROR: " + ex.getMessage()));
+        }
+        return pages;
+    }
+    
 
     @Override
     public int getCount(ArrayList<FilterBeanHelper> hmFilter) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         int pages = 0;
+        
+        
         try {
             pages = oMysql.getCount(strSQL);
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
+        }
+        return pages;
+    }
+    
+     public int getCountusuarionoduplicado(int id_usuario, ArrayList<FilterBeanHelper> hmFilter) throws Exception {
+        strSQL ="SELECT usuario.* FROM usuario WHERE usuario.id  NOT IN (SELECT amistad.id_usuario2 FROM amistad where amistad.id_usuario="+ id_usuario +") and usuario.id !="+id_usuario;
+        strSQL += SqlBuilder.buildSqlWhere(hmFilter);
+        int pages = 0;
+        int num = 0;
+        ResultSet oResulset = oMysql.getAllSql("SELECT COUNT(*) as id FROM usuario WHERE usuario.id  NOT IN (SELECT amistad.id_usuario2 FROM amistad where amistad.id_usuario="+ id_usuario +") and usuario.id !="+id_usuario);
+        
+        if(oResulset != null){
+            while(oResulset.next()){
+                num = oResulset.getInt("id");
+            }
+        }
+        
+        try {
+            pages = num;
         } catch (Exception ex) {
             ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
         }
@@ -98,7 +143,39 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         }
         return arrUsuario;
     }
-
+    
+      public ArrayList<UsuarioBean> getPageusuarionoduplicado(int id_usuario,int intRegsPerPag, int intPage, ArrayList<FilterBeanHelper> hmFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
+        strSQL ="SELECT usuario.* FROM usuario WHERE usuario.id  NOT IN (SELECT amistad.id_usuario2 FROM amistad where amistad.id_usuario="+ id_usuario +") and usuario.id !="+id_usuario;
+        strSQL += SqlBuilder.buildSqlWhere(hmFilter);
+        strSQL += SqlBuilder.buildSqlOrder(hmOrder);
+        
+        int num = 0;
+        
+        ResultSet oResulset = oMysql.getAllSql("SELECT COUNT(*) as id FROM usuario WHERE usuario.id  NOT IN (SELECT amistad.id_usuario2 FROM amistad where amistad.id_usuario="+ id_usuario +") and usuario.id !="+id_usuario);
+        
+        if(oResulset != null){
+            while(oResulset.next()){
+                num = oResulset.getInt("id");
+            }
+        }
+        
+        
+        strSQL += SqlBuilder.buildSqlLimit(num, intRegsPerPag, intPage);
+        ArrayList<UsuarioBean> arrUsuario = new ArrayList<>();
+        try {
+            ResultSet oResultSet = oMysql.getAllSql(strSQL);
+            if (oResultSet != null) {
+                while (oResultSet.next()) {
+                    UsuarioBean oUsuarioBean = new UsuarioBean();
+                    arrUsuario.add(oUsuarioBean.fill(oResultSet, oConnection, expand));
+                }
+            }
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
+        }
+        return arrUsuario;
+    }
+    
     @Override
     public ArrayList<UsuarioBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
@@ -191,3 +268,8 @@ public UsuarioBean getFromLogin(UsuarioBean oUsuario) throws Exception {
     }
 
 }
+
+
+/*SELECT usuario.*
+FROM usuario
+WHERE usuario.id  NOT IN (SELECT amistad.id_usuario2 FROM amistad where amistad.id_usuario=1) and usuario.id !=1*/

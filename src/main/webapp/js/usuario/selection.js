@@ -34,10 +34,11 @@ moduloUsuario.controller('UsuarioSelectionController', ['$scope', '$routeParams'
 
         $scope.ob = "usuario";
         $scope.op = "selection";
-        $scope.title = "Selecci?n de usuario";
+        $scope.title = "Seleccion de usuario";
         $scope.icon = "fa-user";
         $scope.neighbourhood = 2;
         $scope.numero=1;
+        $scope.id_usuario = $routeParams.id_usuario;
         var variable = 1;
         if (!$routeParams.page) {
             $routeParams.page = 1;
@@ -95,7 +96,7 @@ moduloUsuario.controller('UsuarioSelectionController', ['$scope', '$routeParams'
         $scope.params = ($scope.orderParams + $scope.filterParams + $scope.systemFilterParams);
         $scope.params = $scope.params.replace('&', '?');
 
-        serverService.getDataFromPromise(serverService.promise_getSome($scope.ob, $scope.rpp, $scope.numpage, $scope.filterParams, $scope.orderParams, $scope.systemFilterParams)).then(function (data) {
+        serverService.getDataFromPromise(serverService.promise_getSomeusuarionoduplicado($scope.ob, $scope.rpp, $scope.numpage,$scope.id_usuario, $scope.filterParams, $scope.orderParams, $scope.systemFilterParams)).then(function (data) {
             if (data.status != 200) {
                 $scope.status = "Error en la recepci?n de datos del servidor";
             } else {

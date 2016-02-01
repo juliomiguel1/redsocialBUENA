@@ -35,6 +35,7 @@ moduloAmistad.controller('AmistadNewController', ['$scope', '$routeParams', '$lo
         $scope.result = null;
         $scope.title = "Crear un nueva amistad";
         $scope.icon = "fa-users";
+        $scope.id_usuario = $routeParams.id_usuario;
         if (sharedSpaceService.getFase() == 0) {
             $scope.obj = {
                 id: 0,
@@ -60,7 +61,7 @@ moduloAmistad.controller('AmistadNewController', ['$scope', '$routeParams', '$lo
             sharedSpaceService.setReturnLink('/' + $scope.ob + '/new');
             sharedSpaceService.setFase(1);
             sharedSpaceService.setNumeroUsuario=numeroUsuario;
-            $location.path('/' + foreignObjectName + '/selection/1/10');
+            $location.path('/' + foreignObjectName + '/selection/1/10/'+$scope.id_usuario);
         }
         $scope.save = function () {
             console.log("save");

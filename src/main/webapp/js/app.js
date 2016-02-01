@@ -64,7 +64,9 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuario/edit/:id', {templateUrl: 'js/usuario/edit.html', controller: 'UsuarioEditController'});
         $routeProvider.when('/usuario/remove/:id', {templateUrl: 'js/usuario/remove.html',   controller: 'UsuarioRemoveController'});
         $routeProvider.when('/usuario/plist/:page?/:rpp?', {templateUrl: 'js/usuario/plist.html', controller: 'UsuarioPListController'});
-        $routeProvider.when('/usuario/selection/:page/:rpp', {templateUrl: 'js/usuario/selection.html', controller: 'UsuarioSelectionController'});
+      //  $routeProvider.when('/usuario/selection/:page/:rpp', {templateUrl: 'js/usuario/selection.html', controller: 'UsuarioSelectionController'});
+        $routeProvider.when('/usuario/selection/:page/:rpp/:id_usuario?', {templateUrl: 'js/usuario/selection.html', controller: 'UsuarioSelectionController'});
+
 
         //------------
         $routeProvider.when('/perfil/view/:id', {templateUrl: 'js/perfil/view.html', controller: 'PerfilViewController'});

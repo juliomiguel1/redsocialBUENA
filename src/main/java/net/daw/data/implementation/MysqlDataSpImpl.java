@@ -261,7 +261,26 @@ public class MysqlDataSpImpl implements DataInterface {
         }
         return intResult;
     }
+    
+      public int getPagesusuarionoduplicado(String strSqlSelectDataOrigin, int intRegsPerPage,int num) throws Exception {
+        int intResult = 0;
+        int intCount = 0;
+        Statement oStatement = null;
+        try {
+            intCount = Math.max(num, 1);
+            intResult = (intCount - 1) / intRegsPerPage;
+            intResult++;
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPagesSQL ERROR:  Can't process query: " + ex.getMessage()));
+        } finally {
 
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
+        return intResult;
+    }
+    
     @Override
     public ResultSet getAllSql(String strSqlSelectDataOrigin) throws Exception {
         Statement oStatement = null;

@@ -1105,7 +1105,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
-  color: #2f575d;
+  /* color: white; */
   /* background-color: #dee1dd; */ }
 
 input,
@@ -3157,7 +3157,7 @@ tbody.collapse.in {
     clear: both;
     font-weight: normal;
     line-height: 1.42857;
-    color: #2f575d;
+    color: white;
     white-space: nowrap; }
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
@@ -4629,6 +4629,7 @@ a.list-group-item-danger {
     color: inherit; }
 
 .panel-footer {
+  /* width: 100%; */
   padding: 10px 15px;
   background-color: #357CB9;
   border-top: 1px solid #ddd;

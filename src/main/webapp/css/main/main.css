@@ -1117,8 +1117,9 @@ textarea {
   line-height: inherit; }
 
 a {
-  color: white;
-  text-decoration: none; }
+  color: black;
+  text-decoration: none;
+  }
   a:hover, a:focus {
     color: #455f4b;
     text-decoration: underline; }
@@ -3157,8 +3158,9 @@ tbody.collapse.in {
     clear: both;
     font-weight: normal;
     line-height: 1.42857;
-    color: white;
-    white-space: nowrap; }
+    color: #337ab7;
+    white-space: nowrap;
+    }
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
   text-decoration: none;
@@ -4021,7 +4023,7 @@ div#navbar {}
   .breadcrumb > li {
     display: inline-block; }
     .breadcrumb > li + li:before {
-      content: "/ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ";
+      content: "/Â ";
       padding: 0 5px;
       color: #ccc; }
   .breadcrumb > .active {
@@ -4600,6 +4602,7 @@ a.list-group-item-danger {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
 
 .panel-body {
+   
   padding: 15px; }
   .panel-body:before, .panel-body:after {
     content: " ";
@@ -5037,7 +5040,8 @@ button.close {
 .modal-footer {
   padding: 15px;
   text-align: right;
-  border-top: 1px solid #e5e5e5; }
+  //border-top: 1px solid #f5f5f5;
+  }
   .modal-footer:before, .modal-footer:after {
     content: " ";
     display: table; }

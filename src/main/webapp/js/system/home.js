@@ -29,7 +29,7 @@
 'use strict';
 moduloSistema.controller('HomeController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService',
     function ($scope, $routeParams, $location, serverService, sharedSpaceService) {
-
+$('#broth_modal_login').css({"display":"none"});
         $scope.op = "Home";
 
     }

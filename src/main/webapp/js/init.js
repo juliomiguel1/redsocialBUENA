@@ -70,6 +70,7 @@ init = {
         $('#broth_username_id').text(loginName);
         $('.broth_show_when_logged_in').show();
         $('.broth_show_when_logged_out').hide();
+        $(".barrademenu").removeAttr("style");
         //$("#broth_username_menu_id").css('display', 'block', 'important');
         init.unloadLoginForm();
         //configuration.loadRoutes();
@@ -79,12 +80,16 @@ init = {
         $('#broth_username_id').text("Login");
         $('.broth_show_when_logged_in').hide();
         $('.broth_show_when_logged_out').show();
+        $(".barrademenu").css("display","none");
         init.loadLoginForm();
     },
     checkAndUpdateUserConnectionState: function () {
         init.getSessionPromise().done(function (data) {
             if (data['status'] == 200) {
+                
                 init.updateConnectedState(data.message);
+                
+                
             } else {
                 init.updateDisconnectedState();
             }
@@ -92,18 +97,18 @@ init = {
         });
     },
     loadLoginForm: function () {
-        $("#broth_login_modal_footer").html("");
-        $('#brothModalLogin').append(init.loginForm());
-        init.loadModal('#broth_modal_login', true);
-        $("#broth_button_login").unbind('click');
+      //  $("#broth_login_modal_footer").html("");
+       // $('#brothModalLogin').append(init.loginForm());
+      //  init.loadModal('#broth_modal_login', true);
+      //  $("#broth_button_login").unbind('click');
         $("#broth_button_login").click(function () {
             username = $("#broth_input_login").val();
             password = $("#broth_input_password").val();
-            $("#broth_login_modal_footer").html("Please, wait while contacting server for authentication...");
+           // $("#broth_login_modal_footer").html("Please, wait while contacting server for authentication...");
             init.getLoginPromise(username, password).done(function (response) {
                 if (response.status == 200) {
                     $("#broth_login_modal_footer").html("Welcome, you're allowed to enter the site!");
-                    init.unloadLoginForm();
+                  //  init.unloadLoginForm();
                     init.updateConnectedState(response.message)
                 } else {
                     $("#broth_login_modal_footer").html("Login, password or both are incorrect. Please try it again.");
@@ -114,7 +119,7 @@ init = {
         });
     },
     unloadLoginForm: function () {
-        $('#broth_modal_login').modal('hide');
+       // $('#broth_modal_login').css({"visibility":'hidden'});
     },
     login: function (username, password) {
         var that = this;
@@ -150,7 +155,7 @@ init = {
         }
         return b;
     },
-    loginForm: function () {
+   /* loginForm: function () {
         return (
                 dom.div('id="broth_modal_login" class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"',
                         dom.div('class="modal-dialog modal-sm"',
@@ -181,7 +186,7 @@ init = {
                                 )
                         )
                 )
-    },
+    },*/
     getPageHeader: function (icon, title, subtitle) {
         return(
                 dom.div('class="row"',

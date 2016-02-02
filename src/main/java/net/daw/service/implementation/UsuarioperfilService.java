@@ -39,6 +39,7 @@ import net.daw.bean.implementation.UsuarioperfilBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.dao.implementation.PerfilDao;
 import net.daw.dao.implementation.UsuarioDao;
+import net.daw.dao.implementation.UsuarioperfilDao;
 
 import net.daw.helper.statics.AppConfigurationHelper;
 import static net.daw.helper.statics.AppConfigurationHelper.getSourceConnection;
@@ -278,7 +279,7 @@ public class UsuarioperfilService implements TableServiceInterface, ViewServiceI
     @Override
     public String set() throws Exception {
         if (this.checkpermission("set")) {
-            String jason = ParameterCook.prepareJson(oRequest);
+              String jason = ParameterCook.prepareJson(oRequest);
             String resultado = null;
             Connection oConnection = null;
             ConnectionInterface oDataConnectionSource = null;
@@ -287,16 +288,13 @@ public class UsuarioperfilService implements TableServiceInterface, ViewServiceI
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
                 /*Creacion de los dao*/
-                UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                PerfilDao oPerfilDao = new PerfilDao(oConnection);
+                UsuarioperfilDao oUsuarioperfilDao = new UsuarioperfilDao(oConnection);
                 /*Creación de los Bean*/
-                UsuarioBean oUsuarioBean = new UsuarioBean();
-                PerfilBean oPerfilBean = new PerfilBean();
                 UsuarioperfilBean oUsuarioperfilBean = new UsuarioperfilBean();
                 
                 oUsuarioperfilBean = AppConfigurationHelper.getGson().fromJson(jason, oUsuarioperfilBean.getClass());
-                if (oUsuarioBean != null) {
-                    Integer iResult = oUsuarioDao.set(oUsuarioBean);
+                if (oUsuarioperfilBean != null) {
+                    Integer iResult = oUsuarioperfilDao.set(oUsuarioperfilBean);
                     if (iResult >= 1) {
                         resultado = JsonMessage.getJson("200", iResult.toString());
                     } else {
@@ -321,48 +319,6 @@ public class UsuarioperfilService implements TableServiceInterface, ViewServiceI
         } else {
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
-    }
-
-    public String login() throws SQLException, Exception {
-        UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
-        String strAnswer = null;
-        String strCode = "200";
-        if (oUserBean == null) {
-            String login = oRequest.getParameter("login");
-            String pass = oRequest.getParameter("password");
-            if (!login.equals("") && !pass.equals("")) {
-                ConnectionInterface oDataConnectionSource = null;
-                Connection oConnection = null;
-                try {
-                    oDataConnectionSource = getSourceConnection();
-                    oConnection = oDataConnectionSource.newConnection();
-                    UsuarioBean oUsuario = new UsuarioBean();
-                    oUsuario.setEmail(login);
-                    oUsuario.setPassword(pass);
-                    UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                    oUsuario = oUsuarioDao.getFromLogin(oUsuario);
-                    if (oUsuario.getId() != 0) {
-                        oRequest.getSession().setAttribute("userBean", oUsuario);
-                        strAnswer = oUsuario.getNombre();
-                    } else {
-                        strCode = "403";
-                        strAnswer = "User or password incorrect";
-                    }
-                } catch (Exception ex) {
-                    ExceptionBooster.boost(new Exception(this.getClass().getName() + ":login ERROR " + ex.toString()));
-                } finally {
-                    if (oConnection != null) {
-                        oConnection.close();
-                    }
-                    if (oDataConnectionSource != null) {
-                        oDataConnectionSource.disposeConnection();
-                    }
-                }
-            }
-        } else {
-            strAnswer = "Already logged in";
-        }
-        return JsonMessage.getJsonMsg(strCode, strAnswer);
     }
 
     public String logout() {

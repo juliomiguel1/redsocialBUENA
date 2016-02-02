@@ -201,8 +201,10 @@
         <script src="js/usuario/new.js" type="text/javascript"></script>
         <script src="js/usuario/selection.js" type="text/javascript"></script>
         <!-- ------------------------------- -->
-
-
+        
+        <script src="js/usuarioperfil/new.js" type="text/javascript"></script>
+        
+        <!-- ------------------------------- -->
         <script src="js/perfil/view.js" type="text/javascript"></script>
         <script src="js/perfil/plist.js" type="text/javascript"></script>
         <script src="js/perfil/edit.js" type="text/javascript"></script>
@@ -286,6 +288,11 @@
         -->
         <script type="text/javascript">
                         $(document).ready(function () {
+                            
+                            $("#quitar").click(function(){
+                               $('#broth_modal_login').css({"display":"block"}); 
+                            });
+                            
                             configuration.resetCSS();
                             //configuration.pathConfig();
                             $('.broth_show_when_logged_in').hide();
@@ -300,6 +307,8 @@
                                 return false;
                             });
                             init.checkAndUpdateUserConnectionState();
+                            
+                            
                         });
         </script>
     </body>

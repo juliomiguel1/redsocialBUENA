@@ -41,7 +41,7 @@ import net.daw.helper.statics.EncodingUtilHelper;
 public class UsuarioperfilBean implements GenericBean{
     
     @Expose
-    private Integer id_usuario;
+    private Integer id;
     @Expose
     private String nombre = "";
     @Expose
@@ -50,8 +50,6 @@ public class UsuarioperfilBean implements GenericBean{
     private String email = "";    
     @Expose
     private String password = "";
-    @Expose
-    private Integer id_perfil = 0;
     @Expose 
     private String direccion="";
     @Expose 
@@ -64,15 +62,15 @@ public class UsuarioperfilBean implements GenericBean{
     /**
      * @return the id_usuario
      */
-    public Integer getId_usuario() {
-        return id_usuario;
+    public Integer getId() {
+        return id;
     }
 
     /**
-     * @param id_usuario the id_usuario to set
+     * @param id the id_usuario to set
      */
-    public void setId_usuario(Integer id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
@@ -131,20 +129,7 @@ public class UsuarioperfilBean implements GenericBean{
         this.password = password;
     }
 
-    /**
-     * @return the id_perfil
-     */
-    public Integer getId_perfil() {
-        return id_perfil;
-    }
-
-    /**
-     * @param id_perfil the id_perfil to set
-     */
-    public void setId_perfil(Integer id_perfil) {
-        this.id_perfil = id_perfil;
-    }
-
+  
     /**
      * @return the direccion
      */
@@ -203,7 +188,7 @@ public class UsuarioperfilBean implements GenericBean{
     
        public String toJson(Boolean expand) {
         String strJson = "{";
-        strJson += "id:" + id_usuario + ",";
+        strJson += "id:" + id + ",";
         strJson += "nombre:" + nombre + ",";
         strJson += "apellido:" + apellido + ",";
         strJson += "email:" + email + ",";
@@ -222,7 +207,7 @@ public class UsuarioperfilBean implements GenericBean{
     public String getColumns() {
         
         String strColumns = "";
-        strColumns += "id_usuario,";
+        strColumns += "id,";
         strColumns += "nombre,";
         strColumns += "apellido,";
         strColumns += "email,";
@@ -240,7 +225,7 @@ public class UsuarioperfilBean implements GenericBean{
     public String getValues() {
         
         String strColumns = "";
-        strColumns += id_usuario + ",";
+        strColumns += id + ",";
         strColumns += '"'+nombre +'"'+ ",";
         strColumns += '"'+apellido +'"'+ ",";
         strColumns += '"'+email + '"'+",";
@@ -256,7 +241,7 @@ public class UsuarioperfilBean implements GenericBean{
     @Override
     public String toPairs() {
          String strPairs = "";
-        strPairs += "id=" + id_usuario + ",";
+        strPairs += "id=" + id + ",";
         strPairs += "nombre=" + EncodingUtilHelper.quotate(nombre) + ",";
         strPairs += "password=" + EncodingUtilHelper.quotate(getPassword()) + ",";
         strPairs += "apellido=" + EncodingUtilHelper.quotate(apellido) + ",";
@@ -270,7 +255,7 @@ public class UsuarioperfilBean implements GenericBean{
 
     @Override
     public GenericBean fill(ResultSet oResultSet, Connection pooledConnection, Integer expand) throws SQLException, Exception {
-        this.setId_usuario(oResultSet.getInt("id_usuario"));
+        this.setId(oResultSet.getInt("id"));
         this.setNombre(oResultSet.getString("nombre"));
         this.setPassword(oResultSet.getString("password"));
         this.setApellido(oResultSet.getString("apellido"));

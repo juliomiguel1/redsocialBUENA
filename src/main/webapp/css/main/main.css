@@ -25,6 +25,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
     display: none;
 }
 
+*{
+    box-sizing: border-box;
+}
+
 body {
   min-height: 2000px;
   padding-top: 70px;
@@ -36,10 +40,14 @@ body {
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%; }
+  -webkit-text-size-adjust: 100%; 
+  box-sizing: border-box;
+}
 
 body {
-  margin: 0; }
+  margin: 0; 
+  box-sizing: border-box;
+}
 
 article,
 aside,
@@ -1117,12 +1125,13 @@ textarea {
   line-height: inherit; }
 
 a {
-  color: black;
+  /* color: #337ab7; */
   text-decoration: none;
   }
   a:hover, a:focus {
-    color: #455f4b;
-    text-decoration: underline; }
+    /* color: #455f4b; */
+    /* text-decoration: underline; */
+    }
   a:focus {
     outline: thin dotted;
     outline: 5px auto -webkit-focus-ring-color;
@@ -5730,6 +5739,16 @@ button.close {
 			margin-bottom: 20px;
 			text-align: center;
 		}
+                
+                .usuarioregistradoizquierda{
+                        width: 100%;
+			height: 700px;
+			padding-top: 40px;
+			margin-top: 20px;
+			border-right: 5px solid #3684d6;
+			margin-bottom: 20px;
+			text-align: center;
+                }
 
 		.derecha{
 			width: 100%;
@@ -5737,7 +5756,29 @@ button.close {
 			text-align: center;
 			padding-top: 70px;
 		}
-
+                
+                .usuarioregistradoderecha{
+                        width: 100%;
+			height: 100%;
+			text-align: center;
+			padding-top: 70px;
+                }
+                
+                #fotoperfil{
+                    position: relative;
+                    height: 200px;
+                    width: 200px;
+                    -moz-border-radius: 35px;
+                    border-radius: 35px;
+                    border: 1px solid #3684d6;
+                    margin: 0 auto;
+                    overflow: hidden;
+                }
+                
+                .foto{
+                    margin-top: 30px;
+                    width: 90%;
+                }
 		.titulo{
 			font-size: 22px;
 			font-weight: bold;
@@ -5763,8 +5804,31 @@ button.close {
 		    
 		    margin-top: 20px;
 		    margin-left: auto;
-  			margin-right: auto;
+  		    margin-right: auto;
 		    width: 80%;
 		    overflow: hidden;
 
 		}
+                
+                #broth_newaccount a{
+                    text-decoration: none;
+                    color: black;
+                }
+                
+                #broth_newaccount a:hover{
+                    color: blue;
+                }
+                
+                .botones_registrados{
+                    margin-top:40px;
+                    color: #3684d6;
+                    font-weight: bold;
+                    font-size: 1.4em;
+                }
+                
+                .botones_registrados a:hover{
+                    font-size: 1.5em;
+                    cursor: pointer;
+                    text-decoration: none;
+                    
+                }

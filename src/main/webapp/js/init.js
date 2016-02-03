@@ -73,6 +73,8 @@ init = {
         $(".barrademenu").removeAttr("style");
         $("#broth_input_login").attr("onfocus","this.blur()");
         $("#broth_input_password").attr("onfocus","this.blur()");
+        $("#broth_newaccount").css("display","none");
+        $("#broth_fogotpassword").css("display","none");
         //$("#broth_username_menu_id").css('display', 'block', 'important');
         init.unloadLoginForm();
         //configuration.loadRoutes();
@@ -85,6 +87,8 @@ init = {
         $(".barrademenu").css("display","none");
         $("#broth_input_login").removeAttr("onfocus");
         $("#broth_input_password").removeAttr("onfocus");
+        $("#broth_newaccount").removeAttr("style");   
+        $("#broth_fogotpassword").removeAttr("style");
         init.loadLoginForm();
     },
     checkAndUpdateUserConnectionState: function () {

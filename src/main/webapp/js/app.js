@@ -43,6 +43,7 @@ var openAusias = angular.module('myApp', [
     'amistadControllers',
     'comentarioControllers',
     'usuarioperfilControllers',
+    'usuariosregistradosControllers',
     'ui.bootstrap',
     'ngSanitize' //http://stackoverflow.com/questions/9381926/insert-html-into-view-using-angularjs
 ]);
@@ -67,6 +68,9 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuario/plist/:page?/:rpp?', {templateUrl: 'js/usuario/plist.html', controller: 'UsuarioPListController'});
       //  $routeProvider.when('/usuario/selection/:page/:rpp', {templateUrl: 'js/usuario/selection.html', controller: 'UsuarioSelectionController'});
         $routeProvider.when('/usuario/selection/:page/:rpp/:id_usuario?', {templateUrl: 'js/usuario/selection.html', controller: 'UsuarioSelectionController'});
+        //-----------
+        
+        $routeProvider.when('/usuariosregistrados/view', {templateUrl: 'js/usuariosregistrados/view.html', controller: 'UsuariosregistradosViewController'});
         //-----------
         
         $routeProvider.when('/usuarioperfil/new', {templateUrl: 'js/usuarioperfil/new.html', controller: 'UsuarioperfilNewController'});
@@ -133,5 +137,5 @@ var moduloGrupo = angular.module('grupoControllers', []);
 var moduloAmistad = angular.module('amistadControllers', []);
 var moduloComentario = angular.module('comentarioControllers', []);
 var moduloUsuarioperfil = angular.module('usuarioperfilControllers', []);
-
+var moduloUsuariosregistrados = angular.module('usuariosregistradosControllers', []);
 

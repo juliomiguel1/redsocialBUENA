@@ -278,7 +278,7 @@ public class UsuarioperfilService implements TableServiceInterface, ViewServiceI
 
     @Override
     public String set() throws Exception {
-        if (this.checkpermission("set")) {
+    //    if (this.checkpermission("set")) {
               String jason = ParameterCook.prepareJson(oRequest);
             String resultado = null;
             Connection oConnection = null;
@@ -316,9 +316,9 @@ public class UsuarioperfilService implements TableServiceInterface, ViewServiceI
                 }
             }
             return resultado;
-        } else {
+     /*   } else {
             return JsonMessage.getJsonMsg("401", "Unauthorized");
-        }
+        }*/
     }
 
     public String logout() {

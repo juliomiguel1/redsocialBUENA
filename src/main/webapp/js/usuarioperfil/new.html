@@ -26,25 +26,63 @@ THE SOFTWARE.
 <div class="panel-body">
     <form name="outerForm" class="form-horizontal" ng-show="result == null">
 
-        <div id="nombre-group" class="form-group">
-            <label class="col-sm-2 control-label" for="nombre">Nombre:</label>
-            <div class="control col-sm-4">
-                <input ng-model="obj.nombre" type="text" id="nombre" class="form-control" name="nombre" size="15" placeholder="Nombre">
+        <div id="nombre-group" class="form-group"  ng-class="{'has-error': (outerForm.nombre.$error.required || outerForm.nombre.$error.minlength) && !outerForm.nombre.$pristine}">
+            <label class="col-sm-2 control-label" for="nombre">First Name:</label>
+            <div class="control col-sm-3">
+                <input ng-model="obj.nombre"
+                       type="text"
+                       id="nombre"
+                       class="form-control"
+                       name="nombre"
+                       size="15"
+                       placeholder="first name"
+                       minlength="5"
+                       maxlength="40"
+                       required>
+                
+                <span class="help-block" ng-show="!outerForm.nombre.$pristine && outerForm.nombre.$error.required">The name field is required</span>
+                <span class="help-block" ng-show="!outerForm.nombre.$pristine && outerForm.nombre.$error.minlength">The name field must have at least 5 characters</span>
+                <span class="help-block" ng-show="!outerForm.nombre.$pristine && outerForm.nombre.$error.maxlength">The name field must have at most 40 characters</span>
             </div>
         </div>
 
 
-        <div id="apellido-group" class="form-group">
-            <label class="col-sm-2 control-label" for="apellido">Apellidos:</label>
-            <div class="control col-sm-4">
-                <input ng-model="obj.apellido" type="text" id="apellido" class="form-control" name="apellido" size="15" placeholder="Apellido">
+        <div id="apellido-group" class="form-group"  ng-class="{'has-error': (outerForm.apellido.$error.required || outerForm.apellido.$error.minlength) && !outerForm.apellido.$pristine}">
+            <label class="col-sm-2 control-label" for="apellido">Last Name:</label>
+            <div class="control col-sm-3">
+                <input ng-model="obj.apellido"
+                       type="text"
+                       id="apellido"
+                       class="form-control"
+                       name="apellido"
+                       size="15"
+                       placeholder="last name"
+                       minlength="5"
+                       maxlength="40"
+                       required>
+                
+                <span class="help-block" ng-show="!outerForm.apellido.$pristine && outerForm.apellido.$error.required">The surname field is required</span>
+                <span class="help-block" ng-show="!outerForm.apellido.$pristine && outerForm.apellido.$error.minlength">The surname field must have at least 5 characters</span>
+                <span class="help-block" ng-show="!outerForm.apellido.$pristine && outerForm.apellido.$error.maxlength">The surname field must have at most 40 characters</span>
+        
             </div>
         </div>
         
-        <div id="email-group" class="form-group">
-            <label class="col-sm-2 control-label" for="email">Email:</label>
-            <div class="control col-sm-4">
-                <input ng-model="obj.email" type="text" id="email" class="form-control" name="email" size="15" placeholder="Email">
+        <div id="email-group" class="form-group" ng-class="{'has-error': (outerForm.email.$error.required || outerForm.email.$error.minlength) && !outerForm.email.$pristine}">
+            <label class="col-sm-2 control-label" for="email">E-mail:</label>
+            <div class="control col-sm-3">
+                <input ng-model="obj.email"
+                       type="email"
+                       id="apellido"
+                       class="form-control"
+                       name="email"
+                       size="15"
+                       placeholder="Email"
+                       required>
+               
+                <span class="help-block" ng-show="!outerForm.email.$pristine && outerForm.email.$error.required">The e-mail field is required</span>
+                <span class="help-block" ng-show="!outerForm.email.$pristine && outerForm.email.$invalid">The e-mail field is invalid</span>
+        
             </div>
         </div>
 
@@ -52,41 +90,41 @@ THE SOFTWARE.
         <div id="password-group" class="form-group">
             <label class="col-sm-2 control-label" for="password">Password:</label>
             <div class="control col-sm-3">
-                <input ng-model="obj.password" type="text" id="password" class="form-control" name="password" size="15" placeholder="Password">
+                <input ng-model="obj.password" type="password" id="password" class="form-control" name="password" size="15" placeholder="password" required/>
             </div>
         </div>
         
         <div id="direccion-group" class="form-group">
-            <label class="col-sm-2 control-label" for="direccion">Dirección:</label>
+            <label class="col-sm-2 control-label" for="direccion">Address:</label>
             <div class="control col-sm-3">
-                <input ng-model="obj.direccion" type="text" id="direccion" class="form-control" name="direccion" size="15" placeholder="Dirección">
+                <input ng-model="obj.direccion" type="text" id="direccion" class="form-control" name="direccion" size="15" placeholder="address">
             </div>
         </div>
         
         <div id="estado_civil-group" class="form-group">
-            <label class="col-sm-2 control-label" for="estado_civil">Estado Civil:</label>
+            <label class="col-sm-2 control-label" for="estado_civil">Civil Status:</label>
             <div class="control col-sm-3">
-                <input ng-model="obj.estado_civil" type="text" id="estado_civil" class="form-control" name="estado_civil" size="15" placeholder="Estado Civil">
+                <input ng-model="obj.estado_civil" type="text" id="estado_civil" class="form-control" name="estado_civil" size="15" placeholder="civil status">
             </div>
         </div>
         
         <div id="ocupacion-group" class="form-group">
-            <label class="col-sm-2 control-label" for="ocupacion">Ocupación:</label>
+            <label class="col-sm-2 control-label" for="ocupacion">Occupation:</label>
             <div class="control col-sm-3">
-                <input ng-model="obj.ocupacion" type="text" id="ocupacion" class="form-control" name="ocupacion" size="15" placeholder="Ocupación">
+                <input ng-model="obj.ocupacion" type="text" id="ocupacion" class="form-control" name="ocupacion" size="15" placeholder="occupation">
             </div>
         </div>
         
         <div id="estudio-group" class="form-group">
-            <label class="col-sm-2 control-label" for="estudio">Estudios:</label>
+            <label class="col-sm-2 control-label" for="estudio">Studies:</label>
             <div class="control col-sm-3">
-                <input ng-model="obj.estudio" type="text" id="estudio" class="form-control" name="estudio" size="15" placeholder="Estudios">
+                <input ng-model="obj.estudio" type="text" id="estudio" class="form-control" name="estudio" size="15" placeholder="studies">
             </div>
         </div>
 
         <div class="control-group text-right">
             <div class="controls">
-                <a class="btn btn-primary" ng-click="save()">Guardar</a>
+                <a class="btn btn-primary" ng-click="save()" ng-disabled="!outerForm.$valid">Guardar</a>
                 <a class="btn btn-default" ng-click="close()">Cerrar</a>
             </div>
         </div>

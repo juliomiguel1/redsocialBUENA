@@ -34,7 +34,7 @@ moduloUsuarioperfil.controller('UsuarioperfilNewController', ['$scope', '$routeP
         $scope.id = $routeParams.id;
         $scope.ob = 'usuarioperfil';
         $scope.result = null;
-        $scope.title = "Crear un nuevo Usuario";
+        $scope.title = "Register";
         $scope.icon = "fa-user";
         if (sharedSpaceService.getFase() == 0) {
             $scope.obj = {

@@ -49,7 +49,7 @@ var openAusias = angular.module('myApp', [
 
 openAusias.config(['$routeProvider', function ($routeProvider) {
         
-        $routeProvider.when('/', {templateUrl: '/home'});
+        $routeProvider.when('/', {templateUrl: 'js/system/home.html'});
         //------------
         $routeProvider.when('/home', {templateUrl: 'js/system/home.html', controller: 'HomeController'});
         //------------

@@ -73,11 +73,12 @@ moduloUsuarioperfil.controller('UsuarioperfilNewController', ['$scope', '$routeP
         });
         $scope.back = function () {
             $location.path('/#');
+            $('#broth_modal_login').css({"display":"block"});
             //window.history.back();
         };
         $scope.close = function () {
             $location.path('/#');
-            $('#broth_modal_login').css({"display":"block"});
+            
             
         };
        /* $scope.plist = function () {

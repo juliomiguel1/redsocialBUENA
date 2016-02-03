@@ -1460,6 +1460,7 @@ blockquote {
 
 .blockquote-reverse,
 blockquote.pull-right {
+    color:white;
   padding-right: 15px;
   padding-left: 0;
   border-right: 5px solid #c4cdc1;
@@ -4023,7 +4024,7 @@ div#navbar {}
   .breadcrumb > li {
     display: inline-block; }
     .breadcrumb > li + li:before {
-      content: "/Â ";
+      content: "/?";
       padding: 0 5px;
       color: #ccc; }
   .breadcrumb > .active {
@@ -4637,7 +4638,9 @@ a.list-group-item-danger {
   background-color: #357CB9;
   border-top: 1px solid #ddd;
   border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px; }
+  border-bottom-left-radius: 3px;
+  /* color: white; */
+  }
 
 .panel > .list-group,
 .panel > .panel-collapse > .list-group {
@@ -5478,7 +5481,9 @@ button.close {
   margin-right: auto; }
 
 .pull-right {
-  float: right !important; }
+  float: right !important;
+  color: white;
+  }
 
 .pull-left {
   float: left !important; }

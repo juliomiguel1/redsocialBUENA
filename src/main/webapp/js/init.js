@@ -71,6 +71,8 @@ init = {
         $('.broth_show_when_logged_in').show();
         $('.broth_show_when_logged_out').hide();
         $(".barrademenu").removeAttr("style");
+        $("#broth_input_login").attr("onfocus","this.blur()");
+        $("#broth_input_password").attr("onfocus","this.blur()");
         //$("#broth_username_menu_id").css('display', 'block', 'important');
         init.unloadLoginForm();
         //configuration.loadRoutes();
@@ -81,6 +83,8 @@ init = {
         $('.broth_show_when_logged_in').hide();
         $('.broth_show_when_logged_out').show();
         $(".barrademenu").css("display","none");
+        $("#broth_input_login").removeAttr("onfocus");
+        $("#broth_input_password").removeAttr("onfocus");
         init.loadLoginForm();
     },
     checkAndUpdateUserConnectionState: function () {
@@ -132,6 +136,7 @@ init = {
         init.getLogoutPromise().done(function (response) {
             $("#infoPanel").html(response.message);
             init.updateDisconnectedState();
+            $("#broth_login_modal_footer").html("Closed Session");
         });
     },
     getUrlObjectFromUrlString: function (url) {

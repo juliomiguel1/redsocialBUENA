@@ -31,7 +31,7 @@
 
 moduloUsuario.controller('UsuarioPListController', ['$scope', '$routeParams', 'serverService', '$location',
     function ($scope, $routeParams, serverService, $location) {
-        $('#broth_modal_login').css({"display":"none"});
+      //  $('#broth_modal_login').css({"display":"none"});
         $scope.visibles={};
         $scope.visibles.id = true;
         $scope.visibles.nombre = true;

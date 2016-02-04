@@ -33,14 +33,22 @@ THE SOFTWARE.
                 <div class="col-sm-9">
                     <div class="usuarioregistradoderecha">                        
                         <div class='publicar'>
-                            <form name="outerForm" class="form-horizontal" ng-show="result == null">
-                                <div id="publicar-group" class="form-group">
-                                      <textarea ng-model="obj.nombre" type="text" rows="6" id="publicar" class="form-control" name="publicar" placeholder="En que estás pensando?"></textarea>
+                            <form name="outerForm" class="form-horizontal" >
+                                <div id="texto-group" class="form-group">
+                                      <textarea ng-model="obj.texto" rows="6" id="texto" class="form-control" name="texto" placeholder="En que estás pensando?"></textarea>
                                 </div>
                                 <div class="boton_publicar">
                                  <a class="btn btn-primary" ng-click="save()">Publicar</a>
                                 </div>
                             </form>
+                        </div>
+                        <div class="comentarios">
+                            <div ng-repeat="nuevo in bean">
+                                <p class="titulo_publicacion">Publicación</p>
+                                <p>{{nuevo.obj_publicaciones.texto}}</p>
+                                <p class="titulo_publicacion">Comentarios</p>
+                                <p>{{nuevo.comentario}}</p>
+                            </div>
                         </div>
                     </div>	  	    
                 </div>

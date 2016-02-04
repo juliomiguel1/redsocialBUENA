@@ -223,7 +223,7 @@ public class AmistadBean implements GenericBean {
             UsuarioBean oUsuarioBean1 = new UsuarioBean();
             UsuarioDao oUsuarioDao1 = new UsuarioDao(pooledConnection);
             oUsuarioBean1.setId(oResultSet.getInt("id_usuario"));
-            oUsuarioBean1 = oUsuarioDao1.get(oUsuarioBean1, expand - 1);
+            oUsuarioBean1 = oUsuarioDao1.get(oUsuarioBean1, expand);
             this.setObj_usuario(oUsuarioBean1);
         } else {
             this.setId_usuario(oResultSet.getInt("id_usuario"));
@@ -232,7 +232,7 @@ public class AmistadBean implements GenericBean {
             UsuarioBean oUsuarioBean2 = new UsuarioBean();
             UsuarioDao oUsuarioDao2 = new UsuarioDao(pooledConnection);
             oUsuarioBean2.setId(oResultSet.getInt("id_usuario2"));
-            oUsuarioBean2 = oUsuarioDao2.get(oUsuarioBean2, expand - 1);
+            oUsuarioBean2 = oUsuarioDao2.get(oUsuarioBean2, expand);
             this.setObj_usuario2(oUsuarioBean2);
         } else {
             this.setId_usuario2(oResultSet.getInt("id_usuario2"));

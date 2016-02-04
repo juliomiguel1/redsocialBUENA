@@ -99,7 +99,8 @@ public class PublicacionesDao{
     }
     
     
-    public ArrayList<PublicacionesBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
+    public ArrayList<PublicacionesBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand, int id_usuario) throws Exception {
+        strSQL += "AND id_usuario="+id_usuario +" ";
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
         ArrayList<PublicacionesBean> arrPublicaciones = new ArrayList<>();
         try {

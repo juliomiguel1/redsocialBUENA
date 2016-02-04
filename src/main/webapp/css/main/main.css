@@ -5839,14 +5839,34 @@ button.close {
                     width:70%;
                 }
                 
+                .comentarios{
+                   
+                    padding-top: 20px;
+                    margin: 0 auto;
+                    width:70%;
+                }
+                
                 .boton_publicar{
                     text-align: right;
                 }
                 
-                #publicar-group{
+                #texto-group{
                     
                     width: 100%;
                     margin-right: 0px;
                     margin-left: 0px;
              
+                }
+                
+                .comentarios div{
+                    border-radius: 10px;
+                    border:1px solid #3684d6;
+                    padding-left:10px;
+                    padding-top: 10px;
+                }
+                
+                .titulo_publicacion{
+                    text-align: left;
+                    font-size: 1.1em;
+                    color:#3684d6;
                 }

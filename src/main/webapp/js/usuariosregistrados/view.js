@@ -40,7 +40,7 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
         $scope.ob = 'publicaciones';
         $scope.id = $routeParams.id;
         
-        if (sharedSpaceService.getFase() == 0) {
+       // if (sharedSpaceService.getFase() == 0) {
             $scope.obj = {
                 id: 0,
                 texto: "",
@@ -50,14 +50,15 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
                     id: 0
                 }
             };
-        } else {
+       /* } else {
             $scope.obj = sharedSpaceService.getObject();
             sharedSpaceService.setFase(0);
-        }
+        }*/
         
         
-        serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {
+        serverService.getDataFromPromise(serverService.promise_getAllpublicaciones("comentariopublicaciones")).then(function (data) {
             $scope.bean = data.message;
+           
         });
         
         
@@ -70,13 +71,5 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
             });
         };
         
-        $scope.close = function () {
-            $location.path('/home');
-        };
-        $scope.plist = function () {
-            $location.path('/usuario/plist');
-        };
-        $scope.back = function () {
-            window.history.back();
-        };
+        /*select comentariopublicaciones.* from comentariopublicaciones, publicaciones, usuario where comentariopublicaciones.id_publicaciones = publicaciones.id AND usuario.id = publicaciones.id_usuario AND usuario.id= 1*/
     }]);

@@ -132,6 +132,8 @@ public class PublicacionesService implements TableServiceInterface, ViewServiceI
         if (this.checkpermission("getall")) {
             ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
             HashMap<String, String> hmOrder = ParameterCook.prepareOrder(oRequest);
+            UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
+            int id_usuario = oUserBean.getId();
             String data = null;
             Connection oConnection = null;
             ConnectionInterface oDataConnectionSource = null;
@@ -140,7 +142,7 @@ public class PublicacionesService implements TableServiceInterface, ViewServiceI
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 PublicacionesDao oPublicacionesDao = new PublicacionesDao(oConnection);
-                ArrayList<PublicacionesBean> arrBeans = oPublicacionesDao.getAll(alFilter, hmOrder, 1);
+                ArrayList<PublicacionesBean> arrBeans = oPublicacionesDao.getAll(alFilter, hmOrder, 1, id_usuario);
                 data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getAll ERROR: " + ex.getMessage()));
@@ -285,6 +287,8 @@ public class PublicacionesService implements TableServiceInterface, ViewServiceI
             String resultado = null;
             Connection oConnection = null;
             ConnectionInterface oDataConnectionSource = null;
+            UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
+            int id_usuario = oUserBean.getId();
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
@@ -292,6 +296,7 @@ public class PublicacionesService implements TableServiceInterface, ViewServiceI
                 PublicacionesDao oPublicacionesDao = new PublicacionesDao(oConnection);
                 PublicacionesBean oPublicacionesBean = new PublicacionesBean();
                 oPublicacionesBean = AppConfigurationHelper.getGson().fromJson(jason, oPublicacionesBean.getClass());
+                oPublicacionesBean.setId_usuario(id_usuario);
                 if (oPublicacionesBean != null) {
                     Integer iResult = oPublicacionesDao.set(oPublicacionesBean);
                     if (iResult >= 1) {

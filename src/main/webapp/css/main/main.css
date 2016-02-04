@@ -2877,8 +2877,8 @@ select[multiple].input-lg,
 .form-horizontal .checkbox {
   min-height: 27px; }
 .form-horizontal .form-group {
-  margin-left: -15px;
-  margin-right: -15px; }
+  /* margin-left: -15px; */
+  /* margin-right: -15px; */ }
   .form-horizontal .form-group:before, .form-horizontal .form-group:after {
     content: " ";
     display: table; }
@@ -5758,6 +5758,7 @@ button.close {
 		}
                 
                 .usuarioregistradoderecha{
+                        overflow: hidden;
                         width: 100%;
 			height: 100%;
 			text-align: center;
@@ -5831,4 +5832,21 @@ button.close {
                     cursor: pointer;
                     text-decoration: none;
                     
+                }
+                
+                .publicar{
+                    margin: 0 auto;
+                    width:70%;
+                }
+                
+                .boton_publicar{
+                    text-align: right;
+                }
+                
+                #publicar-group{
+                    
+                    width: 100%;
+                    margin-right: 0px;
+                    margin-left: 0px;
+             
                 }

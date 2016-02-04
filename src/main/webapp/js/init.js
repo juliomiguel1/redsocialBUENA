@@ -75,6 +75,7 @@ init = {
         $("#broth_input_password").attr("onfocus","this.blur()");
         $("#broth_newaccount").css("display","none");
         $("#broth_fogotpassword").css("display","none");
+           
         //$("#broth_username_menu_id").css('display', 'block', 'important');
         init.unloadLoginForm();
         //configuration.loadRoutes();
@@ -127,6 +128,7 @@ init = {
         });
     },
     unloadLoginForm: function () {
+         window.location.href="#/usuariosregistrados/view";
        // $('#broth_modal_login').css({"visibility":'hidden'});
     },
     login: function (username, password) {

@@ -33,15 +33,43 @@
 
 
 
-moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$scope', '$routeParams', 'serverService','$location',
-    function ($scope, $routeParams, serverService, $location) {
+moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
+    function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
         $scope.ob = 'usuario';
-        $scope.id = $routeParams.id;                        
+        $scope.id = $routeParams.id;
+        
+        if (sharedSpaceService.getFase() == 0) {
+            $scope.obj = {
+                id: 0,
+                texto: "",
+                fecha: "",
+                id_usuario: 0,
+                obj_usuario: {
+                    id: 0
+                }
+            };
+        } else {
+            $scope.obj = sharedSpaceService.getObject();
+            sharedSpaceService.setFase(0);
+        }
+        
+        
         serverService.getDataFromPromise(serverService.promise_getOne($scope.ob, $scope.id)).then(function (data) {
             $scope.bean = data.message;
         });
+        
+        
+        $scope.save = function () {
+            var dateFechaAsString = $filter('date')($scope.obj.fecha, "dd/MM/yyyy");
+            $scope.obj.fecha = dateFechaAsString;
+            //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
+            serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
+                $scope.result = data;
+            });
+        };
+        
         $scope.close = function () {
             $location.path('/home');
         };

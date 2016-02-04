@@ -37,7 +37,7 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
     function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
-        $scope.ob = 'usuario';
+        $scope.ob = 'publicaciones';
         $scope.id = $routeParams.id;
         
         if (sharedSpaceService.getFase() == 0) {
@@ -62,7 +62,7 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
         
         
         $scope.save = function () {
-            var dateFechaAsString = $filter('date')($scope.obj.fecha, "dd/MM/yyyy");
+            var dateFechaAsString = $filter('date')(new Date(), "dd/MM/yyyy");
             $scope.obj.fecha = dateFechaAsString;
             //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
             serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {

@@ -26,20 +26,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 -->
+<div class="panel-body" >
+            <div class="cuerpo">
+                <div class="col-sm-3" ng-include="'js/usuariosregistrados/menuusuarioregistrado.html'"></div>
 
-    <div class="usuarioregistradoizquierda">
+                <div class="col-sm-9">
+                    <div class="usuarioregistradoderecha"> 
+                        <div ng-repeat="nuevo in bean">
+                            <div class="amigos_nuevos">
+                                <div class="col-sm-3">
+                                    <div class="foto_amigo"></div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="datos_personales">Nombre: {{nuevo.nombre}}</p>
+                                    <p class="datos_personales">Apellido: {{nuevo.apellido}}</p>
+                                    <div class="agregar_amigo"> Agregar Amigo</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	  	    
+                </div>
+            </div>
+</div>
+<div class="panel-footer" style="font-family: Questrial, serif;" ng-include="'js/system/footer.html'"></div>
 
-        <div id="fotoperfil">                 
-            <img class="foto" src="http://es.fordesigner.com/imguploads/Image/cjbc/zcool/png20080526/1211769286.png"/>
-        </div>
 
-        <div class="botones_registrados"><p><a href="#/amigosusuariosregistrados/view">Search Friends</a></p></div>
-
-        <div class="botones_registrados"><p><a>Profile</a></p></div>
-
-        <div class="botones_registrados"><p><a>Friends</a></p></div>
-
-        <div class="botones_registrados"><p><a>Messages</a></p></div>
-
-        <div class="botones_registrados"><p><a>Chat</a></p></div>
-    </div>
+------------------

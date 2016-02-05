@@ -295,6 +295,7 @@ public class PublicacionesService implements TableServiceInterface, ViewServiceI
                 oConnection.setAutoCommit(false);
                 PublicacionesDao oPublicacionesDao = new PublicacionesDao(oConnection);
                 PublicacionesBean oPublicacionesBean = new PublicacionesBean();
+                
                 oPublicacionesBean = AppConfigurationHelper.getGson().fromJson(jason, oPublicacionesBean.getClass());
                 oPublicacionesBean.setId_usuario(id_usuario);
                 if (oPublicacionesBean != null) {

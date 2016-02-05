@@ -33,20 +33,22 @@
 
 
 
-moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
+moduloAmigosUsuariosregistrados.controller('AmigossuariosregistradosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
     function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
-        $scope.ob = 'publicaciones';
+        $scope.ob = 'usuario';
         $scope.id = $routeParams.id;
         
        // if (sharedSpaceService.getFase() == 0) {
             $scope.obj = {
                 id: 0,
-                texto: "",
-                fecha: "",
-                id_usuario: 0,
-                obj_usuario: {
+                nombre: "",
+                apellido: "",
+                email: "",
+                password:"",
+                id_perfil: 0,
+                obj_perfil: {
                     id: 0
                 }
             };
@@ -56,15 +58,13 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
         }*/
         
         
-        serverService.getDataFromPromise(serverService.promise_getAllpublicaciones($scope.ob)).then(function (data) {
+        serverService.getDataFromPromise(serverService.promise_getAll($scope.ob)).then(function (data) {
             $scope.bean = data.message;
            
         });
         
         
-        $scope.save = function () {
-            var dateFechaAsString = $filter('date')(new Date(), "dd/MM/yyyy");
-            $scope.obj.fecha = dateFechaAsString;
+        $scope.save = function () {          
             //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
             serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
                 $scope.result = data;

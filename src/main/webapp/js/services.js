@@ -84,8 +84,8 @@ angular.module('Services', [])
                 promise_getAllpublicaciones: function (strClass) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getall' , 'GET', '');
                 },
-                promise_getAll: function (strClass, filterParams, orderParams, systemfilterParams) {
-                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewall' + filterParams + orderParams + systemfilterParams, 'GET', '');
+                promise_getAll: function (strClass) {
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getall' , 'GET', '');
                 },
                 promise_removeOne: function (strClass, id) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=remove&id=' + id, 'GET', '');

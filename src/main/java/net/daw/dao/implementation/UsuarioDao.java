@@ -39,7 +39,7 @@ import net.daw.helper.statics.ExceptionBooster;
 import net.daw.helper.statics.FilterBeanHelper;
 import net.daw.helper.statics.SqlBuilder;
 
-public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterface<UsuarioBean> {
+public class UsuarioDao {
 
     private String strTable = "usuario";
     private String strSQL = "select * from usuario where 1=1 ";
@@ -55,7 +55,6 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         }
     }
 
-    @Override
     public int getPages(int intRegsPerPag, ArrayList<FilterBeanHelper> hmFilter) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         int pages = 0;
@@ -89,7 +88,6 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
     }
     
 
-    @Override
     public int getCount(ArrayList<FilterBeanHelper> hmFilter) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         int pages = 0;
@@ -123,8 +121,7 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         }
         return pages;
     }
-
-    @Override
+     
     public ArrayList<UsuarioBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBeanHelper> hmFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
@@ -176,8 +173,9 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         return arrUsuario;
     }
     
-    @Override
-    public ArrayList<UsuarioBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
+      
+    public ArrayList<UsuarioBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand, int id_usuario) throws Exception {
+        strSQL ="SELECT usuario.* FROM usuario WHERE usuario.id  NOT IN (SELECT amistad.id_usuario2 FROM amistad where amistad.id_usuario="+ id_usuario +") and usuario.id !="+id_usuario;
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
         ArrayList<UsuarioBean> arrUsuario = new ArrayList<>();
         try {
@@ -194,7 +192,6 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         return arrUsuario;
     }
 
-    @Override
     public UsuarioBean get(UsuarioBean oUsuarioBean, Integer expand) throws Exception {
         if (oUsuarioBean.getId() > 0) {
             try {
@@ -213,7 +210,6 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         return oUsuarioBean;
     }
 
-    @Override
     public Integer set(UsuarioBean oUsuarioBean) throws Exception {
           Integer iResult = null;
         try {
@@ -235,7 +231,6 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         return iResult;
     }
 
-    @Override
     public Integer remove(Integer id) throws Exception {
         int result = 0;
         try {

@@ -5867,6 +5867,33 @@ button.close {
                 
                 .titulo_publicacion{
                     text-align: left;
-                    font-size: 1.1em;
+                    font-size: 1em;
                     color:#3684d6;
+                }
+                
+                .amigos_nuevos{
+                    overflow: hidden;
+                    padding: 10px;
+                    margin: 0 auto;
+                    width:70%;
+                    border-radius: 10px;
+                    border:1px solid #3684d6;
+                }
+                
+                .foto_amigo{
+                    padding: 10px;
+                    border:1px solid black;
+                    height: 100px;
+                    width: 100px;
+                }
+                
+                .datos_personales{
+                    text-align: left;
+                }
+                
+                .agregar_amigo{
+                    position: absolute;
+                    text-align: right;
+                    color: gray;
+                    /* margin-bottom: 100px; */
                 }

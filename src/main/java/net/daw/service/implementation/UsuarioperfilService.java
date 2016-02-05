@@ -133,6 +133,8 @@ public class UsuarioperfilService implements TableServiceInterface, ViewServiceI
         if (this.checkpermission("getall")) {
             ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
             HashMap<String, String> hmOrder = ParameterCook.prepareOrder(oRequest);
+            UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
+            int id_usuario = oUserBean.getId();
             String data = null;
             Connection oConnection = null;
             ConnectionInterface oDataConnectionSource = null;
@@ -141,7 +143,7 @@ public class UsuarioperfilService implements TableServiceInterface, ViewServiceI
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                ArrayList<UsuarioBean> arrBeans = oUsuarioDao.getAll(alFilter, hmOrder, 1);
+                ArrayList<UsuarioBean> arrBeans = oUsuarioDao.getAll(alFilter, hmOrder, 1, id_usuario);
                 data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getAll ERROR: " + ex.getMessage()));

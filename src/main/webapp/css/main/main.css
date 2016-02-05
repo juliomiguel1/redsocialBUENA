@@ -5872,15 +5872,17 @@ button.close {
                 }
                 
                 .amigos_nuevos{
+                    position: relative;
                     overflow: hidden;
                     padding: 10px;
                     margin: 0 auto;
-                    width:70%;
+                    width:60%;
                     border-radius: 10px;
                     border:1px solid #3684d6;
                 }
                 
                 .foto_amigo{
+                    border-radius: 10px;
                     padding: 10px;
                     border:1px solid black;
                     height: 100px;
@@ -5892,8 +5894,18 @@ button.close {
                 }
                 
                 .agregar_amigo{
-                    position: absolute;
+                    position: relative;
                     text-align: right;
                     color: gray;
-                    /* margin-bottom: 100px; */
+                    margin-top: 20px;
+                }
+                
+                .titulo_pagina{
+                    text-align: left;
+                    color:#3684d6;
+                }
+                
+                .agregar_amigo a{
+                    text-decoration: none;
+                    cursor: pointer;
                 }

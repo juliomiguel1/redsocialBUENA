@@ -32,7 +32,8 @@ THE SOFTWARE.
 
                 <div class="col-sm-9">
                     <div class="usuarioregistradoderecha"> 
-                        <div ng-repeat="nuevo in bean">
+                        <h3 class="titulo_pagina">SEARCH FRIENDS</h3></br>
+                        <div ng-repeat="nuevo in bean" style="margin-bottom: 15px;">
                             <div class="amigos_nuevos">
                                 <div class="col-sm-3">
                                     <div class="foto_amigo"></div>
@@ -40,7 +41,7 @@ THE SOFTWARE.
                                 <div class="col-sm-9">
                                     <p class="datos_personales">Nombre: {{nuevo.nombre}}</p>
                                     <p class="datos_personales">Apellido: {{nuevo.apellido}}</p>
-                                    <div class="agregar_amigo"> Agregar Amigo</div>
+                                    <div class="agregar_amigo"><a ng-click="go(nuevo.id)"> Agregar Amigo</a></div>
                                 </div>
                             </div>
                         </div>

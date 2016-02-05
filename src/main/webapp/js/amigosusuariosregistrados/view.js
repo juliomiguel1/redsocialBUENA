@@ -63,6 +63,12 @@ moduloAmigosUsuariosregistrados.controller('AmigossuariosregistradosViewControll
            
         });
         
+        $scope.go= function(num){
+            
+            serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
+                $scope.result = data;
+            });
+        }
         
         $scope.save = function () {          
             //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            

@@ -32,19 +32,47 @@ THE SOFTWARE.
 
                 <div class="col-sm-9">
                     <div class="usuarioregistradoderecha"> 
-                        <h3 class="titulo_pagina">SEARCH FRIENDS</h3></br>
-                        <div ng-repeat="nuevo in bean" style="margin-bottom: 15px;">
+                        <h3 class="titulo_pagina">PROFILE</h3></br>
                             <div class="amigos_nuevos">
                                 <div class="col-sm-3">
                                     <div class="foto_amigo"></div>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="datos_personales">Nombre: {{nuevo.nombre}}</p>
-                                    <p class="datos_personales">Apellido: {{nuevo.apellido}}</p>
-                                    <div class="agregar_amigo"><a ng-click="go(nuevo.id)"> Agregar Amigo</a></div>
+                                    <form name="outerForm" class="form-horizontal">
+                                        
+                                    <div id="direccion-group" class="form-group">
+                                        <label class="col-sm-3 control-label" for="direccion">Address:</label>
+                                        <div class="control col-sm-9">
+                                            <input ng-model="bean.direccion" type="text" id="direccion" class="form-control" name="direccion" size="15" placeholder="address">
+                                        </div>
+                                    </div>
+
+
+                                    <div id="estado_civil-group" class="form-group">
+                                        <label class="col-sm-3 control-label" for="estado_civil">Civil Status:</label>
+                                        <div class="control col-sm-9">
+                                            <input ng-model="bean.estado_civil" type="text" id="estado_civil" class="form-control" name="estado_civil" size="15" placeholder="civil status">
+                                        </div>
+                                    </div>
+
+                                    <div id="ocupacion-group" class="form-group">
+                                        <label class="col-sm-3 control-label" for="ocupacion">Occupation:  </label>
+                                        <div class="control col-sm-9">
+                                            <input ng-model="bean.ocupacion" type="text" id="ocupacion" class="form-control" name="ocupacion" size="15" placeholder="occupation">
+                                        </div>
+                                    </div>
+
+                                    <div id="estudio-group" class="form-group">
+                                        <label class="col-sm-3 control-label" for="estudio">Studies:  </label>
+                                        <div class="control col-sm-9">
+                                            <input ng-model="bean.estudio" type="text" id="estudio" class="form-control" name="estudio" size="15" placeholder="studies">
+                                        </div>
+                                    </div>    
+                                 
+                                    </form>
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>	  	    
                 </div>
             </div>

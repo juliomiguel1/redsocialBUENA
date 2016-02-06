@@ -125,6 +125,38 @@ public class PerfilService implements TableServiceInterface, ViewServiceInterfac
         }
     }
     
+    public String getusuario() throws Exception {
+        if (this.checkpermission("get")) {
+            String data = null;
+            Connection oConnection = null;
+            ConnectionInterface oDataConnectionSource = null;
+            try {
+                oDataConnectionSource = getSourceConnection();
+                oConnection = oDataConnectionSource.newConnection();
+                PerfilDao oPerfilDao = new PerfilDao(oConnection);
+                UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
+                int id = oUserBean.getId();
+                PerfilBean oPerfilBean = new PerfilBean(id);
+                oPerfilBean = oPerfilDao.get(oPerfilBean, AppConfigurationHelper.getJsonDepth());
+                Gson gson = AppConfigurationHelper.getGson();
+                data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(oPerfilBean));
+            } catch (Exception ex) {
+                ExceptionBooster.boost(new Exception(this.getClass().getName() + ":get ERROR: " + ex.getMessage()));
+            } finally {
+                if (oConnection != null) {
+                    oConnection.close();
+                }
+                if (oDataConnectionSource != null) {
+                    oDataConnectionSource.disposeConnection();
+                }
+            }
+            return data;
+
+        } else {
+            return JsonMessage.getJsonMsg("401", "Unauthorized");
+        }
+    }
+    
     /*
         @Override
     public String get() throws Exception {

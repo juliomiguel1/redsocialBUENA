@@ -66,6 +66,9 @@ angular.module('Services', [])
 //
 //                    });
                 },
+                promise_getOneUsuario: function (strClass,id) {
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getusuario&id=' + id, 'GET', '');
+                },
                 promise_getMeta: function (strClass) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getmetainformation', 'GET', '');
                 },

@@ -37,7 +37,7 @@ moduloPerfilUsuariosregistrados.controller('PerfilusuariosregistradosViewControl
     function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
-        $scope.ob = 'usuario';
+        $scope.ob = 'perfil';
         $scope.id = $routeParams.id;
         
        // if (sharedSpaceService.getFase() == 0) {
@@ -58,7 +58,7 @@ moduloPerfilUsuariosregistrados.controller('PerfilusuariosregistradosViewControl
         }*/
         
         
-        serverService.getDataFromPromise(serverService.promise_getOne($scope.ob,"0")).then(function (data) {
+        serverService.getDataFromPromise(serverService.promise_getOneUsuario($scope.ob,"0")).then(function (data) {
             $scope.bean = data.message;
            
         });

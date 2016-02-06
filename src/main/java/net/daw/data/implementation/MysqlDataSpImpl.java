@@ -160,7 +160,25 @@ public class MysqlDataSpImpl implements DataInterface {
         }
         return intResult;
     }
-
+    
+  /*  public int removeOneAmistad(int id_usuario, int id_usuario2, String strTabla) throws Exception {
+        PreparedStatement oPreparedStatement = null;
+        int intResult = 0;
+        try {
+            String strSQL = "DELETE FROM amistad WHERE id_usuario ="+id_usuario + " AND id_usuario2 ="+ id_usuario2;
+            oPreparedStatement = (PreparedStatement) connection.prepareStatement(strSQL);
+            oPreparedStatement.setInt(1, intId);
+            intResult = oPreparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":removeOne ERROR removing register: " + ex.getMessage()));
+        } finally {
+            if (oPreparedStatement != null) {
+                oPreparedStatement.close();
+            }
+        }
+        return intResult;
+    }
+*/
     @Override
     public String getId(String strTabla, String strCampo, String strValor) throws Exception {
         String strResult = null;

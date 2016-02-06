@@ -39,7 +39,7 @@ import net.daw.helper.statics.ExceptionBooster;
 import net.daw.helper.statics.FilterBeanHelper;
 import net.daw.helper.statics.SqlBuilder;
 
-public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterface<AmistadBean> {
+public class AmistadDao   {
 
     private String strTable = "amistad";
     private String strSQL = "select * from amistad where 1=1 ";
@@ -55,7 +55,6 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
         }
     }
 
-    @Override
     public int getPages(int intRegsPerPag, ArrayList<FilterBeanHelper> hmFilter) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         int pages = 0;
@@ -92,7 +91,6 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
     }
     
     
-    @Override
     public int getCount(ArrayList<FilterBeanHelper> hmFilter) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         int pages = 0;
@@ -126,7 +124,6 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
     }
     
 
-    @Override
     public ArrayList<AmistadBean> getPage(int intRegsPerPag, int intPage, ArrayList<FilterBeanHelper> hmFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
@@ -146,8 +143,9 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
         return arrAmistad;
     }
 
-    @Override
-    public ArrayList<AmistadBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
+    
+    public ArrayList<AmistadBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand,int id) throws Exception {
+        strSQL = "select * from amistad where id_usuario ="+id; 
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
         ArrayList<AmistadBean> arrAmistad = new ArrayList<>();
         try {
@@ -164,7 +162,7 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
         return arrAmistad;
     }
 
-    @Override
+
     public AmistadBean get(AmistadBean oAmistadBean, Integer expand) throws Exception {
         if (oAmistadBean.getId() > 0) {
             try {
@@ -183,7 +181,7 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
         return oAmistadBean;
     }
 
-    @Override
+    
     public Integer set(AmistadBean oAmistadBean) throws Exception {
           Integer iResult = null;
         try {
@@ -212,14 +210,35 @@ public class AmistadDao implements ViewDaoInterface<AmistadBean>, TableDaoInterf
         return iResult;
     }
 
-    @Override
+   
     public Integer remove(Integer id) throws Exception {
         int result = 0;
-        try {
-            result = oMysql.removeOne(id, strTable);
-        } catch (Exception ex) {
-            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":remove ERROR: " + ex.getMessage()));
+        int id_usuario = 0;
+        int id_usuario2 = 0;
+        int id_nuevo = 0;
+         String sentencia = "select * from amistad where id = "+ id;
+        ResultSet oResultSet = oMysql.getAllSql(sentencia);
+        if(oResultSet != null){
+            while(oResultSet.next()){
+                id_usuario = oResultSet.getInt("id_usuario");
+                id_usuario2 = oResultSet.getInt("id_usuario2");
+            }
         }
+        
+        String sentencia2 = "select * from amistad where (id_usuario="+ id_usuario+" and id_usuario2="+id_usuario2+") or (id_usuario="+id_usuario2+" and id_usuario2="+id_usuario+")";
+        ResultSet oResultSet2 = oMysql.getAllSql(sentencia2);
+        if(oResultSet2 != null){
+            while(oResultSet2.next()){
+                id_nuevo = oResultSet2.getInt("id");
+                try {
+                    result = oMysql.removeOne(id_nuevo, strTable);
+                } catch (Exception ex) {
+                    ExceptionBooster.boost(new Exception(this.getClass().getName() + ":remove ERROR: " + ex.getMessage()));
+                }                
+            }
+        }
+        
+        
         return result;
     }
 

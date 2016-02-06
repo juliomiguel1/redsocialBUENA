@@ -33,46 +33,30 @@
 
 
 
-moduloPerfilUsuariosregistrados.controller('PerfilusuariosregistradosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
+moduloAmigos.controller('AmigosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
     function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
-        $scope.ob = 'perfil';
+        $scope.ob = 'amistad';
         $scope.id = $routeParams.id;
-        
-       // if (sharedSpaceService.getFase() == 0) {
-            $scope.obj = {
-                id: 0,
-                direccion: "",
-                estado_civil: "",
-                ocupacion: "",
-                estudio:"",
-                id_usuario: 0,
-                obj_usuario: {
-                    id: 0
-                }
-            };
-       /* } else {
-            $scope.obj = sharedSpaceService.getObject();
-            sharedSpaceService.setFase(0);
-        }*/
-        
-        
-        serverService.getDataFromPromise(serverService.promise_getOneUsuario($scope.ob,"0")).then(function (data) {
+               
+        serverService.getDataFromPromise(serverService.promise_getAll($scope.ob)).then(function (data) {
             $scope.bean = data.message;
            
         });
         
-        
-        $scope.save = function () {
-            console.log("save");
-            console.log({json: JSON.stringify(serverService.array_identificarArray($scope.bean))});
-            //strValues = serverService.array_identificarArray(thisObject.form_getFormValues(strClass));
-            serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.bean))})).then(function (data) {
-                if(data.status =="200"){
+        $scope.go= function(num){
+            
+            serverService.getDataFromPromise(serverService.promise_removeOne($scope.ob, num)).then(function (data) {
                 $scope.result = data;
-                $("#perfil_modificado").removeAttr("style");
-                }
+                $("#usuarioborrado"+num).empty().html("<h4 style=\"text-align:'left'\">You deleted a Friend</h4>");
+            });
+        }
+        
+        $scope.save = function () {          
+            //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
+            serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
+                $scope.result = data;
             });
         };
         

@@ -67,8 +67,15 @@ THE SOFTWARE.
                                         <div class="control col-sm-9">
                                             <input ng-model="bean.estudio" type="text" id="estudio" class="form-control" name="estudio" size="15" placeholder="studies">
                                         </div>
-                                    </div>    
-                                 
+                                    </div>  
+                                    <div class="col-sm-7" >
+                                        <div id="perfil_modificado" style="display:none">
+                                            <h4>It has changed your profile.</h4>
+                                        </div>                                            
+                                    </div>
+                                    <div class="control-group col-sm-5 text-right">
+                                            <button class="btn btn-success" ng-click="save()">Save</button>
+                                    </div>
                                     </form>
                                 </div>
                             </div>

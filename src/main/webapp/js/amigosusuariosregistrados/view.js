@@ -68,7 +68,7 @@ moduloAmigosUsuariosregistrados.controller('AmigossuariosregistradosViewControll
             serverService.getDataFromPromise(serverService.promise_setOneAmigo("amistad",num)).then(function (data) {
                if(data.status == "200"){
                 $scope.result = data;
-                    $("#usuarionumero"+num).empty().html("<h4 style=\"text-align:'left'\">Tienes un nuevo amigo</h4>");
+                    $("#usuarionumero"+num).empty().html("<h4 style=\"text-align:'left'\">You've added a new friend</h4>");
                 }
             });
         }

@@ -219,11 +219,11 @@ public class PerfilBean implements GenericBean {
     @Override
     public String toPairs() {
         String strPairs = "";
-        strPairs += "id=" + id + ",";
-        strPairs += "direccion=" + direccion + ",";
-        strPairs += "estado_civil=" + estado_civil + ",";
-        strPairs += "ocupacion=" + ocupacion + ",";
-        strPairs += "estudio=" + estudio + ",";
+        strPairs += "id=" + getId() + ",";
+        strPairs += "direccion= " +'"'+ direccion +'"'+ ",";
+        strPairs += "estado_civil=" +'"'+ estado_civil +'"'+ ",";
+        strPairs += "ocupacion=" +'"'+ ocupacion + '"'+",";
+        strPairs += "estudio=" +'"'+ estudio +'"'+ ",";
         strPairs += "sexo=" + sexo + ",";
         strPairs += "id_usuario=" + id_usuario;
         return strPairs;

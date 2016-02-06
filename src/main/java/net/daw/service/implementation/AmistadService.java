@@ -159,6 +159,8 @@ public class AmistadService implements TableServiceInterface, ViewServiceInterfa
         if (this.checkpermission("getall")) {
             ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
             HashMap<String, String> hmOrder = ParameterCook.prepareOrder(oRequest);
+            UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
+            int id = oUserBean.getId();
             String data = null;
             Connection oConnection = null;
             ConnectionInterface oDataConnectionSource = null;
@@ -167,7 +169,8 @@ public class AmistadService implements TableServiceInterface, ViewServiceInterfa
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 AmistadDao oAmistadDao = new AmistadDao(oConnection);
-                ArrayList<AmistadBean> arrBeans = oAmistadDao.getAll(alFilter, hmOrder, 1);
+                
+                ArrayList<AmistadBean> arrBeans = oAmistadDao.getAll(alFilter, hmOrder, 1, id);
                 data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getAll ERROR: " + ex.getMessage()));

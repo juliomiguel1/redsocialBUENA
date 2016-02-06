@@ -397,16 +397,23 @@ public class AmistadService implements TableServiceInterface, ViewServiceInterfa
     public String set() throws Exception {
         if (this.checkpermission("set")) {
             String jason = ParameterCook.prepareJson(oRequest);
+            int id_usuario=ParameterCook.prepareInt("id_usuario",oRequest);
             String resultado = null;
             Connection oConnection = null;
             ConnectionInterface oDataConnectionSource = null;
+            UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
+            int id = oUserBean.getId();
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
                 AmistadDao oAmistadDao = new AmistadDao(oConnection);
                 AmistadBean oAmistadBean = new AmistadBean();
-                oAmistadBean = AppConfigurationHelper.getGson().fromJson(jason, oAmistadBean.getClass());
+                //oAmistadBean = AppConfigurationHelper.getGson().fromJson(jason, oAmistadBean.getClass());
+                
+                oAmistadBean.setId_usuario(id);
+                oAmistadBean.setId_usuario2(id_usuario);
+                oAmistadBean.setId_grupo(1);
                 if (oAmistadBean != null) {
                     Integer iResult = oAmistadDao.set(oAmistadBean);
                     if (iResult >= 1) {

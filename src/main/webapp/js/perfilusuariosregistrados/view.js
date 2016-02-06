@@ -33,7 +33,7 @@
 
 
 
-moduloAmigosUsuariosregistrados.controller('AmigossuariosregistradosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
+moduloPerfilUsuariosregistrados.controller('PerfilusuariosregistradosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
     function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
@@ -43,12 +43,12 @@ moduloAmigosUsuariosregistrados.controller('AmigossuariosregistradosViewControll
        // if (sharedSpaceService.getFase() == 0) {
             $scope.obj = {
                 id: 0,
-                nombre: "",
-                apellido: "",
-                email: "",
-                password:"",
-                id_perfil: 0,
-                obj_perfil: {
+                direccion: "",
+                estado_civil: "",
+                ocupacion: "",
+                estudio:"",
+                id_usuario: 0,
+                obj_usuario: {
                     id: 0
                 }
             };
@@ -58,20 +58,11 @@ moduloAmigosUsuariosregistrados.controller('AmigossuariosregistradosViewControll
         }*/
         
         
-        serverService.getDataFromPromise(serverService.promise_getAll($scope.ob)).then(function (data) {
+        serverService.getDataFromPromise(serverService.promise_getOne($scope.ob,"0")).then(function (data) {
             $scope.bean = data.message;
            
         });
         
-        $scope.go= function(num){
-            
-            serverService.getDataFromPromise(serverService.promise_setOneAmigo("amistad",num)).then(function (data) {
-               if(data.status == "200"){
-                $scope.result = data;
-                    $("#usuarionumero"+num).empty().html("<h4 style=\"text-align:'left'\">Tienes un nuevo amigo</h4>");
-                }
-            });
-        }
         
         $scope.save = function () {          
             //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            

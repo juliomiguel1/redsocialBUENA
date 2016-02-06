@@ -97,6 +97,10 @@ angular.module('Services', [])
                     $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set', {params: jsonfile});
                 },
+                 promise_setOneAmigo: function (strClass,id_usuario) {
+                    $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set'+ '&id_usuario='+id_usuario);
+                },
                 getDataFromPromise: function (promise) {
                     return promise.then(function (result) {
                         return result.data;

@@ -160,7 +160,25 @@ public class ComentarioDao implements ViewDaoInterface<ComentarioBean>, TableDao
         }
         return arrComentario;
     }
-
+    
+    public ArrayList<ComentarioBean> getAllporusuario(int id_usuario,ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
+        strSQL = "SELECT comentario.* from comentario, amistad where comentario.id_amistad= amistad.id and amistad.id_usuario2="+id_usuario;
+        strSQL += SqlBuilder.buildSqlOrder(hmOrder);
+        ArrayList<ComentarioBean> arrComentario = new ArrayList<>();
+        try {
+            ResultSet oResultSet = oMysql.getAllSql(strSQL);
+            if (oResultSet != null) {
+                while (oResultSet.next()) {
+                    ComentarioBean oComentarioBean = new ComentarioBean();
+                    arrComentario.add(oComentarioBean.fill(oResultSet, oConnection, expand));
+                }
+            }
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
+        }
+        return arrComentario;
+    }
+    
     @Override
     public ComentarioBean get(ComentarioBean oComentarioBean, Integer expand) throws Exception {
         if (oComentarioBean.getId() > 0) {
@@ -179,7 +197,22 @@ public class ComentarioDao implements ViewDaoInterface<ComentarioBean>, TableDao
         }
         return oComentarioBean;
     }
-
+    
+    public int getAmistad(int id_usuario, int id_usuario2) throws Exception{
+        int num =0;
+        
+        String consulta = "select * from amistad where (id_usuario="+ id_usuario+" and id_usuario2="+id_usuario2+")";
+        
+        ResultSet oResultSet = oMysql.getAllSql(consulta);
+        
+        if(oResultSet != null){
+            while(oResultSet.next()){
+                num= oResultSet.getInt("id");
+            }
+        }
+        return num;
+    }
+    
     @Override
     public Integer set(ComentarioBean oComentarioBean) throws Exception {
           Integer iResult = null;

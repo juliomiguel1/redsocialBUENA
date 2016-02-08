@@ -90,8 +90,8 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
 
          //-----------
         
-        $routeProvider.when('/mensajesusuariosregistrados/view', {templateUrl: 'js/mensajesusuariosregistrados/view.html', controller: 'MensajesNewController'});
-
+        $routeProvider.when('/mensajesusuariosregistrados/new', {templateUrl: 'js/mensajesusuariosregistrados/new.html', controller: 'MensajesNewController'});
+        $routeProvider.when('/mensajesusuariosregistrados/view', {templateUrl: 'js/mensajesusuariosregistrados/view.html', controller: 'MensajesViewController'});
         
         
         //------------

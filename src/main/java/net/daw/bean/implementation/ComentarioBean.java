@@ -174,7 +174,7 @@ public class ComentarioBean implements GenericBean {
             AmistadBean oAmistadBean = new AmistadBean();
             AmistadDao oAmistadDao = new AmistadDao(pooledConnection);
             oAmistadBean.setId(oResultSet.getInt("id_amistad"));
-            oAmistadBean = oAmistadDao.get(oAmistadBean, expand - 1);
+            oAmistadBean = oAmistadDao.get(oAmistadBean, expand );
             this.setObj_amistad(oAmistadBean);
         } else {
             this.setId_amistad(oResultSet.getInt("id_amistad"));

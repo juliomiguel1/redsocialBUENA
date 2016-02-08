@@ -86,7 +86,11 @@ angular.module('Services', [])
                 },                
                 promise_getAllpublicaciones: function (strClass) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getall' , 'GET', '');
-                },
+                },                
+                promise_getAllMensajes: function (strClass) {
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getallporusuario' , 'GET', '');
+                }
+                ,
                 promise_getAll: function (strClass) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getall' , 'GET', '');
                 },
@@ -100,6 +104,11 @@ angular.module('Services', [])
                     $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set', {params: jsonfile});
                 },
+                promise_setOneMensaje: function (strClass, jsonfile) {
+                    $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set', {params: jsonfile} );
+                }
+                ,
                  promise_setOneAmigo: function (strClass,id_usuario) {
                     $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set'+ '&id_usuario='+id_usuario);

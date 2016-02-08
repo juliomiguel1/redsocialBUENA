@@ -33,7 +33,7 @@
 
 
 
-moduloMensajes.controller('MensajesViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
+moduloMensajes.controller('MensajesNewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
     function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
@@ -57,14 +57,22 @@ moduloMensajes.controller('MensajesViewController', ['$scope', '$routeParams', '
         }*/
         
         
-        serverService.getDataFromPromise(serverService.promise_getAllMensajes($scope.ob)).then(function (data) {
+        serverService.getDataFromPromise(serverService.promise_getAll("amistad")).then(function (data) {
             $scope.bean = data.message;
            
         });
         
         $scope.go= function(obj){
             
-         
+            var dateFechaAsString = $filter('date')(new Date(), "dd/MM/yyyy HH:mm:ss");
+            $scope.obj.fecha = dateFechaAsString;
+            
+            serverService.getDataFromPromise(serverService.promise_setOneMensaje($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
+               if(data.status == "200"){
+                $scope.result = data;
+                    $(".mensajeenviado").html("<p>Message send!!</p>");
+                }
+            });
         }
         
         $scope.save = function () {          

@@ -32,18 +32,24 @@ THE SOFTWARE.
 
                 <div class="col-sm-9">
                     <div class="usuarioregistradoderecha"> 
-                        <h3 class="titulo_pagina">FRIENDS</h3></br>
+                        <h3 class="titulo_pagina">Create Message</h3></br>
                         <div ng-repeat="nuevo in bean" style="margin-bottom: 15px;">
-                            <div class="amigos_nuevos" id="usuarioborrado{{nuevo.id}}">
-                                <div class="col-sm-3">
-                                    <div class="foto_amigo"></div>
+                            <form name="outerForm" class="form-horizontal" id="usuarionumero{{nuevo.id}}">
+                                <div class="amigos_nuevos">
+                                    <div class="col-sm-3">
+                                        <div class="foto_amigo"></div>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="datos_personales" ng-model="obj.id=nuevo.obj_usuario2.id">Nombre: {{nuevo.obj_usuario2.nombre}}</p>
+                                        <p class="datos_personales">Apellido: {{nuevo.obj_usuario2.apellido}}</p>
+                                        <div class="escribirmensaje">
+                                            <textarea ng-model="obj.texto" rows="6" id="texto" class="form-control" name="texto" placeholder="En que estás pensando?"></textarea>
+                                            <div class="mensajeenviado"></div>
+                                            <div class="agregar_amigo"><a ng-click="go(obj)"> Send</a></div>
+                                        </div>                                        
+                                    </div>
                                 </div>
-                                <div class="col-sm-9" >
-                                    <p class="datos_personales">Nombre: {{nuevo.obj_usuario2.nombre}}</p>
-                                    <p class="datos_personales">Apellido: {{nuevo.obj_usuario2.apellido}}</p>
-                                    <div class="agregar_amigo"><a ng-click="go(nuevo.id)"> remove Friend</a></div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>	  	    
                 </div>

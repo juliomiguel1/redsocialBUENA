@@ -40,11 +40,12 @@ THE SOFTWARE.
                                         <div class="foto_amigo"></div>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="datos_personales" ng-model="obj.obj_amistad.id_usuario2">Nombre: {{nuevo.obj_usuario2.nombre}}</p>
-                                        <p class="datos_personales">Apellido: {{nuevo.obj_usuario2.apellido}}</p>
+                                        <p class="datos_personales">Nombre: {{nuevo.obj_amistad.obj_usuario.nombre}}</p>
+                                        <p class="datos_personales">Apellido: {{nuevo.obj_amistad.obj_usuario.apellido}}</p>
                                         <div class="escribirmensaje">
-                                            <textarea ng-model="obj.texto" rows="6" id="texto" class="form-control" name="texto" placeholder="En que estás pensando?"></textarea>
-                                            <div class="agregar_amigo"><a ng-click="go(obj)"> Send</a></div>
+                                            <textarea rows="3" id="texto" class="form-control" name="texto" >{{nuevo.texto}}</textarea>
+                                            <div class="mensajeenviado"></div>
+                                            <div class="agregar_amigo"><a ng-click="go(obj)">Delete</a></div>
                                         </div>                                        
                                     </div>
                                 </div>
@@ -56,5 +57,3 @@ THE SOFTWARE.
 </div>
 <div class="panel-footer" style="font-family: Questrial, serif;" ng-include="'js/system/footer.html'"></div>
 
-
-------------------

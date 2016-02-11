@@ -1,32 +1,52 @@
-var app =  angular.module('chatApp', ['firebase']);
- 
-	app.controller('chatController', ['$scope','Message','$filter', function($scope,Message,$filter){
-			$scope.date = new Date();
-			$scope.result = null;
- 			var s= new Date();
+/* 
+ * Copyright (c) 2015 by Rafael Angel Aznar Aparici (rafaaznar at gmail dot com)
+ * 
+ * openAUSIAS: The stunning micro-library that helps you to develop easily 
+ *             AJAX web applications by using Java and jQuery
+ * openAUSIAS is distributed under the MIT License (MIT)
+ * Sources at https://github.com/rafaelaznar/
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ * 
+ */
 
- 			$scope.$watch('fecha', function () {
+'use strict';
 
-                $scope.result = $filter('date')(new Date(), "dd/MM/yyyy HH:mm:ss");
+moduloChat.controller('ChatController', ['$scope', '$routeParams', '$location', 'serverService', 'sharedSpaceService', '$filter', 'Message',
+    function ($scope, $routeParams, $location, serverService, sharedSpaceService, $filter, Message) {
+        $scope.date = new Date();
+        $scope.result = null;
+        var s = new Date();
 
-            }, true);
+        $scope.$watch('fecha', function () {
 
-			$scope.messages= Message.all;
-			//message.date= new Date();
-			$scope.insertar = function(mensaje){
-				mensaje.fecha = $scope.result
-                Message.create(mensaje);
-				mensaje.text = " ";
-			};
-	}]);
+            $scope.result = $filter('date')(new Date(), "dd/MM/yyyy HH:mm:ss");
+
+        }, true);
+
+        $scope.messages = Message.all;
+        //message.date= new Date();
+        $scope.insertar = function (mensaje) {
+            mensaje.fecha = $scope.result
+            Message.create(mensaje);
+            mensaje.text = " ";
+        };
 
 
- 	
-	app.filter('reverse', function() {
-  		return function(items) {
-    	return items.slice().reverse();
-  		};
-	});
-
-	
-
+    }]);

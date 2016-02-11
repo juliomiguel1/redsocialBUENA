@@ -68,6 +68,14 @@ angular.module('Filters').filter('booleanizate', function ($filter)
     };
 });
 
+angular.module('Filters').filter('reverse', function ($filter)
+{
+    return function(items) {
+    	return items.slice().reverse();
+    };
+});
+
+
 //angular.module('Filters').filter('uppercaseo', function ($filter)
 //{
 //    return function (input)

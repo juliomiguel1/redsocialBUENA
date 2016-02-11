@@ -48,6 +48,7 @@ var openAusias = angular.module('myApp', [
     'perfilusuariosregistradosControllers',
     'amigosControllers',
     'mensajesControllers', 
+    'chatControllers',
     'ui.bootstrap',
     'ngSanitize' //http://stackoverflow.com/questions/9381926/insert-html-into-view-using-angularjs
 ]);
@@ -89,6 +90,7 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/usuarioperfil/new', {templateUrl: 'js/usuarioperfil/new.html', controller: 'UsuarioperfilNewController'});
         //-----------
         
+        $routeProvider.when('/chat/chat', {templateUrl: 'js/chat/chat.html', controller: 'ChatController'});
 
 
         
@@ -164,3 +166,4 @@ var moduloAmigosUsuariosregistrados = angular.module('amigosusuariosregistradosC
 var moduloPerfilUsuariosregistrados = angular.module('perfilusuariosregistradosControllers', []);
 var moduloAmigos = angular.module('amigosControllers', []);
 var moduloMensajes = angular.module('mensajesControllers', []);
+var moduloChat = angular.module('chatControllers', []);

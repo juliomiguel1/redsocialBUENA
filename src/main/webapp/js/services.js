@@ -66,7 +66,7 @@ angular.module('Services', [])
 //
 //                    });
                 },
-                promise_getOneUsuario: function (strClass,id) {
+                promise_getOneUsuario: function (strClass, id) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getusuario&id=' + id, 'GET', '');
                 },
                 promise_getMeta: function (strClass) {
@@ -76,23 +76,23 @@ angular.module('Services', [])
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsome' + '&rpp=' + rpp + '&page=' + page + filterParams + orderParams + systemfilterParams, 'GET', '');
                 },
                 promise_getSomexidusuario: function (strClass, rpp, page, id_usuario, filterParams, orderParams, systemfilterParams) {
-                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsomexusuario'  + '&rpp=' + rpp + '&page=' + page + '&id_usuario=' + id_usuario + filterParams + orderParams + systemfilterParams, 'GET', '');
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsomexusuario' + '&rpp=' + rpp + '&page=' + page + '&id_usuario=' + id_usuario + filterParams + orderParams + systemfilterParams, 'GET', '');
                 },
                 promise_getSomexidusuarioComentario: function (strClass, rpp, page, id_usuario, filterParams, orderParams, systemfilterParams) {
-                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsomexusuarioComentario'  + '&rpp=' + rpp + '&page=' + page + '&id_usuario=' + id_usuario + filterParams + orderParams + systemfilterParams, 'GET', '');
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsomexusuarioComentario' + '&rpp=' + rpp + '&page=' + page + '&id_usuario=' + id_usuario + filterParams + orderParams + systemfilterParams, 'GET', '');
                 },
                 promise_getSomeusuarionoduplicado: function (strClass, rpp, page, id_usuario, filterParams, orderParams, systemfilterParams) {
-                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsomeusuarionoduplicado'  + '&rpp=' + rpp + '&page=' + page + '&id_usuario=' + id_usuario + filterParams + orderParams + systemfilterParams, 'GET', '');
-                },                
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getaggregateviewsomeusuarionoduplicado' + '&rpp=' + rpp + '&page=' + page + '&id_usuario=' + id_usuario + filterParams + orderParams + systemfilterParams, 'GET', '');
+                },
                 promise_getAllpublicaciones: function (strClass) {
-                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getall' , 'GET', '');
-                },                
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getall', 'GET', '');
+                },
                 promise_getAllMensajes: function (strClass) {
-                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getallporusuario' , 'GET', '');
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getallporusuario', 'GET', '');
                 }
                 ,
                 promise_getAll: function (strClass) {
-                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getall' , 'GET', '');
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getall', 'GET', '');
                 },
                 promise_removeOne: function (strClass, id) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=remove&id=' + id, 'GET', '');
@@ -106,12 +106,12 @@ angular.module('Services', [])
                 },
                 promise_setOneMensaje: function (strClass, jsonfile) {
                     $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
-                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set', {params: jsonfile} );
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set', {params: jsonfile});
                 }
                 ,
-                 promise_setOneAmigo: function (strClass,id_usuario) {
+                promise_setOneAmigo: function (strClass, id_usuario) {
                     $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
-                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set'+ '&id_usuario='+id_usuario);
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set' + '&id_usuario=' + id_usuario);
                 },
                 getDataFromPromise: function (promise) {
                     return promise.then(function (result) {
@@ -305,9 +305,32 @@ angular.module('Services', [])
                 devuelveNumero: function (value) {
                     nuevo = value
                 }
-                
+
 
 
             };
-        })
+        }).factory('Message', ['$firebase',
+    function ($firebase) {
+        var ref = new Firebase('https://chatjulio.firebaseio.com/');
+        var messages = $firebase(ref.child('messages')).$asArray();
+
+        var Message = {
+            all: messages,
+            create: function (message) {
+                return messages.$add(message);
+            },
+            get: function (messageId) {
+                return $firebase(ref.child('messages').child(messageId)).$asObject();
+            },
+            delete: function (message) {
+                return messages.$remove(message);
+            }
+        };
+
+        return Message;
+
+    }
+])
+
         .value('version', '0.1');
+

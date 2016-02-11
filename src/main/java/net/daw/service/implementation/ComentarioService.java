@@ -442,10 +442,6 @@ public class ComentarioService implements TableServiceInterface, ViewServiceInte
                 oComentarioBean.setId_amistad(num);
                 if (oComentarioBean != null) {
                     Integer iResult = oComentarioDao.set(oComentarioBean);
-                    num = oComentarioDao.getAmistad( aux,id_usuario);
-                    oComentarioBean.setId(0);
-                    oComentarioBean.setId_amistad(num);
-                    iResult = oComentarioDao.set(oComentarioBean);
                     if (iResult >= 1) {
                         resultado = JsonMessage.getJson("200", iResult.toString());
                     } else {

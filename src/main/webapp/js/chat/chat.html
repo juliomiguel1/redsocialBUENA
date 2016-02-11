@@ -1,0 +1,23 @@
+
+
+<div class="panel-body" >
+    <div class="cuerpo">
+        <div class="col-sm-3" ng-include="'js/usuariosregistrados/menuusuarioregistrado.html'"></div>
+
+        <div class="col-sm-9">
+            <div class="usuarioregistradoderecha"> 
+                    <p>Usuario : <input type="text" ng-model="mensaje.user"></p>
+                    <p>Mensaje :<input type="text" ng-model="mensaje.text" ng-keyup="$event.keyCode == 13 && insertar(mensaje)"></p>
+
+
+                    <ul>
+                        <li ng-repeat="message in messages| reverse |limitTo: 25">
+                            {{message.user}}: <span id="texto">{{message.text}}</span> <strong> -->{{message.fecha}}<--</strong>
+                        </li>
+                    </ul>                
+            </div>	  	    
+        </div>
+    </div>
+</div>
+<div class="panel-footer" style="font-family: Questrial, serif;" ng-include="'js/system/footer.html'"></div>
+

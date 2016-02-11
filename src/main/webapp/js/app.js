@@ -87,7 +87,11 @@ openAusias.config(['$routeProvider', function ($routeProvider) {
         //-----------
         
         $routeProvider.when('/usuarioperfil/new', {templateUrl: 'js/usuarioperfil/new.html', controller: 'UsuarioperfilNewController'});
+        //-----------
+        
 
+
+        
          //-----------
         
         $routeProvider.when('/mensajesusuariosregistrados/new', {templateUrl: 'js/mensajesusuariosregistrados/new.html', controller: 'MensajesNewController'});

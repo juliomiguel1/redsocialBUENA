@@ -94,6 +94,37 @@ public class ComentarioService implements TableServiceInterface, ViewServiceInte
         }
     }
     
+    
+    public String getmensajesnuevos() throws Exception {
+        if (this.checkpermission("getcount")) {
+            String data = null;
+            ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
+            UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
+            int id_usuario = oUserBean.getId();
+            Connection oConnection = null;
+            ConnectionInterface oDataConnectionSource = null;
+            try {
+                oDataConnectionSource = getSourceConnection();
+                oConnection = oDataConnectionSource.newConnection();
+                ComentarioDao oComentarioDao = new ComentarioDao(oConnection);
+                data = JsonMessage.getJson("200", Integer.toString(oComentarioDao.getmensajesnuevos(id_usuario)));
+            } catch (Exception ex) {
+                ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
+            } finally {
+                if (oConnection != null) {
+                    oConnection.close();
+                }
+                if (oDataConnectionSource != null) {
+                    oDataConnectionSource.disposeConnection();
+                }
+            }
+            return data;
+        } else {
+            return JsonMessage.getJsonMsg("401", "Unauthorized");
+        }
+    }
+    
+    
       public String getcountporidusuario() throws Exception {
         if (this.checkpermission("getcount")) {
             String data = null;

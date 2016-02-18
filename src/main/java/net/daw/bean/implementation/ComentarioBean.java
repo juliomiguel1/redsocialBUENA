@@ -52,7 +52,8 @@ public class ComentarioBean implements GenericBean {
     private Integer id_amistad = 0;
     @Expose(deserialize = false)
     private AmistadBean obj_amistad = null;
-
+    @Expose
+    private Integer leido;
     public ComentarioBean() {
         this.id = 0;
     }
@@ -120,6 +121,21 @@ public class ComentarioBean implements GenericBean {
         this.obj_amistad = obj_amistad;
     }
     
+      /**
+     * @return the leido
+     */
+    public Integer getLeido() {
+        return leido;
+    }
+
+    /**
+     * @param leido the leido to set
+     */
+    public void setLeido(Integer leido) {
+        this.leido = leido;
+    }
+    
+    
     public String toJson(Boolean expand) {
         String strJson = "{";
         strJson += "id:" + id + ",";
@@ -130,6 +146,7 @@ public class ComentarioBean implements GenericBean {
         } else {
             strJson += "id_amistad:" + id_amistad + ",";
         }
+        strJson += "leido:" + leido ;
         strJson += "}";
         return strJson;
     }
@@ -141,6 +158,7 @@ public class ComentarioBean implements GenericBean {
         strColumns += "texto,";
         strColumns += "fecha,";
         strColumns += "id_amistad";
+        strColumns += "leido";
         
         return strColumns;
     }
@@ -152,6 +170,7 @@ public class ComentarioBean implements GenericBean {
         strColumns += '"'+texto +'"'+ ",";        
         strColumns += EncodingUtilHelper.stringifyAndQuotate(fecha)+ ",";
         strColumns += id_amistad;
+        strColumns += leido;
         return strColumns;
     }
 
@@ -161,7 +180,8 @@ public class ComentarioBean implements GenericBean {
         strPairs += "id=" + id + ",";
         strPairs += "texto=" + EncodingUtilHelper.quotate(texto) + ",";
         strPairs += "fecha=" + EncodingUtilHelper.stringifyAndQuotate(fecha) + ",";
-        strPairs += "id_amistad=" + id_amistad;
+        strPairs += "id_amistad=" + id_amistad + ",";
+        strPairs += "leido=" + leido;
         return strPairs;
     }
 
@@ -179,8 +199,8 @@ public class ComentarioBean implements GenericBean {
         } else {
             this.setId_amistad(oResultSet.getInt("id_amistad"));
         }
+        this.setLeido(oResultSet.getInt("leido"));
         return this;
-
     }
     
 }

@@ -89,6 +89,9 @@ angular.module('Services', [])
                 },
                 promise_getAllMensajes: function (strClass) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getallporusuario', 'GET', '');
+                },
+                promise_getMensajesnuevos: function (strClass) {
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getmensajesnuevos', 'GET', '');
                 }
                 ,
                 promise_getAll: function (strClass) {

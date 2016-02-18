@@ -34,11 +34,16 @@ moduloChat.controller('ChatController', ['$scope', '$routeParams', '$location', 
         $scope.result = null;
         var s = new Date();
 
-        $scope.$watch('fecha', function () {
+        $scope.callAtInterval = function () {
+            $scope.$watch('fecha', function () {
 
-            $scope.result = $filter('date')(new Date(), "dd/MM/yyyy HH:mm:ss");
+                $scope.result = $filter('date')(new Date(), "dd/MM/yyyy HH:mm:ss");
 
-        }, true);
+            }, true);
+        }
+        $interval(function () {
+            $scope.callAtInterval();
+        }, 1000);
 
         $scope.messages = Message.all;
         //message.date= new Date();

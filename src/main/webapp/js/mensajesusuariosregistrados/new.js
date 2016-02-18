@@ -49,7 +49,8 @@ moduloMensajes.controller('MensajesNewController', ['$scope', '$routeParams', 's
                 obj_amistad: {
                     id: 0,
                     id_usuario2:0
-                }
+                },
+                leido: 0
             };
        /* } else {
             $scope.obj = sharedSpaceService.getObject();
@@ -71,6 +72,7 @@ moduloMensajes.controller('MensajesNewController', ['$scope', '$routeParams', 's
                if(data.status == "200"){
                 $scope.result = data;
                     $(".mensajeenviado").html("<p>Message send!!</p>");
+                    
                 }
             });
         }

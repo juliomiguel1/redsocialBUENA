@@ -143,6 +143,24 @@ public class ComentarioDao implements ViewDaoInterface<ComentarioBean>, TableDao
     }
     
     
+    public int getmensajesnuevos(int id_usuario) throws Exception{
+    
+        int num= 0;
+        
+        strSQL = "select count(*) as total from comentario, amistad, usuario where (usuario.id= amistad.id_usuario OR usuario.id= amistad.id_usuario2) AND amistad.id = comentario.id_amistad AND usuario.id="+id_usuario+" and comentario.leido=0";
+        try{
+            ResultSet oResultSet = oMysql.getAllSql(strSQL);
+            if(oResultSet != null){
+                while(oResultSet.next()){
+                    num = oResultSet.getInt("total");
+                }
+            }            
+        }catch(Exception ex){
+             ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
+        }
+        return num;
+    }
+      
     @Override
     public ArrayList<ComentarioBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);

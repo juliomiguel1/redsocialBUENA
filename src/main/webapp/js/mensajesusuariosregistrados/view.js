@@ -65,7 +65,7 @@ moduloMensajes.controller('MensajesViewController', ['$scope', '$routeParams', '
 
         $interval(function () {
             $scope.callAtInterval();
-        }, 20000);
+        }, 1000);
         
         
         $scope.go = function (obj) {

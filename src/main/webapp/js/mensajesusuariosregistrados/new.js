@@ -33,8 +33,8 @@
 
 
 
-moduloMensajes.controller('MensajesNewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
-    function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter) {
+moduloMensajes.controller('MensajesNewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter', '$interval',
+    function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter, $interval) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
         $scope.ob = 'comentario';
@@ -62,6 +62,18 @@ moduloMensajes.controller('MensajesNewController', ['$scope', '$routeParams', 's
             $scope.bean = data.message;
            
         });
+        
+         $scope.callAtInterval = function () {
+            serverService.getDataFromPromise(serverService.promise_getMensajesnuevos("comentario")).then(function (data) {
+                $scope.total = data.message;
+
+            });
+        }
+
+        $interval(function () {
+            $scope.callAtInterval();
+        }, 1000); 
+        
         
         $scope.go= function(obj){
             

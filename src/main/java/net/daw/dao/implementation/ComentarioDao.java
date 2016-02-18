@@ -125,7 +125,7 @@ public class ComentarioDao implements ViewDaoInterface<ComentarioBean>, TableDao
       public ArrayList<ComentarioBean> getPagexidusuario(int id_usuario,int intRegsPerPag, int intPage, ArrayList<FilterBeanHelper> hmFilter, HashMap<String, String> hmOrder, Integer expand) throws Exception {
         //strSQL += SqlBuilder.buildSqlWhere(hmFilter);
        // strSQL += SqlBuilder.buildSqlOrder(hmOrder);
-        strSQL = "select comentario.id, comentario.texto, comentario.fecha, comentario.id_amistad from comentario, amistad, usuario where (usuario.id= amistad.id_usuario OR usuario.id= amistad.id_usuario2) AND amistad.id = comentario.id_amistad AND usuario.id="+id_usuario ;
+        strSQL = "select comentario.id, comentario.texto, comentario.fecha, comentario.id_amistad from comentario, amistad, usuario where ( usuario.id= amistad.id_usuario2) AND amistad.id = comentario.id_amistad AND usuario.id="+id_usuario ;
         strSQL += SqlBuilder.buildSqlLimit(oMysql.getCount(strSQL), intRegsPerPag, intPage);
         ArrayList<ComentarioBean> arrComentario = new ArrayList<>();
         try {
@@ -147,7 +147,7 @@ public class ComentarioDao implements ViewDaoInterface<ComentarioBean>, TableDao
     
         int num= 0;
         
-        strSQL = "select count(*) as total from comentario, amistad, usuario where (usuario.id= amistad.id_usuario OR usuario.id= amistad.id_usuario2) AND amistad.id = comentario.id_amistad AND usuario.id="+id_usuario+" and comentario.leido=0";
+        strSQL = "select count(*) as total from comentario, amistad, usuario where usuario.id= amistad.id_usuario AND amistad.id = comentario.id_amistad AND amistad.id_usuario2="+id_usuario+" and comentario.leido=0";
         try{
             ResultSet oResultSet = oMysql.getAllSql(strSQL);
             if(oResultSet != null){

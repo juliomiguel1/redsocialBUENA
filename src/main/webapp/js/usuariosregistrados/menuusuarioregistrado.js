@@ -9,15 +9,15 @@ moduloMenuusuarioregistrado.controller('MenuusuairoregistradoController', ['$sco
         $scope.id = $routeParams.id;
         $scope.total = 0;
         
-        $scope.callAtInterval = function () {
-            serverService.getDataFromPromise(serverService.promise_getMensajesnuevos($scope.ob)).then(function (data) {
+        $scope.callAtInterval1 = function () {
+            serverService.getDataFromPromise(serverService.promise_getMensajesnuevos('comentario')).then(function (data) {
                 $scope.total = data.message;
 
             });
         }
 
         $interval(function () {
-            $scope.callAtInterval();
+            $scope.callAtInterval1();
         }, 1000);        
         
         

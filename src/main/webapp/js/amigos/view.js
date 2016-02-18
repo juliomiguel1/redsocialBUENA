@@ -33,8 +33,8 @@
 
 
 
-moduloAmigos.controller('AmigosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
-    function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter) {
+moduloAmigos.controller('AmigosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter', '$interval',
+    function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter, $interval) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
         $scope.ob = 'amistad';
@@ -52,6 +52,17 @@ moduloAmigos.controller('AmigosViewController', ['$scope', '$routeParams', 'serv
                 $("#usuarioborrado"+num).empty().html("<h4 style=\"text-align:'left'\">You deleted a Friend</h4>");
             });
         }
+        
+         $scope.callAtInterval = function () {
+            serverService.getDataFromPromise(serverService.promise_getMensajesnuevos("comentario")).then(function (data) {
+                $scope.total = data.message;
+
+            });
+        }
+
+        $interval(function () {
+            $scope.callAtInterval();
+        }, 1000); 
         
         $scope.save = function () {          
             //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            

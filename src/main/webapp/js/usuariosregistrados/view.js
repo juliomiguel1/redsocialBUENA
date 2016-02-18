@@ -33,8 +33,8 @@
 
 
 
-moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter',
-    function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter) {
+moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter', '$interval',
+    function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter, $interval) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
         $scope.ob = 'publicaciones';
@@ -61,6 +61,16 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
            
         });
         
+        $scope.callAtInterval = function () {
+            serverService.getDataFromPromise(serverService.promise_getMensajesnuevos("comentario")).then(function (data) {
+                $scope.total = data.message;
+
+            });
+        }
+
+        $interval(function () {
+            $scope.callAtInterval();
+        }, 1000); 
         
         $scope.save = function () {
             var dateFechaAsString = $filter('date')(new Date(), "dd/MM/yyyy");

@@ -27,23 +27,42 @@ THE SOFTWARE.
 
 -->
 
-    <div class="usuarioregistradoizquierda">
+<div class="usuarioregistradoizquierda">
 
-        <div id="fotoperfil">                 
-            <img class="foto" src="http://es.fordesigner.com/imguploads/Image/cjbc/zcool/png20080526/1211769286.png"/>
-        </div>
-
-        <div class="botones_registrados"><p><a href="#/usuariosregistrados/view">Publications</a></p></div>
-        
-        <div class="botones_registrados"><p><a href="#/amigosusuariosregistrados/view">Search Friends</a></p></div>
-
-        <div class="botones_registrados"><p><a href="#/perfilusuariosregistrados/view">Profile</a></p></div>
-
-        <div class="botones_registrados"><p><a href="#/amigos/view">Friends</a></p></div>
-
-        <div class="botones_registrados"><p><a href="#/mensajesusuariosregistrados/new">Create Message</a></p></div>
-        
-        <div class="botones_registrados"><p><a href="#/mensajesusuariosregistrados/view">Received Messages {{total}}</a></p></div>
-        
-        <div class="botones_registrados"><p><a href="#/chat/chat">Chat</a></p></div>
+    <div id="fotoperfil">                 
+        <img class="foto" src="http://es.fordesigner.com/imguploads/Image/cjbc/zcool/png20080526/1211769286.png"/>
     </div>
+
+    <!-- <div class="botones_registrados"><p><a href="#/usuariosregistrados/view">Publications</a></p></div>
+     
+     <div class="botones_registrados"><p><a href="#/amigosusuariosregistrados/view">Search Friends</a></p></div>
+
+     <div class="botones_registrados"><p><a href="#/perfilusuariosregistrados/view">Profile</a></p></div>
+
+     <div class="botones_registrados"><p><a href="#/amigos/view">Friends</a></p></div>
+
+     <div class="botones_registrados"><p><a href="#/mensajesusuariosregistrados/new">Create Message</a></p></div>
+     
+     <div class="botones_registrados"><p><a href="#/mensajesusuariosregistrados/view">Received Messages {{total}}</a></p></div>
+     
+     <div class="botones_registrados"><p><a href="#/chat/chat">Chat</a></p></div> -->
+    <div class="listadeopciones">
+        <ul>
+            <li class="botones_registrados"><a href="#/usuariosregistrados/view">Publications</a></li>
+            <li class="botones_registrados">Friends
+                <ul>
+                    <li class="botones_registrados"><a href="#/amigos/view">Friends</a></li>
+                    <li class="botones_registrados"><a href="#/amigosusuariosregistrados/view">Search Friends</a></li>
+                </ul>	
+            </li>
+            <li class="botones_registrados">Message <div class="imagencorreo"><img src="http://4.bp.blogspot.com/-RbGDtsPgfLg/VZ8MX3TOKkI/AAAAAAAAA-o/4qS2Hect5ew/s1600/Email%2BChat.png"></div>
+
+                <ul>
+                    <li class="botones_registrados"><a href="#/mensajesusuariosregistrados/new">Create Message</a></li>
+                    <li class="botones_registrados"><a href="#/mensajesusuariosregistrados/view">Received Messages {{total}}</a></li>
+                </ul>	 			
+            </li>
+            <li class="botones_registrados">Chat</li>
+        </ul>
+    </div>
+</div>

@@ -33,34 +33,34 @@
 
 
 
-moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter', '$interval',
-    function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter, $interval) {
+moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$scope', '$routeParams', 'serverService', '$location', 'sharedSpaceService', '$filter', '$interval',
+    function ($scope, $routeParams, serverService, $location, sharedSpaceService, $filter, $interval) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
         $scope.ob = 'publicaciones';
         $scope.id = $routeParams.id;
-        
-       // if (sharedSpaceService.getFase() == 0) {
-            $scope.obj = {
-                id: 0,
-                texto: "",
-                fecha: "",
-                id_usuario: 0,
-                obj_usuario: {
-                    id: 0
-                }
-            };
-       /* } else {
-            $scope.obj = sharedSpaceService.getObject();
-            sharedSpaceService.setFase(0);
-        }*/
-        
-        
-        serverService.getDataFromPromise(serverService.promise_getAllpublicaciones($scope.ob)).then(function (data) {
-            $scope.bean = data.message;
-           
-        });
-        
+
+        // if (sharedSpaceService.getFase() == 0) {
+        $scope.obj = {
+            id: 0,
+            texto: "",
+            fecha: "",
+            id_usuario: 0,
+            obj_usuario: {
+                id: 0
+            }
+        };
+        /* } else {
+         $scope.obj = sharedSpaceService.getObject();
+         sharedSpaceService.setFase(0);
+         }*/
+
+        $scope.callAtInterval1 = function () {
+            serverService.getDataFromPromise(serverService.promise_getAllpublicaciones($scope.ob)).then(function (data) {
+                $scope.bean = data.message;
+
+            });
+        }
         $scope.callAtInterval = function () {
             serverService.getDataFromPromise(serverService.promise_getMensajesnuevos("comentario")).then(function (data) {
                 $scope.total = data.message;
@@ -70,8 +70,9 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
 
         $interval(function () {
             $scope.callAtInterval();
-        }, 1000); 
-        
+            $scope.callAtInterval1();
+        }, 1000);
+
         $scope.save = function () {
             var dateFechaAsString = $filter('date')(new Date(), "dd/MM/yyyy");
             $scope.obj.fecha = dateFechaAsString;
@@ -80,6 +81,6 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
                 $scope.result = data;
             });
         };
-        
+
         /*select comentariopublicaciones.* from comentariopublicaciones, publicaciones, usuario where comentariopublicaciones.id_publicaciones = publicaciones.id AND usuario.id = publicaciones.id_usuario AND usuario.id= 1*/
     }]);

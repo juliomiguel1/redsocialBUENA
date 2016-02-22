@@ -324,14 +324,18 @@ public class ComentariopublicacionesService implements TableServiceInterface, Vi
             ConnectionInterface oDataConnectionSource = null;
             UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
             int id_usuario = oUserBean.getId();
+            int id_publicaciones = ParameterCook.prepareInt("id_publicaciones", oRequest);
+            String comentario = oRequest.getParameter("comentario");
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
                 ComentariopublicacionesDao oComentariopublicacionesDao = new ComentariopublicacionesDao(oConnection);
                 ComentariopublicacionesBean oComentariopublicacionesBean = new ComentariopublicacionesBean();
-                oComentariopublicacionesBean = AppConfigurationHelper.getGson().fromJson(jason, oComentariopublicacionesBean.getClass());
-               
+              //  oComentariopublicacionesBean = AppConfigurationHelper.getGson().fromJson(jason, oComentariopublicacionesBean.getClass());
+                oComentariopublicacionesBean.setId_usuario(id_usuario);
+                oComentariopublicacionesBean.setComentario(comentario);
+                oComentariopublicacionesBean.setId_publicaciones(id_publicaciones);
                 if (oComentariopublicacionesBean != null) {
                     Integer iResult = oComentariopublicacionesDao.set(oComentariopublicacionesBean);
                     if (iResult >= 1) {

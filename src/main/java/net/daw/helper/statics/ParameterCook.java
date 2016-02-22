@@ -174,4 +174,14 @@ public class ParameterCook {
         }
         return result;
     }
+    
+//     public static String prepareString(String strParameter, HttpServletRequest request) {
+//        String result = null;
+//        if (request.getParameter(strParameter) == null) {
+//            result = null;
+//        } else {
+//            result = String.parseString(request.getParameter(strParameter));
+//        }
+//        return result;
+//    }
 }

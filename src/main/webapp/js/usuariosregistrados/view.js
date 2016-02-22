@@ -58,8 +58,8 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
             obj_publicaciones: {
                 id: 0
             },
-            id_amistad: 0,
-            obj_amistad: {
+            id_usuario: 0,
+            obj_usuario: {
                 id: 0
             }
         };
@@ -105,8 +105,11 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
             });
         };
         
-        $scope.guardarcomentario = function(obj,num){
-            $scope.prueba = obj;
+        $scope.guardarcomentario = function(objpublicacion,num){
+            objpublicacion.id_publicaciones = num;
+            serverService.getDataFromPromise(serverService.promise_setOneComentariopublicacion("comentariopublicaciones", objpublicacion.comentario, num)).then(function (data) {
+                $scope.result = data;
+            });
         };
         
         $scope.vercomentario = function(num){

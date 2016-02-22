@@ -119,6 +119,10 @@ angular.module('Services', [])
                     $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set' + '&id_usuario=' + id_usuario);
                 },
+                promise_setOneComentariopublicacion: function (strClass,comentario, id_publicaciones) {
+                    $http.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=set' + '&id_publicaciones=' + id_publicaciones+'&comentario='+comentario);
+                },
                 getDataFromPromise: function (promise) {
                     return promise.then(function (result) {
                         return result.data;

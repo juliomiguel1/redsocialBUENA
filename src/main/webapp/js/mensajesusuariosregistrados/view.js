@@ -82,16 +82,19 @@ moduloMensajes.controller('MensajesViewController', ['$scope', '$routeParams', '
         }, 1000);
         
         
-        $scope.go = function (obj) {
+        $scope.go = function (num) {
 
-
+              serverService.getDataFromPromise(serverService.promise_removeOne("comentario", num)).then(function (data) {
+                $scope.result = data;
+                $("#usuarioborrado" + num).empty().html("<h4 style=\"text-align:'left'\">You deleted a Friend</h4>");
+            });
         }
 
         $scope.save = function () {
             //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
             serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
                 $scope.result = data;
-                $("#texto").empty().text("");
+              
             });
         };
 

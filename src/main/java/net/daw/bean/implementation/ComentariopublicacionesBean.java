@@ -35,6 +35,7 @@ import java.util.Date;
 import net.daw.bean.publicinterface.GenericBean;
 import net.daw.dao.implementation.AmistadDao;
 import net.daw.dao.implementation.PublicacionesDao;
+import net.daw.dao.implementation.UsuarioDao;
 import net.daw.helper.statics.EncodingUtilHelper;
 
 /**
@@ -54,9 +55,9 @@ public class ComentariopublicacionesBean implements GenericBean {
     @Expose(deserialize = false)
     private PublicacionesBean obj_publicaciones = null;
     @Expose(serialize = false)
-    private Integer id_amistad = 0;
+    private Integer id_usuario = 0;
     @Expose(deserialize = false)
-    private AmistadBean obj_amistad = null;
+    private UsuarioBean obj_usuario = null;
 
     /**
      * @return the id
@@ -128,33 +129,7 @@ public class ComentariopublicacionesBean implements GenericBean {
         this.obj_publicaciones = obj_publicaciones;
     }
 
-    /**
-     * @return the id_amistad
-     */
-    public Integer getId_amistad() {
-        return id_amistad;
-    }
-
-    /**
-     * @param id_amistad the id_amistad to set
-     */
-    public void setId_amistad(Integer id_amistad) {
-        this.id_amistad = id_amistad;
-    }
-
-    /**
-     * @return the obj_amistad
-     */
-    public AmistadBean getObj_amistad() {
-        return obj_amistad;
-    }
-
-    /**
-     * @param obj_amistad the obj_amistad to set
-     */
-    public void setObj_amistad(AmistadBean obj_amistad) {
-        this.obj_amistad = obj_amistad;
-    }
+    
     
      public String toJson(Boolean expand) {
         String strJson = "{";
@@ -162,10 +137,10 @@ public class ComentariopublicacionesBean implements GenericBean {
         strJson += "comentario:" + comentario + ",";
         strJson += "fecha:" + fecha + ",";
         if (expand) {
-            strJson += "obj_amistad:" + obj_amistad.toJson(false) + ",";
+            strJson += "obj_usuario:" + obj_usuario.toJson(false) + ",";
             strJson += "obj_publicaciones:" + obj_publicaciones.toJson(false) + ",";
         } else {
-            strJson += "id_amistad:" + id_amistad + ",";
+            strJson += "id_usuario:" + id_usuario + ",";
             strJson += "id_publicaciones:" + id_publicaciones + ",";
         }
         strJson += "}";
@@ -179,7 +154,7 @@ public class ComentariopublicacionesBean implements GenericBean {
         strColumns += "comentario,";
         strColumns += "fecha,";
         strColumns += "id_publicaciones,";
-        strColumns += "id_amistad";
+        strColumns += "id_usuario";
         
         return strColumns;
     }
@@ -191,7 +166,7 @@ public class ComentariopublicacionesBean implements GenericBean {
         strColumns += '"'+comentario +'"'+ ",";        
         strColumns += EncodingUtilHelper.stringifyAndQuotate(fecha)+ ", ";
         strColumns += id_publicaciones + ","; 
-        strColumns += id_amistad;
+        strColumns += id_usuario;
         return strColumns;
     }
     
@@ -202,7 +177,7 @@ public class ComentariopublicacionesBean implements GenericBean {
         strPairs += "comentario=" + EncodingUtilHelper.quotate(comentario) + ",";
         strPairs += "fecha=" + EncodingUtilHelper.stringifyAndQuotate(fecha) + ",";
         strPairs += "id_publicaciones=" + id_publicaciones +",";
-        strPairs += "id_amistad=" + id_amistad;
+        strPairs += "id_usuario=" + id_usuario;
         return strPairs;
     }
     
@@ -221,15 +196,43 @@ public class ComentariopublicacionesBean implements GenericBean {
             this.setId_publicaciones(oResultSet.getInt("id_publicaciones"));
         }
         if (expand > 0) {
-            AmistadBean oAmistadBean = new AmistadBean();
-            AmistadDao oAmistadDao = new AmistadDao(pooledConnection);
-            oAmistadBean.setId(oResultSet.getInt("id_amistad"));
-            oAmistadBean = oAmistadDao.get(oAmistadBean, expand );
-            this.setObj_amistad(oAmistadBean);
+            UsuarioBean oUsuarioBean = new UsuarioBean();
+            UsuarioDao oUsuarioDao = new UsuarioDao(pooledConnection);
+            oUsuarioBean.setId(oResultSet.getInt("id_usuario"));
+            oUsuarioBean = oUsuarioDao.get(oUsuarioBean, expand );
+            this.setObj_usuario(oUsuarioBean);
         } else {
-            this.setId_amistad(oResultSet.getInt("id_amistad"));
+            this.setId_usuario(oResultSet.getInt("id_usuario"));
         }
         return this;
 
+    }
+
+    /**
+     * @return the id_usuario
+     */
+    public Integer getId_usuario() {
+        return id_usuario;
+    }
+
+    /**
+     * @param id_usuario the id_usuario to set
+     */
+    public void setId_usuario(Integer id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    /**
+     * @return the obj_usuario
+     */
+    public UsuarioBean getObj_usuario() {
+        return obj_usuario;
+    }
+
+    /**
+     * @param obj_usuario the obj_usuario to set
+     */
+    public void setObj_usuario(UsuarioBean obj_usuario) {
+        this.obj_usuario = obj_usuario;
     }
 }

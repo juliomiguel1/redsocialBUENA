@@ -99,7 +99,7 @@ public class ComentariopublicacionesDao{
     
     
     public ArrayList<ComentariopublicacionesBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand, int id_usuario) throws Exception {
-        strSQL = "select comentariopublicaciones.* from comentariopublicaciones, publicaciones, amistad where comentariopublicaciones.id_publicaciones = publicaciones.id AND amistad.id_usuario = publicaciones.id_usuario AND amistad.id_usuario="+id_usuario;
+        strSQL = "select comentariopublicaciones.* from comentariopublicaciones, publicaciones, usuario where comentariopublicaciones.id_publicaciones = publicaciones.id AND usuario.id = publicaciones.id_usuario AND usuario.id="+id_usuario;
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
         ArrayList<ComentariopublicacionesBean> arrComentariopublicaciones = new ArrayList<>();
         try {
@@ -116,6 +116,25 @@ public class ComentariopublicacionesDao{
         return arrComentariopublicaciones;
     }
 
+    public ArrayList<ComentariopublicacionesBean> getAllcomentariopoidpublicacion(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand, int id_usuario, int id_publicacion) throws Exception {
+        strSQL = "select comentariopublicaciones.* from comentariopublicaciones, publicaciones, usuario where comentariopublicaciones.id_publicaciones = publicaciones.id AND usuario.id = publicaciones.id_usuario AND publicaciones.id_usuario="+id_usuario+" AND publicaciones.id="+id_publicacion;
+        strSQL += SqlBuilder.buildSqlOrder(hmOrder);
+        ArrayList<ComentariopublicacionesBean> arrComentariopublicaciones = new ArrayList<>();
+        try {
+            ResultSet oResultSet = oMysql.getAllSql(strSQL);
+            if (oResultSet != null) {
+                while (oResultSet.next()) {
+                    ComentariopublicacionesBean oComentariopublicacionesBean = new ComentariopublicacionesBean();
+                    arrComentariopublicaciones.add(oComentariopublicacionesBean.fill(oResultSet, oConnection, expand));
+                }
+            }
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
+        }
+        return arrComentariopublicaciones;
+    }
+
+    
     
     public ComentariopublicacionesBean get(ComentariopublicacionesBean oComentariopublicacionesBean, Integer expand) throws Exception {
         if (oComentariopublicacionesBean.getId() > 0) {

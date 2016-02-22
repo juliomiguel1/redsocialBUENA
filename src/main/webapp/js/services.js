@@ -87,6 +87,9 @@ angular.module('Services', [])
                 promise_getAllpublicaciones: function (strClass) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getall', 'GET', '');
                 },
+                 promise_getAllcomentariopublicaciones: function (strClass,id) {
+                    return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getallcomentarioporidpublicacion&id=' +id, 'GET', '');
+                },
                 promise_getAllMensajes: function (strClass) {
                     return $http.get(configuration.getAppUrl() + '?ob=' + strClass + '&op=getallporusuario', 'GET', '');
                 },

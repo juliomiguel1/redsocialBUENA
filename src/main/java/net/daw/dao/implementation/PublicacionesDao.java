@@ -100,7 +100,7 @@ public class PublicacionesDao{
     
     
     public ArrayList<PublicacionesBean> getAll(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand, int id_usuario) throws Exception {
-        strSQL += "AND id_usuario="+id_usuario +" ";
+        strSQL = "select publicaciones.* from publicaciones, amistad where (publicaciones.id_usuario = amistad.id_usuario or publicaciones.id_usuario = amistad.id_usuario2) AND amistad.id_usuario="+id_usuario +" ";
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
         ArrayList<PublicacionesBean> arrPublicaciones = new ArrayList<>();
         try {

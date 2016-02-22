@@ -66,7 +66,13 @@ moduloAmigosUsuariosregistrados.controller('AmigossuariosregistradosViewControll
          $scope.callAtInterval = function () {
             serverService.getDataFromPromise(serverService.promise_getMensajesnuevos("comentario")).then(function (data) {
                 $scope.total = data.message;
-
+               /* if ($scope.total != 0) {
+                   
+                    $(".imagencorreo").animate({"top": "-10px"}, 500, function () {
+                        $(".imagencorreo").animate({"top": "0"}, 500);
+                    });
+                   
+                }*/
             });
         }
 

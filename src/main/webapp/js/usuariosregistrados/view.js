@@ -50,11 +50,28 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
                 id: 0
             }
         };
+        $scope.objpublicacion={
+            id: 0,
+            comentario: "",
+            fecha: "",
+            id_publicaciones: 0,
+            obj_publicaciones: {
+                id: 0
+            },
+            id_amistad: 0,
+            obj_amistad: {
+                id: 0
+            }
+        };
         /* } else {
          $scope.obj = sharedSpaceService.getObject();
          sharedSpaceService.setFase(0);
          }*/
-
+        serverService.getDataFromPromise(serverService.promise_getAllpublicaciones($scope.ob)).then(function (data) {
+                $scope.bean = data.message;
+                });
+        
+        
         $scope.callAtInterval1 = function () {
             serverService.getDataFromPromise(serverService.promise_getAllpublicaciones($scope.ob)).then(function (data) {
                 $scope.bean = data.message;
@@ -64,14 +81,20 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
         $scope.callAtInterval = function () {
             serverService.getDataFromPromise(serverService.promise_getMensajesnuevos("comentario")).then(function (data) {
                 $scope.total = data.message;
-
+               /* if ($scope.total != 0) {
+                   
+                    $(".imagencorreo").animate({"top": "-10px"}, 500, function () {
+                        $(".imagencorreo").animate({"top": "0"}, 500);
+                    });
+                   
+                }*/
             });
         }
 
         $interval(function () {
             $scope.callAtInterval();
             $scope.callAtInterval1();
-        }, 1000);
+        }, 60000);
 
         $scope.save = function () {
             var dateFechaAsString = $filter('date')(new Date(), "dd/MM/yyyy");
@@ -81,6 +104,16 @@ moduloUsuariosregistrados.controller('UsuariosregistradosViewController', ['$sco
                 $scope.result = data;
             });
         };
-
+        
+        $scope.guardarcomentario = function(obj,num){
+            $scope.prueba = obj;
+        };
+        
+        $scope.vercomentario = function(num){
+            serverService.getDataFromPromise(serverService.promise_getAllcomentariopublicaciones("comentariopublicaciones",num)).then(function (data){
+                $scope.vercoment = data.message;
+            });
+        };
+        
         /*select comentariopublicaciones.* from comentariopublicaciones, publicaciones, usuario where comentariopublicaciones.id_publicaciones = publicaciones.id AND usuario.id = publicaciones.id_usuario AND usuario.id= 1*/
     }]);

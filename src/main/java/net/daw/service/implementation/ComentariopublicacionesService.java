@@ -160,7 +160,42 @@ public class ComentariopublicacionesService implements TableServiceInterface, Vi
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
+    
+     public String getallcomentarioporidpublicacion() throws Exception {
+        if (this.checkpermission("getall")) {
+            ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
+            HashMap<String, String> hmOrder = ParameterCook.prepareOrder(oRequest);
+            UsuarioBean oUserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
+            int id_usuario = oUserBean.getId();
+            int id_publicacion = ParameterCook.prepareId(oRequest);
+            String data = null;
+            Connection oConnection = null;
+            ConnectionInterface oDataConnectionSource = null;
 
+            try {
+                oDataConnectionSource = getSourceConnection();
+                oConnection = oDataConnectionSource.newConnection();
+                ComentariopublicacionesDao oComentariopublicacionesDao = new ComentariopublicacionesDao(oConnection);
+                ArrayList<ComentariopublicacionesBean> arrBeans = oComentariopublicacionesDao.getAllcomentariopoidpublicacion(alFilter, hmOrder, 1, id_usuario,id_publicacion);
+                data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
+            } catch (Exception ex) {
+                ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getAll ERROR: " + ex.getMessage()));
+            } finally {
+                if (oConnection != null) {
+                    oConnection.close();
+                }
+                if (oDataConnectionSource != null) {
+                    oDataConnectionSource.disposeConnection();
+                }
+            }
+
+            return data;
+        } else {
+            return JsonMessage.getJsonMsg("401", "Unauthorized");
+        }
+    }
+
+    
     @Override
     @SuppressWarnings("empty-statement")
     public String getpage() throws Exception {

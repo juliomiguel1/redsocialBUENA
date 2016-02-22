@@ -33,43 +33,49 @@
 
 
 
-moduloAmigos.controller('AmigosViewController', ['$scope', '$routeParams', 'serverService','$location','sharedSpaceService', '$filter', '$interval',
-    function ($scope, $routeParams, serverService, $location, sharedSpaceService,$filter, $interval) {
+moduloAmigos.controller('AmigosViewController', ['$scope', '$routeParams', 'serverService', '$location', 'sharedSpaceService', '$filter', '$interval',
+    function ($scope, $routeParams, serverService, $location, sharedSpaceService, $filter, $interval) {
         $scope.title = "Vista de usuario";
         $scope.icon = "fa-text";
         $scope.ob = 'amistad';
         $scope.id = $routeParams.id;
-               
+
         serverService.getDataFromPromise(serverService.promise_getAll($scope.ob)).then(function (data) {
             $scope.bean = data.message;
-           
+
         });
-        
-        $scope.go= function(num){
-            
+
+        $scope.go = function (num) {
+
             serverService.getDataFromPromise(serverService.promise_removeOne($scope.ob, num)).then(function (data) {
                 $scope.result = data;
-                $("#usuarioborrado"+num).empty().html("<h4 style=\"text-align:'left'\">You deleted a Friend</h4>");
+                $("#usuarioborrado" + num).empty().html("<h4 style=\"text-align:'left'\">You deleted a Friend</h4>");
             });
         }
-        
-         $scope.callAtInterval = function () {
+
+        $scope.callAtInterval = function () {
             serverService.getDataFromPromise(serverService.promise_getMensajesnuevos("comentario")).then(function (data) {
                 $scope.total = data.message;
-
+//                if ($scope.total != 0) {
+//
+//                    $(".imagencorreo").animate({"top": "-10px"}, 500, function () {
+//                        $(".imagencorreo").animate({"top": "0"}, 500);
+//                    });
+//
+//                }
             });
         }
 
         $interval(function () {
             $scope.callAtInterval();
-        }, 1000); 
-        
-        $scope.save = function () {          
+        }, 1000);
+
+        $scope.save = function () {
             //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
             serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
                 $scope.result = data;
             });
         };
-        
+
         /*select comentariopublicaciones.* from comentariopublicaciones, publicaciones, usuario where comentariopublicaciones.id_publicaciones = publicaciones.id AND usuario.id = publicaciones.id_usuario AND usuario.id= 1*/
     }]);

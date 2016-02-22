@@ -27,31 +27,40 @@ THE SOFTWARE.
 
 -->
 <div class="panel-body" >
-            <div class="cuerpo">
-                <div class="col-sm-3" ng-include="'js/usuariosregistrados/menuusuarioregistrado.html'"></div>
+    <div class="cuerpo">
+        <div class="col-sm-3" ng-include="'js/usuariosregistrados/menuusuarioregistrado.html'"></div>
 
-                <div class="col-sm-9">
-                    <div class="usuarioregistradoderecha">                        
-                        <div class='publicar'>
-                            <form name="outerForm" class="form-horizontal" >
-                                <div id="texto-group" class="form-group">
-                                      <textarea ng-model="obj.texto" rows="6" id="texto" class="form-control" name="texto" placeholder="En que estás pensando?"></textarea>
-                                </div>
-                                <div class="boton_publicar">
-                                 <a class="btn btn-primary" ng-click="save()">Publicar</a>
-                                </div>
-                            </form>
+        <div class="col-sm-9">
+            <div class="usuarioregistradoderecha">                        
+                <div class='publicar'>
+                    <form name="outerForm" class="form-horizontal" >
+                        <div id="texto-group" class="form-group">
+                            <textarea ng-model="obj.texto" rows="6" id="texto" class="form-control" name="texto" placeholder="What are you thinking?"></textarea>
                         </div>
-                        <div class="comentarios">
-                            <div ng-repeat="nuevo in bean">
-                                <p class="titulo_publicacion">Publicación</p>
-                                <p>{{nuevo.texto}}</p>
-                                <p class="titulo_publicacion">Comentarios</p>
+                        <div class="boton_publicar">
+                            <a class="btn btn-primary" ng-click="save()">Post</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="comentarios">
+                    <div ng-repeat="nuevo in bean" class="comentari" style="margin-top: 15px;">
+                        <p class="titulo_publicacion">{{nuevo.obj_usuario.nombre}} {{nuevo.obj_usuario.apellido}}</p>
+                        <p >{{nuevo.texto}}</p>
+                        <p class="titulo_publicacion" ng-click="vercomentario(nuevo.id)">Comments</p>
+                        <div ng-if="vercoment.obj_publicaciones.id == (nuevo.id)" ng-repeat="vercoment in vercoment" style="margin-top: 15px; margin-bottom:15px;text-align: left;">
+                            <p><strong>{{vercoment.obj_usuario.nombre}} {{vercoment.obj_usuario.apellido}}: </strong>{{vercoment.comentario}}</p>
+                        </div>
+                        <div class="comentariospublicaciones">
+                            <textarea ng-model="objpublicacion.comentario" rows="2" cols="50" id="texto" class="form-control" name="comentario" placeholder=""></textarea>
+                            <div class="boton_publicar" style="margin-top: 5px;">
+                                <a class="btn btn-primary" ng-click="guardarcomentario(objpublicacion,nuevo.id)">Post</a>
                             </div>
                         </div>
-                    </div>	  	    
+                    </div>
                 </div>
-            </div>
+            </div>	  	    
+        </div>
+    </div>
 </div>
 <div class="panel-footer" style="font-family: Questrial, serif;" ng-include="'js/system/footer.html'"></div>
 

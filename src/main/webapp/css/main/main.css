@@ -5845,7 +5845,6 @@ button.close {
 }
 
 .comentarios{
-
     padding-top: 20px;
     margin: 0 auto;
     width:70%;
@@ -5863,7 +5862,7 @@ button.close {
 
 }
 
-.comentarios div{
+.comentarios .comentari{
     border-radius: 10px;
     border:1px solid #3684d6;
     padding-left:10px;
@@ -5936,4 +5935,12 @@ button.close {
     width: 100%;
     height: 100%;
     margin-left: -155px;
+}
+
+.comentariospublicaciones{
+    
+    border-color: white;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 15px;
 }

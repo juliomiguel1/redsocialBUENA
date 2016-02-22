@@ -26,11 +26,21 @@
  */
 package net.daw.dao.implementation;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletException;
 import net.daw.bean.implementation.UsuarioBean;
+import static net.daw.dao.implementation.ServletEnviarMailConfirmacion.aleatoria;
 import net.daw.dao.publicinterface.TableDaoInterface;
 import net.daw.dao.publicinterface.ViewDaoInterface;
 import net.daw.data.implementation.MysqlDataSpImpl;
@@ -87,7 +97,77 @@ public class UsuarioDao {
         return pages;
     }
     
+    public String getCadenaAlfanumAleatoria(int longitud) {
+        String cadenaAleatoria = "";
+        long milis = new java.util.GregorianCalendar().getTimeInMillis();
+        Random r = new Random(milis);
+        int i = 0;
+        while (i < longitud) {
+            char c = (char) r.nextInt(255);
+            //System.out.println("char:"+c);
+            if ((c >= '0' && c <= 9) || (c >= 'A' && c <= 'Z')) {
+                cadenaAleatoria += c;
+                i++;
+            }
+        }
+        return cadenaAleatoria;
+    }
+    /*
+       public String pruebaservicio() throws Exception {
+     //   System.out.println("ENTRA2");
+        String nombre = "julio";//request.getParameter("nombre");
+        String usuario = "user";//request.getParameter("usuario");
+        String contra = "contra";//request.getParameter("contra");
+        String email = "mail";//request.getParameter("mail");
+        aleatoria = getCadenaAlfanumAleatoria(8);
+        System.out.println("ESTO SE GUARDA:\n"
+                + "INSERT INTO TB_USUARIO(NOM,USU,CON,MAIL,ALE) VALUES(" + nombre + "," + usuario + "," + contra + "," + email + "," + aleatoria + ")");
 
+        try {
+            // Propiedades de la conexión
+            Properties props = new Properties();
+            props.setProperty("mail.smtp.host", "smtp.gmail.com");
+            props.setProperty("mail.smtp.starttls.enable", "true");
+            props.setProperty("mail.smtp.port", "587");
+            props.setProperty("mail.smtp.user", "julio6164@gmail.com");
+            props.setProperty("mail.smtp.auth", "true");
+
+            // Preparamos la sesion
+            Session session = Session.getDefaultInstance(props);
+
+            // Construimos el mensaje
+            MimeMessage message = new MimeMessage(session);
+            //la persona k tiene k verificar
+            message.setFrom(new InternetAddress("julio6164@gmail.com"));
+            message.addRecipient(
+                    Message.RecipientType.TO,
+                    new InternetAddress("julio6164@gmail.com"));
+            message.addHeader("Disposition-Notification-To", "julio6164@gmail.com");
+            message.setSubject("Correo de verificacion, porfavor no responder");
+            message.setText(
+                    "Este es un correo de verificacion \n"
+                    + "Gracias por escribirse a B2MINING.COM \n"
+                    + "Porfavor haga click en el siguiente enlace\n"
+                    + "para seguir con la verificacion de sus datos \n"
+                    + "  Enlace  ",
+                    "ISO-8859-1",
+                    "html");
+
+            // Lo enviamos.
+            Transport t = session.getTransport("smtp");
+            t.connect("julio6164@gmail.com", "CONTRASENA");
+            t.sendMessage(message, message.getAllRecipients());
+
+            // Cierre.
+            t.close();
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
+        }
+        // response.sendRedirect("respuesta.jsp");
+       
+        return "enviado";
+    }
+    */
     public int getCount(ArrayList<FilterBeanHelper> hmFilter) throws Exception {
         strSQL += SqlBuilder.buildSqlWhere(hmFilter);
         int pages = 0;

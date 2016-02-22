@@ -37,6 +37,7 @@ import net.daw.bean.implementation.PerfilBean;
 import net.daw.bean.implementation.UsuarioBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.dao.implementation.PerfilDao;
+import net.daw.dao.implementation.ServletEnviarMailConfirmacion;
 import net.daw.dao.implementation.UsuarioDao;
 
 import net.daw.helper.statics.AppConfigurationHelper;
@@ -72,11 +73,13 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             String data = null;
             ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
             Connection oConnection = null;
+
             ConnectionInterface oDataConnectionSource = null;
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
+             //   String cadena = oUsuarioDao.getCadenaAlfanumAleatoria(8);
                 data = JsonMessage.getJson("200", Integer.toString(oUsuarioDao.getCount(alFilter)));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
@@ -93,19 +96,19 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
-    
-      public String getcountusuarionoduplicado() throws Exception {
+
+    public String getcountusuarionoduplicado() throws Exception {
         if (this.checkpermission("getcount")) {
             String data = null;
             ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
-            int id_usuario = ParameterCook.prepareInt("id_usuario",oRequest);
+            int id_usuario = ParameterCook.prepareInt("id_usuario", oRequest);
             Connection oConnection = null;
             ConnectionInterface oDataConnectionSource = null;
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                data = JsonMessage.getJson("200", Integer.toString(oUsuarioDao.getCountusuarionoduplicado(id_usuario,alFilter)));
+                data = JsonMessage.getJson("200", Integer.toString(oUsuarioDao.getCountusuarionoduplicado(id_usuario, alFilter)));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getCount ERROR: " + ex.getMessage()));
             } finally {
@@ -121,7 +124,7 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
-    
+
     @Override
     public String get() throws Exception {
         if (this.checkpermission("get")) {
@@ -196,6 +199,7 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             int intPage = ParameterCook.preparePage(oRequest);
             ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
             HashMap<String, String> hmOrder = ParameterCook.prepareOrder(oRequest);
+
             String data = null;
             Connection oConnection = null;
             ConnectionInterface oDataConnectionSource = null;
@@ -220,13 +224,13 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
-    
-       @SuppressWarnings("empty-statement")
+
+    @SuppressWarnings("empty-statement")
     public String getpageusuarionoduplicado() throws Exception {
         if (this.checkpermission("getpage")) {
             int intRegsPerPag = ParameterCook.prepareRpp(oRequest);;
             int intPage = ParameterCook.preparePage(oRequest);
-            int id_usuario = ParameterCook.prepareInt("id_usuario",oRequest);
+            int id_usuario = ParameterCook.prepareInt("id_usuario", oRequest);
             ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
             HashMap<String, String> hmOrder = ParameterCook.prepareOrder(oRequest);
             String data = null;
@@ -236,7 +240,7 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                List<UsuarioBean> arrBeans = oUsuarioDao.getPageusuarionoduplicado(id_usuario,intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
+                List<UsuarioBean> arrBeans = oUsuarioDao.getPageusuarionoduplicado(id_usuario, intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonDepth());
                 data = JsonMessage.getJson("200", AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPage ERROR: " + ex.getMessage()));
@@ -253,7 +257,7 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
-    
+
     @Override
     public String getpages() throws Exception {
         if (this.checkpermission("getpages")) {
@@ -282,11 +286,11 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
-    
-        public String getpagesusuarionoduplicado() throws Exception {
+
+    public String getpagesusuarionoduplicado() throws Exception {
         if (this.checkpermission("getpages")) {
             int intRegsPerPag = ParameterCook.prepareRpp(oRequest);
-            int id_usuario = ParameterCook.prepareInt("id_usuario",oRequest);
+            int id_usuario = ParameterCook.prepareInt("id_usuario", oRequest);
             ArrayList<FilterBeanHelper> alFilter = ParameterCook.prepareFilter(oRequest);
             String data = null;
             Connection oConnection = null;
@@ -295,7 +299,7 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
-                data = JsonMessage.getJson("200", Integer.toString(oUsuarioDao.getPagesusuarionoduplicado(id_usuario,intRegsPerPag, alFilter)));
+                data = JsonMessage.getJson("200", Integer.toString(oUsuarioDao.getPagesusuarionoduplicado(id_usuario, intRegsPerPag, alFilter)));
             } catch (Exception ex) {
                 ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getPages ERROR: " + ex.getMessage()));
             } finally {
@@ -311,7 +315,7 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
-    
+
     @Override
     public String getaggregateviewsome() throws Exception {
         if (this.checkpermission("getaggregateviewsome")) {
@@ -334,8 +338,8 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
-    
-      public String getaggregateviewsomeusuarionoduplicado() throws Exception {
+
+    public String getaggregateviewsomeusuarionoduplicado() throws Exception {
         if (this.checkpermission("getaggregateviewsomeusuarionoduplicado")) {
             String data = null;
             try {
@@ -356,7 +360,7 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
             return JsonMessage.getJsonMsg("401", "Unauthorized");
         }
     }
-    
+
     @Override
     public String remove() throws Exception {
         if (this.checkpermission("remove")) {
@@ -401,13 +405,13 @@ public class UsuarioService implements TableServiceInterface, ViewServiceInterfa
                 oConnection.setAutoCommit(false);
                 UsuarioDao oUsuarioDao = new UsuarioDao(oConnection);
                 UsuarioBean oUsuarioBean = new UsuarioBean();
-               // PerfilBean oPerfilBean = new PerfilBean();                
+                // PerfilBean oPerfilBean = new PerfilBean();                
                 oUsuarioBean = AppConfigurationHelper.getGson().fromJson(jason, oUsuarioBean.getClass());
                 if (oUsuarioBean != null) {
                     Integer iResult = oUsuarioDao.set(oUsuarioBean);
-                    
+
                     if (iResult >= 1) {
-                        
+
                         resultado = JsonMessage.getJson("200", iResult.toString());
                     } else {
                         resultado = JsonMessage.getJson("500", "Error during registry set");

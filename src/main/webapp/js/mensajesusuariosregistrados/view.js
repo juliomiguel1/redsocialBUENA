@@ -62,9 +62,23 @@ moduloMensajes.controller('MensajesViewController', ['$scope', '$routeParams', '
 
             });
         }
-
+        
+          $scope.callAtInterval1 = function () {
+            serverService.getDataFromPromise(serverService.promise_getMensajesnuevos("comentario")).then(function (data) {
+                $scope.total = data.message;
+              /*  if ($scope.total != 0) {
+                   
+                    $(".imagencorreo").animate({"top": "-10px"}, 500, function () {
+                        $(".imagencorreo").animate({"top": "0"}, 500);
+                    });
+                   
+                }*/
+            });
+        }
+        
         $interval(function () {
             $scope.callAtInterval();
+         //   $scope.callAtInterval1();
         }, 1000);
         
         
@@ -77,6 +91,7 @@ moduloMensajes.controller('MensajesViewController', ['$scope', '$routeParams', '
             //console.log({json: JSON.stringify(serverService.array_identificarArray($scope.obj))});            
             serverService.getDataFromPromise(serverService.promise_setOne($scope.ob, {json: JSON.stringify(serverService.array_identificarArray($scope.obj))})).then(function (data) {
                 $scope.result = data;
+                $("#texto").empty().text("");
             });
         };
 

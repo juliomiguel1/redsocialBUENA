@@ -117,7 +117,7 @@ public class ComentariopublicacionesDao{
     }
 
     public ArrayList<ComentariopublicacionesBean> getAllcomentariopoidpublicacion(ArrayList<FilterBeanHelper> alFilter, HashMap<String, String> hmOrder, Integer expand, int id_usuario, int id_publicacion) throws Exception {
-        strSQL = "select comentariopublicaciones.* from comentariopublicaciones, publicaciones, usuario where comentariopublicaciones.id_publicaciones = publicaciones.id AND usuario.id = publicaciones.id_usuario AND publicaciones.id_usuario="+id_usuario+" AND publicaciones.id="+id_publicacion;
+        strSQL = "select comentariopublicaciones.* from comentariopublicaciones, publicaciones, usuario, amistad where comentariopublicaciones.id_publicaciones = publicaciones.id AND (amistad.id_usuario ="+id_usuario+" or amistad.id_usuario2="+id_usuario+") AND publicaciones.id="+id_publicacion+" GROUP By comentariopublicaciones.id";
         strSQL += SqlBuilder.buildSqlOrder(hmOrder);
         ArrayList<ComentariopublicacionesBean> arrComentariopublicaciones = new ArrayList<>();
         try {
